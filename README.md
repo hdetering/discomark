@@ -20,3 +20,6 @@ No explicit installation is necessary. Just download the sources and you're read
 
 ## How to run DiscoMark
 
+## Acknowledgements
+
+DiscoMark uses [PriFi](http://cgi-www.cs.au.dk/cgi-chili/PriFi/main) for primer design. We thank [Jakob Freslund](mailto:jakobf@birc.au.dk), who kindly provided us with the source code to PriFi.
