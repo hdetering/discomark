@@ -180,8 +180,13 @@ class DataBroker():
 
     # loading BLAST hits
     # ======================
-    def load_blast_hits(self, blast_filename):        
+    def load_blast_hits(self, blast_filename, add=False):        
         session = self.session
+
+        # truncate existing table if not in 'add' mode
+        if not add:
+            print("TODO: truncate table prior to loading records.")
+
         # find best reference hits in local alignments
         f = open(blast_filename, 'rt')
         row = f.readline().strip().split()

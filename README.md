@@ -9,7 +9,7 @@ Discover phylogenetic markers from orthologous sequences
 ## Requirements
 
 Before running DiscoMark, make sure you have the following programs installed:
-* [Python](https://www.python.org) (>= 2.6.6)
+* [Python](https://www.python.org) (>= 2.7)
 * [NCBI Blast+](ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST)
 * [MAFFT](http://mafft.cbrc.jp/alignment/software) (>= 6.864b)
 * [TrimAl](https://github.com/scapella/trimal) (>= 1.4)

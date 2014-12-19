@@ -1,12 +1,14 @@
 from models import *
 import os, shutil, subprocess
+from StringIO import StringIO
 from glob import glob
-from Bio import SeqIO
+from Bio import SeqIO, AlignIO
 #from Bio.Align.Applications import MafftCommandline # can only be used with python >=2.7
 from Bio.Blast import NCBIWWW
 from Bio.Blast.Applications import NcbiblastnCommandline
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
+
 
 ################################
 # 1. parse predicted orthologs #
@@ -55,7 +57,7 @@ def align_orthologs(ortho_dir, aligned_dir, orthologs):
 ######################
 # 3. trim alignments #
 ######################
-def trim_alignments(aligned_dir, trimmed_dir):    
+def trim_alignments(aligned_dir, trimmed_dir, trimal):    
     print("\nTrimming alignments...")
     aligned_files = os.walk(aligned_dir).next()[2]
     aligned_files = [os.path.join(aligned_dir, f) for f in os.listdir(aligned_dir) if os.path.isfile(os.path.join(aligned_dir,f))]
@@ -78,8 +80,7 @@ def makeblastdb(genome):
 # 4. map against reference genome #
 ###################################
 def map_to_reference(query_dir, mapped_dir, genome):    
-    import os, glob, db
-    from db import Sequence, Ortholog, Mapping
+    import os, glob
     from Bio import SeqIO
     from Bio.Blast.Applications import NcbiblastnCommandline
     from Bio.Blast import NCBIXML
@@ -106,19 +107,16 @@ def map_to_reference(query_dir, mapped_dir, genome):
     cline = NcbiblastnCommandline(query=query_fn, db=genome, out=out_fn, outfmt='"6 std sstrand"')
     print("\t%s\n" % cline)
     cline()
-        
-    # parse BLAST hits
-    print("\tLoading BLAST hits...\n")
-    model.load_blast_hits(out_fn)
-    hits = model.get_best_hits()
     
+    return out_fn
+        
+def add_reference(trimmed_dir, mapped_dir, genome, hits):
     # combine ortholog and reference sequences
     for rec in SeqIO.parse(open(genome, 'rt'), 'fasta'):
         if rec.id in hits:
             rec_hits = hits[rec.id]
             in_fn  = os.path.join(trimmed_dir, "%s.trim.fasta" % rec_hits['ortholog'])
             out_fn = os.path.join(mapped_dir, "%s.ref.fasta" % rec_hits['ortholog'])
-            #in_f = open(in_fn, 'rt')
             with open(out_fn, 'wt') as out_f:
                 # write out ortholog sequences
                 for seq in SeqIO.parse(in_fn, 'fasta'):
@@ -139,14 +137,7 @@ def map_to_reference(query_dir, mapped_dir, genome):
     
     # align combined files using MAFFT
     print("Realigning Orthologs (including reference)...")
-    #from Bio.Align.Applications import MafftCommandline
-    #from Bio.Align import MultipleSeqAlignment
-    #from StringIO import StringIO
-    #from Bio import AlignIO
-    import subprocess
-    from StringIO import StringIO
-    from Bio import AlignIO
-    for f in glob.glob(os.path.join(mapped_dir, '*.ref.fasta')):
+    for f in glob(os.path.join(mapped_dir, '*.ref.fasta')):
         o_id = os.path.split(f)[1].split('.')[0]
         # run MAFFT (preserve input order, so ref seq is last)
         cline = ['mafft','--localpair','--maxiterate','16','--inputorder','--preservecase',f]
@@ -165,7 +156,7 @@ def map_to_reference(query_dir, mapped_dir, genome):
 #####################
 # 5. design primers #
 #####################
-def design_primers(mapped_dir, primer_dir):
+def design_primers(mapped_dir, primer_dir, prifi):
     import os, glob
     from Bio import AlignIO
     
@@ -181,6 +172,14 @@ def design_primers(mapped_dir, primer_dir):
             print("Whoa! Empty alignment file?! (%s)" % f)
             continue
     
+        # exchange seq names with numbers
+        # (Clustal format truncates to len 30 but need to be unique for PriFi)
+        i = 0
+        for rec in align:
+            rec.id = str(i)
+            rec.name = str(i)
+            i += 1
+
         o_id = os.path.split(f)[1].split('.')[0]
         handle = open(os.path.join(primer_dir, o_id+'.prifi.aln'), 'wt')
         AlignIO.write(align, handle, 'clustal')
@@ -189,21 +188,21 @@ def design_primers(mapped_dir, primer_dir):
     # call PriFi for actual primer design
     import subprocess
     for f in glob.glob(os.path.join(primer_dir, '*.prifi.aln')):
-        prifi_params = [prifi, os.path.split(f)[1]]
-        sp = subprocess.Popen(prifi_params, cwd=primer_dir)
+        print(os.getcwd())
+        prifi_params = [prifi, f]
+        print(prifi_params)
+        sp = subprocess.Popen(prifi_params) #, cwd=primer_dir)
         sp.wait()
 
 
 # export primer-ortholog-reference alignment
-def export_primer_alignments(primer_dir):
+def export_primer_alignments(primer_dir, orthologs):
     import os
     from Bio import AlignIO
     from Bio.Seq import Seq
     from Bio.SeqRecord import SeqRecord
     from Bio.Align import MultipleSeqAlignment
 
-    orthologs = model.get_orthologs()
-    
     for db_ortho in orthologs:
         primers = db_ortho.primer_sets
         if len(primers) > 0:
@@ -236,7 +235,7 @@ def blast_primers_online(primer_dir, out_dir):
     handle = NCBIWWW.qblast('blastn', 'refseq_mrna', open('primers.fa').read(), entrez_query='txid2[Orgn] OR txid9606')
     print(datetime.datetime.now())
     out_fn = os.path.join(out_dir, 'blast_out.xml')
-    with outfile = open(out_fn, 'w'):
+    with open(out_fn, 'w') as outfile:
         outfile.write(handle.read())
 
 # run local BLAST
