@@ -1,4 +1,4 @@
-from models import *
+from discomark.models import *
 from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker
 import os, re
@@ -14,9 +14,9 @@ class DataBroker():
     """ This class maintains the db session and handles data access. """
     def __init__(self, project_name):
         # choose whether to use an in-memory db or create a db file
-        print project_name
+        print(project_name)
         if project_name:
-            self.conn_str = 'sqlite:///data/%s/%s.db' % (project_name, project_name)
+            self.conn_str = 'sqlite:///%s/%s.db' % (project_name, project_name)
         else:
             print("\nUsing in-memory database.\n")
             self.conn_str = 'sqlite:///:memory:'
@@ -146,7 +146,7 @@ class DataBroker():
         session = self.session
 
         print("\nLoading data from directory '%s' ..." % input_dir)
-        species = sorted(os.walk(input_dir).next()[1])
+        species = sorted(next(os.walk(input_dir))[1])
         print("\nFound %d species:\n\t%s\n" % (len(species), '\n\t'.join(species)))
 
         # traverse species folders

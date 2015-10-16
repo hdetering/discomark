@@ -1,6 +1,12 @@
-from models import *
-import os, shutil, subprocess
-from StringIO import StringIO
+from __future__ import print_function
+from discomark.models import *
+import utils
+import datetime
+import io
+import os
+import shutil
+import subprocess
+import sys
 from glob import glob
 from Bio import SeqIO, AlignIO
 #from Bio.Align.Applications import MafftCommandline # can only be used with python >=2.7
@@ -31,8 +37,8 @@ def merge_species(input_dir, ortho_dir, orthologs):
 ###########################
 # 2. align ortholog files #
 ###########################
-def align_orthologs(ortho_dir, aligned_dir, orthologs):    
-    print("\nAligning ortholog sequences...")    
+def align_orthologs(ortho_dir, aligned_dir, orthologs):
+    print("\nAligning ortholog sequences...")
     # align each ortholog
     for o in orthologs:
         ortho_fn = os.path.join(ortho_dir, "%s.fasta" % o.id)
@@ -47,7 +53,7 @@ def align_orthologs(ortho_dir, aligned_dir, orthologs):
             #print("\t%s " % mafft_cline)
             # run MAFFT
             #stdout, stderr = mafft_cline()
-            with open(align_fn, "wt") as handle:
+            with open(align_fn, "wb") as handle:
                 handle.write(stdout)
         # otherwise just copy the ortholog file
         else:
@@ -57,11 +63,11 @@ def align_orthologs(ortho_dir, aligned_dir, orthologs):
 ######################
 # 3. trim alignments #
 ######################
-def trim_alignments(aligned_dir, trimmed_dir, trimal):    
+def trim_alignments(aligned_dir, trimmed_dir, trimal):
     print("\nTrimming alignments...")
-    aligned_files = os.walk(aligned_dir).next()[2]
+    aligned_files = next(os.walk(aligned_dir))[2]
     aligned_files = [os.path.join(aligned_dir, f) for f in os.listdir(aligned_dir) if os.path.isfile(os.path.join(aligned_dir,f))]
-    
+
     for f in aligned_files:
         o_id = os.path.split(f)[1].split('.')[0]
         out = os.path.join(trimmed_dir, "%s.trim.fasta" % o_id)
@@ -79,25 +85,25 @@ def makeblastdb(genome):
 ###################################
 # 4. map against reference genome #
 ###################################
-def map_to_reference(query_dir, mapped_dir, genome):    
+def map_to_reference(query_dir, mapped_dir, genome):
     import os, glob
     from Bio import SeqIO
     from Bio.Blast.Applications import NcbiblastnCommandline
     from Bio.Blast import NCBIXML
-    
+
     # create the BLAST db to map against
     print("\nCreating BLAST database from reference...")
     makeblastdb(genome)
-    
+
     query_files = glob.glob(os.path.join(query_dir, '*.fasta'))
-    
+
     # combine query sequences into a single FASTA file
     query_fn = os.path.join(mapped_dir, 'query.fasta')
     query_file = open(query_fn, 'wt')
     for f in query_files:
         o_id = os.path.split(f)[1].split('.')[0]
         SeqIO.write(SeqIO.parse(open(f, 'rt'), 'fasta'), query_file, 'fasta')
-    query_file.close() 
+    query_file.close()
 
     # run BLAST
     print("\nRunning BLAST...")
@@ -107,9 +113,9 @@ def map_to_reference(query_dir, mapped_dir, genome):
     cline = NcbiblastnCommandline(query=query_fn, db=genome, out=out_fn, outfmt='"6 std sstrand"')
     print("\t%s\n" % cline)
     cline()
-    
+
     return out_fn
-        
+
 def add_reference(trimmed_dir, mapped_dir, genome, hits):
     # combine ortholog and reference sequences
     for rec in SeqIO.parse(open(genome, 'rt'), 'fasta'):
@@ -134,13 +140,13 @@ def add_reference(trimmed_dir, mapped_dir, genome, hits):
                 start = max(0, rec_hits['range'][0]-100)
                 end = min(len(rec), rec_hits['range'][1]+100)
                 SeqIO.write(rec[start:end].upper(), out_f, 'fasta')
-    
+
     # align combined files using MAFFT
     print("Realigning Orthologs (including reference)...")
     for f in glob(os.path.join(mapped_dir, '*.ref.fasta')):
         o_id = os.path.split(f)[1].split('.')[0]
         # run MAFFT (preserve input order, so ref seq is last)
-        cline = ['mafft','--localpair','--maxiterate','16','--inputorder','--preservecase',f]
+        cline = ['mafft','--localpair','--maxiterate','16','--inputorder','--preservecase','--clustalout',f]
         print("\t%s " % ' '.join(cline))
         #stdout = subprocess.check_output(cline) # won't work with python <2.7!
         stdout = subprocess.Popen(cline, stdout=subprocess.PIPE).communicate()[0] # this works with python <2.7
@@ -148,9 +154,10 @@ def add_reference(trimmed_dir, mapped_dir, genome, hits):
         # print("\t%s " % mafft_cline)
         #stdout, stderr = mafft_cline()
         #align = AlignIO.read(StringIO(stdout), "clustal")
+
         with open(os.path.join(mapped_dir, '%s.mapped.aln' % o_id), 'wb') as handle:
-            aln = AlignIO.read(StringIO(stdout), 'fasta')
-            AlignIO.write(aln, handle, 'clustal')
+            handle.write(stdout)
+
 
 
 #####################
@@ -159,11 +166,11 @@ def add_reference(trimmed_dir, mapped_dir, genome, hits):
 def design_primers(mapped_dir, primer_dir, prifi):
     import os, glob
     from Bio import AlignIO
-    
+
     print("\nDesigning primers using PriFi...\n")
-    
+
     mapped_files = glob.glob(os.path.join(mapped_dir, '*.mapped.aln'))
-    
+
     print("\tChecking for empty alignments...")
     for f in mapped_files:
         try:
@@ -171,7 +178,7 @@ def design_primers(mapped_dir, primer_dir, prifi):
         except Exception:
             print("Whoa! Empty alignment file?! (%s)" % f)
             continue
-    
+
         # exchange seq names with numbers
         # (Clustal format truncates to len 30 but need to be unique for PriFi)
         i = 0
@@ -215,7 +222,7 @@ def export_primer_alignments(primer_dir, orthologs):
                 pos_fw = [int(x) for x in ps.pos_fw.split('-')]
                 pos_rv = [int(x) for x in ps.pos_rv.split('-')]
                 # generate gapped sequence
-                seq = ('-'*pos_fw[0] + ps.seq_fw + '-'*(pos_rv[0]-pos_fw[1]) + 
+                seq = ('-'*pos_fw[0] + ps.seq_fw + '-'*(pos_rv[0]-pos_fw[1]) +
                        Seq(ps.seq_rv).reverse_complement() + '-'*(len(aln[0])-pos_rv[1]))
                 rec = SeqRecord(seq, id="%s_%s-%s" % (db_ortho.id, i, i))
                 pseqs.append(rec)
@@ -248,7 +255,7 @@ def blast_primers_offline(primer_dir, out_dir):
     cline = NcbiblastnCommandline(query=query_fn, db='nt', out=out_fn, outfmt='5') #'"6 std sstrand"')
     print("\t%s\n" % cline)
     cline()
-        
+
     # parse BLAST hits
     #print("\tLoading BLAST hits...\n")
     #model.load_primer_blast_hits(out_fn)
@@ -259,8 +266,11 @@ def blast_primers_offline(primer_dir, out_dir):
 # final. create report #
 ########################
 def create_report(primer_dir, report_dir):
-    import utils
+    if not os.path.exists(report_dir):
+        print("\nSetting up report...", file=sys.stderr)
+        print("\tCopy report HTML files to %s" % report_dir)
+        shutil.copytree(os.path.join('.', 'resources', 'report'), report_dir)
 
-    print("\nGenerating data for report...\n")
-    utils.generateRecordsJs()
-    utils.generateAlignmentJs()
+    print("\nGenerating data for report...\n", file=sys.stderr)
+    utils.generateRecordsJs(primer_dir, os.path.join(report_dir, 'js'))
+    utils.generateAlignmentJs(primer_dir, os.path.join(report_dir, 'js'))

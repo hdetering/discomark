@@ -1,1 +1,3 @@
-data
+out
+output
+*.pyc
