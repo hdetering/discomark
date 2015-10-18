@@ -1,7 +1,8 @@
+from __future__ import division, print_function
 from discomark.models import *
 from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker
-import os, re
+import os, re, sys
 from glob import glob
 from Bio import SeqIO
 from Bio.Blast import NCBIXML
@@ -14,13 +15,12 @@ class DataBroker():
     """ This class maintains the db session and handles data access. """
     def __init__(self, project_name):
         # choose whether to use an in-memory db or create a db file
-        print(project_name)
         if project_name:
             self.conn_str = 'sqlite:///%s/%s.db' % (project_name, project_name)
         else:
             print("\nUsing in-memory database.\n")
             self.conn_str = 'sqlite:///:memory:'
-            
+
         # connection to database
         self.engine = create_engine(self.conn_str, echo=False)
         # create a database session
@@ -46,15 +46,15 @@ class DataBroker():
         ortho_hits = self.session.query(Ortholog.id, Mapping.refseq, func.max(Mapping.length)).join(Ortholog.sequences).join(Sequence.mappings).group_by(Ortholog).all()
         ref2ortho = {}
         # for each ortholog's best hit, get
-        #  - orientation of each sequence hit 
+        #  - orientation of each sequence hit
         #  - reference sequence range
         for o_id, ref_id, max_len in ortho_hits:
             hits = (
                 self.session.query(
-                    Ortholog.id, 
-                    Sequence.fasta_id, 
-                    Mapping.ref_start, 
-                    Mapping.ref_end, 
+                    Ortholog.id,
+                    Sequence.fasta_id,
+                    Mapping.ref_start,
+                    Mapping.ref_end,
                     Mapping.strand
                 )
                 .join(Ortholog.sequences)
@@ -107,7 +107,7 @@ class DataBroker():
         if not os.path.exists(cat_fn):
             print("\tWarning: file '%s' is missing! Orthologs will not be functionally annotated." % cat_fn)
             return False
-        
+
         for l in open(cat_fn):
             line = l.rstrip()
             if len(line) == 0:
@@ -129,7 +129,7 @@ class DataBroker():
         if not os.path.exists(anno_fn):
             print("\tWarning: file '%s' is missing! Orthologs will not be functionally annotated." % anno_fn)
             return False
-        
+
         for line in open(anno_fn):
             o_id, cog, fun, prot = line.strip('\n').split('\t')
             db_ortho = Ortholog(id=int(o_id), prot=prot)
@@ -142,12 +142,12 @@ class DataBroker():
 
     # loading input data
     # =====================
-    def create_db_from_input(self, input_dir):
+    def create_db_from_input(self, input_dir, log_fh=sys.stderr):
         session = self.session
 
-        print("\nLoading data from directory '%s' ..." % input_dir)
+        print("\nLoading data from directory '%s' ..." % input_dir, file=log_fh)
         species = sorted(next(os.walk(input_dir))[1])
-        print("\nFound %d species:\n\t%s\n" % (len(species), '\n\t'.join(species)))
+        print("\nFound %d species:\n\t%s\n" % (len(species), '\n\t'.join(species)), file=log_fh)
 
         # traverse species folders
         for sp_name in species:
@@ -180,12 +180,14 @@ class DataBroker():
 
     # loading BLAST hits
     # ======================
-    def load_blast_hits(self, blast_filename, add=False):        
+    def load_blast_hits(self, blast_filename, add=False):
         session = self.session
 
         # truncate existing table if not in 'add' mode
         if not add:
-            print("TODO: truncate table prior to loading records.")
+            tab = Base.metadata.tables['mappings']
+            session.execute(tab.delete())
+            session.commit()
 
         # find best reference hits in local alignments
         f = open(blast_filename, 'rt')
@@ -214,7 +216,7 @@ class DataBroker():
     def load_blast_hits_xml(blast_filename):
         session = self.session
 
-        # find best reference hits in local alignments
+        # find best (i.e. longest) reference hits in local alignments
         for rec in NCBIXML.parse(open(blast_filename, 'rt')):
             seq_id = rec.descriptions[0].title
             max_len = 0
@@ -263,3 +265,27 @@ Avg\. #sequences in primer alignments: \S+ / \S+
                 session.add(ps)
         session.commit()
         session.close()
+
+    # export primers to file
+    def export_primers_to_file(self, filename):
+        primer_sets = self.session.query(PrimerSet).all()
+
+        with open(filename, 'wt') as outfile:
+            for ps in primer_sets:
+                outfile.write(">%d_%d_fw\n%s\n" % (ps.id, ps.id_ortholog, ps.seq_fw))
+                outfile.write(">%d_%d_rv\n%s\n" % (ps.id, ps.id_ortholog, ps.seq_rv))
+
+    # load primer BLAST hits from XML file
+    def load_primer_blast_hits_xml(blast_filename):
+        session = self.session
+
+        # find best reference hits in local alignments
+        for rec in NCBIXML.parse(open(blast_filename, 'rt')):
+            # query id format: "<id_primerset>_<id_ortholog>_(fw|rv)"
+            primer_id = int(rec.query.split('_')[0])
+            primer_fwrv = rec.query.split('_')[-1]
+            subject_id = rec.alignments[0].accession
+
+            session.query(PrimerSet).filter_by(id=primer_id).update({"blast_%s" % primer_fwrv: subject_id})
+
+        session.commit()

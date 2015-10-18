@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 from __future__ import division, print_function
 
+program = "DiscoMark"
+version = "0.9"
 # Run parameters
 # (todo: create command line params)
 num_threads = 1
 
 import argparse
+import datetime
 import os
 import sys
 # name of configparser module has been changed in Python3
@@ -32,6 +35,11 @@ def parse_args():
     parser.add_argument('--no-primer-blast', help="skip online primer BLAST (use, when running without internet connection", action='store_true')
     args = parser.parse_args()
 
+    # if no arguments were provided, display help and exit
+    if len(sys.argv) < 2:
+        parser.print_help()
+        sys.exit(0)
+
     # check if output directory exists
     if os.path.isdir(args.dir) and args.step == 0:
         utils.print_error_and_exit("output folder '%s' already exists. Delete it or resume using '-s/--step'." % args.dir)
@@ -54,12 +62,12 @@ def parse_args():
     return args
 
 if __name__ == '__main__':
+    print("\n%s v%s\n" % (program, version))
     args = parse_args()
-    print(args)
     data_dir = os.path.join(args.dir)
 
     # 0. initialize folder structure and DB
-    reference   = os.path.join(data_dir, 'genome', 'genome.fasta')
+    reference   = os.path.join(args.dir, 'genome', 'genome.fasta')
     input_dir   = os.path.join(args.dir, config.get('Data', 'input_dir'))
     ortho_dir   = os.path.join(args.dir, config.get('Data', 'ortho_dir'))
     aligned_dir = os.path.join(args.dir, config.get('Data', 'aligned_dir'))
@@ -69,38 +77,50 @@ if __name__ == '__main__':
     blast_dir   = os.path.join(args.dir, config.get('Data', 'blast_dir'))
     report_dir  = os.path.join(args.dir, config.get('Data', 'report_dir'))
 
+    if not os.path.exists(args.dir):
+        utils.setup_output_folders(data_dir, args.input, args.reference, config)
+    logfile = open(os.path.join(args.dir, 'discomark.log'), 'wt')
+    print(datetime.datetime.now(), file=logfile)
+    print("Running DiscoMark with the following parameters:\n%s" % args, file=logfile)
     model = database.DataBroker(args.dir)
     model.initialize_db(args.dir)
 
     # 1. parse predicted orthologs
     if args.step <= 0:
-        utils.setup_output_folders(data_dir, args.input, args.reference, config)
         model.create_db_from_input(input_dir)
     orthologs = model.get_orthologs()
     if args.step <= 1:
-        steps.merge_species(input_dir, ortho_dir, orthologs)
+        print("\n[1] Merging orthologs from input folders...")
+        steps.merge_species(input_dir, ortho_dir, orthologs, logfile)
     # 2. align ortholog files
     if args.step <= 2:
-        steps.align_orthologs(ortho_dir, aligned_dir, orthologs)
+        print("\n[2] Aligning orthologous sequences...")
+        steps.align_orthologs(ortho_dir, aligned_dir, orthologs, logfile)
     # 3. trim alignments
     if args.step <= 3:
-        steps.trim_alignments(aligned_dir, trimmed_dir, trimal)
+        print("\n[3] Trimming alignments...")
+        steps.trim_alignments(aligned_dir, trimmed_dir, trimal, logfile)
     # 4. map trimmed alignments against reference genome
     if args.step <= 4:
-        out_fn = steps.map_to_reference(trimmed_dir, mapped_dir, reference)
+        print("\n[4] Mapping alignments to reference...")
+        out_fn = steps.map_to_reference(trimmed_dir, mapped_dir, reference, logfile)
         model.load_blast_hits(out_fn)
         hits = model.get_best_hits()
-        steps.add_reference(trimmed_dir, mapped_dir, reference, hits)
+        steps.add_reference(trimmed_dir, mapped_dir, reference, hits, logfile)
     # 5. design primers
     if args.step <= 5:
-        steps.design_primers(mapped_dir, primer_dir, prifi)
+        print("\n[5] Designing primers based on multiple alignments...")
+        steps.design_primers(mapped_dir, primer_dir, prifi, logfile)
         model.load_primers(primer_dir)
+        model.export_primers_to_file(os.path.join(primer_dir, 'primers.fa'))
         orthologs = model.get_orthologs()
         steps.export_primer_alignments(primer_dir, orthologs)
     # 6. primer BLAST
     if args.step <= 6 and not args.no_primer_blast:
-        #steps.blast_primers_online(primer_dir, blast_dir)
-        pass
+        print("\n[6] Searching primer sequences in BLAST database...")
+        steps.blast_primers_online(primer_dir, blast_dir, logfile)
 
     # create report
     steps.create_report(primer_dir, report_dir)
+
+    logfile.close()

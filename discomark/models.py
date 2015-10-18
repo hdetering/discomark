@@ -23,7 +23,7 @@ class Category(Base):
 # many-to-many relationship between Function and Ortholog
 fun_orto = Table('function_ortholog', Base.metadata,
                  Column('id_function', Integer, ForeignKey('functions.id')),
-                 Column('id_ortholog', Integer, ForeignKey('orthologs.id')))    
+                 Column('id_ortholog', Integer, ForeignKey('orthologs.id')))
 
 class Function(Base):
     """ Functional used in ortholog annotations. """
@@ -44,7 +44,7 @@ class Species(Base):
 
     id   = Column(Integer, primary_key=True)
     name = Column(String)
-    
+
     def __repr__(self):
         return "<Species(name='%s')>" % self.name
 
@@ -56,7 +56,7 @@ class Ortholog(Base):
     prot        = Column(String)
     sequences   = relationship("Sequence", backref="ortholog")
     files       = relationship("File", backref="ortholog")
-    
+
     def __repr__(self):
         return "<Ortholog(%d)>" % self.id
 
@@ -80,18 +80,18 @@ class Sequence(Base):
     sequence    = Column(Text)
     length      = Column(Integer)
     species     = relationship("Species", backref="sequences")
-    
+
     def __repr__(self):
-        return "<Sequence(id='%s')>" % self.fasta_id    
+        return "<Sequence(id='%s')>" % self.fasta_id
 
 class File(Base):
     """ Files refer to input files on the file system. """
     __tablename__ = 'files'
-    
+
     id          = Column(Integer, primary_key=True)
     id_ortholog = Column(Integer, ForeignKey('orthologs.id'))
     path        = Column(String)
-    
+
     def __repr__(self):
         t = 'ortholog' if self.id_ortholog != None else '?'
         return "<File(type=%s, path=%s)>" % (t,self.path)
@@ -99,7 +99,7 @@ class File(Base):
 class Mapping(Base):
     """ Mappings are sequence-to-reference alignment hits (from BLAST). """
     __tablename__ = 'mappings'
-    
+
     id          = Column(Integer, primary_key=True)
     id_sequence = Column(Integer, ForeignKey('sequences.id'))
     refseq      = Column(String)
@@ -108,14 +108,14 @@ class Mapping(Base):
     length      = Column(Integer)
     strand      = Column(String)
     sequence    = relationship("Sequence", backref="mappings")
-    
+
     def __repr__(self):
         return "<Mapping(seq='%s', ref='%s', len=%d, strand='%s')>" % (self.sequence.fasta_id, self.refseq, self.length, self.strand)
 
 class PrimerSet(Base):
     """ Primers are templates for PCR amplification of Orthologs. """
     __tablename__ = 'primer_sets'
-    
+
     id          = Column(Integer, primary_key=True)
     id_ortholog = Column(Integer, ForeignKey('orthologs.id'))
     ortholog    = relationship("Ortholog", backref="primer_sets")
@@ -124,6 +124,8 @@ class PrimerSet(Base):
     pos_rv      = Column(String)
     seq_fw      = Column(String)
     seq_rv      = Column(String)
-    
+    blast_fw    = Column(String) # NCBI accession
+    blast_rv    = Column(String) # NCBI accession
+
     def __repr__(self):
         return "<PrimerSet(ortholog='%d', product=%dbp)>" % (self.ortholog.id, self.prod_len)
