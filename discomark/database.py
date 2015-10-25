@@ -262,6 +262,8 @@ Avg\. #sequences in primer alignments: \S+ / \S+
                 ps.pos_rv = m.group('pos_rv')
                 ps.seq_fw = m.group('seq_fw')
                 ps.seq_rv = m.group('seq_rv')
+                ps.tm_fw = float(m.group('Tm_fw'))
+                ps.tm_rv = float(m.group('Tm_rv'))
                 session.add(ps)
         session.commit()
         session.close()
@@ -276,16 +278,30 @@ Avg\. #sequences in primer alignments: \S+ / \S+
                 outfile.write(">%d_%d_rv\n%s\n" % (ps.id, ps.id_ortholog, ps.seq_rv))
 
     # load primer BLAST hits from XML file
-    def load_primer_blast_hits_xml(blast_filename):
+    def load_primer_blast_hits_xml(self, blast_xml):
         session = self.session
-
         # find best reference hits in local alignments
-        for rec in NCBIXML.parse(open(blast_filename, 'rt')):
-            # query id format: "<id_primerset>_<id_ortholog>_(fw|rv)"
-            primer_id = int(rec.query.split('_')[0])
-            primer_fwrv = rec.query.split('_')[-1]
-            subject_id = rec.alignments[0].accession
+        for rec in NCBIXML.parse(open(blast_xml, 'rt')):
+            if len(rec.alignments) > 0:
+                # query id format: "<id_primerset>_<id_ortholog>_(fw|rv)"
+                primer_id = int(rec.query.split('_')[0])
+                primer_fwrv = rec.query.split('_')[-1]
+                subject_id = rec.alignments[0].accession
 
-            session.query(PrimerSet).filter_by(id=primer_id).update({"blast_%s" % primer_fwrv: subject_id})
+                session.query(PrimerSet).filter_by(id=primer_id).update({"blast_%s" % primer_fwrv: subject_id})
 
         session.commit()
+
+    def primersets_to_records_js(self, target_fn):
+        primer_sets = self.session.query(PrimerSet).all()
+
+        rec_cnt = 0
+        js = "var myRecords = [\n"
+        for ps in primer_sets:
+            js += ps.to_json(rec_cnt) + ',\n'
+            rec_cnt += 1
+        js += "\n];"
+
+        with open(target_fn, 'wt') as outfile:
+            print(outfile.name)
+            outfile.write(js)

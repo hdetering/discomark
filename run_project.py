@@ -95,18 +95,22 @@ if __name__ == '__main__':
     # 2. align ortholog files
     if args.step <= 2:
         print("\n[2] Aligning orthologous sequences...")
-        steps.align_orthologs(ortho_dir, aligned_dir, orthologs, logfile)
+        settings = config.items('02_MAFFT_settings')
+        steps.align_orthologs(ortho_dir, aligned_dir, orthologs, settings, logfile)
     # 3. trim alignments
     if args.step <= 3:
         print("\n[3] Trimming alignments...")
-        steps.trim_alignments(aligned_dir, trimmed_dir, trimal, logfile)
+        settings = config.items('03_TrimAl_settings')
+        steps.trim_alignments(aligned_dir, trimmed_dir, trimal, settings, logfile)
     # 4. map trimmed alignments against reference genome
     if args.step <= 4:
         print("\n[4] Mapping alignments to reference...")
-        out_fn = steps.map_to_reference(trimmed_dir, mapped_dir, reference, logfile)
+        settings = config.items('04_BLAST_settings')
+        out_fn = steps.map_to_reference(trimmed_dir, mapped_dir, reference, settings, logfile)
         model.load_blast_hits(out_fn)
         hits = model.get_best_hits()
-        steps.add_reference(trimmed_dir, mapped_dir, reference, hits, logfile)
+        settings = config.items('04_MAFFT_settings')
+        steps.add_reference(trimmed_dir, mapped_dir, reference, hits, settings, logfile)
     # 5. design primers
     if args.step <= 5:
         print("\n[5] Designing primers based on multiple alignments...")
@@ -118,9 +122,13 @@ if __name__ == '__main__':
     # 6. primer BLAST
     if args.step <= 6 and not args.no_primer_blast:
         print("\n[6] Searching primer sequences in BLAST database...")
-        steps.blast_primers_online(primer_dir, blast_dir, logfile)
+        blast_outfile = os.path.join(blast_dir, 'blast_out.xml')
+        steps.blast_primers_online(primer_dir, blast_outfile, logfile)
+        model.load_primer_blast_hits_xml(blast_outfile)
 
     # create report
-    steps.create_report(primer_dir, report_dir)
+    steps.create_report_dir(primer_dir, report_dir)
+    print("\nGenerating data for report...\n", file=sys.stderr)
+    model.primersets_to_records_js(os.path.join(report_dir, 'js', 'records.js'))
 
     logfile.close()

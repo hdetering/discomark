@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.schema import ForeignKey
 Base = declarative_base()
 
-from sqlalchemy import Table, Column, Integer, String, Text
+from sqlalchemy import Table, Column, Float, Integer, String, Text
 
 class Category(Base):
     """ Functional categories used in ortholog annotations. """
@@ -124,8 +124,25 @@ class PrimerSet(Base):
     pos_rv      = Column(String)
     seq_fw      = Column(String)
     seq_rv      = Column(String)
+    tm_fw       = Column(Float)
+    tm_rv       = Column(Float)
     blast_fw    = Column(String) # NCBI accession
     blast_rv    = Column(String) # NCBI accession
 
     def __repr__(self):
         return "<PrimerSet(ortholog='%d', product=%dbp)>" % (self.ortholog.id, self.prod_len)
+
+    def to_json(self, idx):
+        format_str = '''  {
+    "index": "%s",
+    "export": "0",
+    "orthologId": "%s",
+    "product-(bp)": "%s",
+    "fwSequence": "%s",
+    "rvSequence": "%s",
+    "tm": "%s/%s",
+    "primerLength": "%s/%s",
+    "fwBlastHit": "%s",
+    "rvBlastHit": "%s"
+  }'''
+        return format_str % (idx, self.id, self.prod_len, self.seq_fw, self.seq_rv, self.tm_fw, self.tm_rv, len(self.seq_fw), len(self.seq_rv), self.blast_fw, self.blast_rv)

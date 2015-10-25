@@ -38,18 +38,19 @@ def merge_species(input_dir, ortho_dir, orthologs, log_fh=sys.stderr):
 ###########################
 # 2. align ortholog files #
 ###########################
-def align_orthologs(ortho_dir, aligned_dir, orthologs, logfile):
-    print("\nAligning ortholog sequences...", file=logfile)
+def align_orthologs(ortho_dir, aligned_dir, orthologs, settings, log_fh=sys.stderr):
+    print("\nAligning ortholog sequences...", file=log_fh)
     # align each ortholog
     for o in orthologs:
         ortho_fn = os.path.join(ortho_dir, "%s.fasta" % o.id)
         align_fn = os.path.join(aligned_dir, '%s.aligned.fasta' % o.id)
         # alignment makes sense only if file contains >1 sequences
         if len(o.sequences) > 1:
-            cline = ['mafft','--localpair','--maxiterate','16','--inputorder','--preservecase',ortho_fn]
-            print("\t%s " % ' '.join(cline), file=logfile)
+            #cline = ['mafft','--localpair','--maxiterate','16','--inputorder','--preservecase', ortho_fn]
+            cline = ['mafft'] + [x for x in sum(settings, ()) if len(x.strip())>0] + [ortho_fn]
+            print("\t%s " % ' '.join(cline), file=log_fh)
             #stdout = subprocess.check_output(cline) # won't work with python <2.7!
-            stdout = subprocess.Popen(cline, stdout=subprocess.PIPE, stderr=logfile).communicate()[0] # this works with python <2.7
+            stdout = subprocess.Popen(cline, stdout=subprocess.PIPE, stderr=None).communicate()[0] # this works with python <2.7
             #mafft_cline = MafftCommandline(input=ortho_fn, localpair=True, maxiterate=16)
             #print("\t%s " % mafft_cline)
             # run MAFFT
@@ -64,7 +65,7 @@ def align_orthologs(ortho_dir, aligned_dir, orthologs, logfile):
 ######################
 # 3. trim alignments #
 ######################
-def trim_alignments(aligned_dir, trimmed_dir, trimal, log_fh=sys.stderr):
+def trim_alignments(aligned_dir, trimmed_dir, trimal, settings, log_fh=sys.stderr):
     print("\nTrimming alignments...", file=log_fh)
     aligned_files = next(os.walk(aligned_dir))[2]
     aligned_files = [os.path.join(aligned_dir, f) for f in os.listdir(aligned_dir) if os.path.isfile(os.path.join(aligned_dir,f))]
@@ -72,7 +73,8 @@ def trim_alignments(aligned_dir, trimmed_dir, trimal, log_fh=sys.stderr):
     for f in aligned_files:
         o_id = os.path.split(f)[1].split('.')[0]
         out = os.path.join(trimmed_dir, "%s.trim.fasta" % o_id)
-        trimal_params = [trimal, "-in", f, "-out", out, "-htmlout", "%s.html" % out, "-strictplus"]
+        trimal_params = [trimal, '-in', f, '-out', out, '-htmlout', "%s.html" % out]
+        trimal_params += [x for x in sum(settings, ()) if len(x.strip())>0]
         subprocess.call(trimal_params, stdout=log_fh, stderr=log_fh)
 
 
@@ -86,7 +88,7 @@ def makeblastdb(genome, log_fh=sys.stderr):
 ###################################
 # 4. map against reference genome #
 ###################################
-def map_to_reference(query_dir, mapped_dir, genome, log_fh=sys.stderr):
+def map_to_reference(query_dir, mapped_dir, genome, settings, log_fh=sys.stderr):
     # create the BLAST db to map against
     print("\nCreating BLAST database from reference...", file=log_fh)
     makeblastdb(genome, log_fh)
@@ -105,13 +107,13 @@ def map_to_reference(query_dir, mapped_dir, genome, log_fh=sys.stderr):
     out_fn = os.path.join(mapped_dir, 'blast.out')
     # blast_options = ['-query', query_fn, '-db', genome, '-out', out_fn]
     # cline = ['blastn'] + blast_options
-    cline = NcbiblastnCommandline(query=query_fn, db=genome, out=out_fn, outfmt='"6 std sstrand"')
+    cline = NcbiblastnCommandline(query=query_fn, db=genome, out=out_fn, outfmt='"6 std sstrand"', **dict(settings))
     print("\t%s\n" % cline, file=log_fh)
     stdout, stderr = cline()
 
     return out_fn
 
-def add_reference(trimmed_dir, mapped_dir, genome, hits, log_fh):
+def add_reference(trimmed_dir, mapped_dir, genome, hits, mafft_settings, log_fh):
     # combine ortholog and reference sequences
     for rec in SeqIO.parse(open(genome, 'rt'), 'fasta'):
         if rec.id in hits:
@@ -141,14 +143,9 @@ def add_reference(trimmed_dir, mapped_dir, genome, hits, log_fh):
     for f in glob(os.path.join(mapped_dir, '*.ref.fasta')):
         o_id = os.path.split(f)[1].split('.')[0]
         # run MAFFT (preserve input order, so ref seq is last)
-        cline = ['mafft','--localpair','--maxiterate','16','--inputorder','--preservecase','--clustalout',f]
+        cline = ['mafft'] + [x for x in sum(mafft_settings, ()) if len(x.strip())>0] + [f]
         print("\t%s " % ' '.join(cline), file=log_fh)
-        #stdout = subprocess.check_output(cline) # won't work with python <2.7!
         stdout = subprocess.Popen(cline, stdout=subprocess.PIPE, stderr=log_fh).communicate()[0] # this works with python <2.7
-        #mafft_cline = MafftCommandline(input=f, localpair=True, maxiterate=16, inputorder=True, clustalout=True)
-        # print("\t%s " % mafft_cline)
-        #stdout, stderr = mafft_cline()
-        #align = AlignIO.read(StringIO(stdout), "clustal")
 
         with open(os.path.join(mapped_dir, '%s.mapped.aln' % o_id), 'wb') as handle:
             handle.write(stdout)
@@ -220,13 +217,12 @@ def export_primer_alignments(primer_dir, orthologs):
 #############################################################
 
 # run NCBI BLAST
-def blast_primers_online(primer_dir, out_dir, log_fh=sys.stderr):
+def blast_primers_online(primer_dir, out_fn, log_fh=sys.stderr):
     primerfile = os.path.join(primer_dir, 'primers.fa')
     print(datetime.datetime.now(), file=log_fh)
     print("Performing remote BLAST search for primers...", file=log_fh)
     handle = NCBIWWW.qblast('blastn', 'refseq_mrna', open(primerfile).read(), entrez_query='txid2[Orgn] OR txid9606[Orgn]')
     print(datetime.datetime.now(), file=log_fh)
-    out_fn = os.path.join(out_dir, 'blast_out.xml')
     with open(out_fn, 'w') as outfile:
         outfile.write(handle.read())
 
@@ -250,12 +246,12 @@ def blast_primers_offline(primer_dir, out_dir):
 ########################
 # final. create report #
 ########################
-def create_report(primer_dir, report_dir):
+def create_report_dir(primer_dir, report_dir):
     if not os.path.exists(report_dir):
         print("\nSetting up report...", file=sys.stderr)
         print("\tCopy report HTML files to %s" % report_dir)
         shutil.copytree(os.path.join('.', 'resources', 'report'), report_dir)
 
-    print("\nGenerating data for report...\n", file=sys.stderr)
-    utils.generateRecordsJs(primer_dir, os.path.join(report_dir, 'js'))
-    utils.generateAlignmentJs(primer_dir, os.path.join(report_dir, 'js'))
+    #print("\nGenerating data for report...\n", file=sys.stderr)
+    #utils.generateRecordsJs(primer_dir, os.path.join(report_dir, 'js'))
+    #utils.generateAlignmentJs(primer_dir, os.path.join(report_dir, 'js'))
