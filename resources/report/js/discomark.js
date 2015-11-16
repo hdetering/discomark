@@ -1,4 +1,4 @@
-var textAlign = ["center", "center", "center", "start", "start", "center", "center", "start", "start"];
+var textAlign = ["center", "center", "center", "center", "start", "start", "center", "center", "start", "start"];
 var dynatable = null,
     dt_dirty = false;
 var alignmentViewer = null;
@@ -15,19 +15,28 @@ function myAttributeWriter(record) {
         }
         html += '/>';
     }
+    // insert a link for NCBI records
+    else if (this.id == "fwBlastHit" || this.id == "rvBlastHit") {
+      if (record[this.id] != "None") {
+        html = "<a href='http://www.ncbi.nlm.nih.gov/nuccore/" + record[this.id] + "' target='_blank'>" + record[this.id] + "</a>";
+      }
+      else {
+        html = record[this.id];
+      }
+    }
     else {
         html = record[this.id];
     }
     return html;
 };
-  
+
 function simpleCellWriter(column, record) {
     var html = column.attributeWriter(record)
         td = '<td';
-    
+
     // add css style
     td += ' style="text-align: ' + textAlign[column.index] + ';"';
-    
+
     console.log(record['export']);
     return td +' id="' +JSON.stringify(record)+ '">' + html + '</td>';
 };
@@ -65,7 +74,7 @@ function updateAlignmentViewer(orthoId, showSeq) {
     console.log(orthoId);
     $('#ortholog-id').html(orthoId);
     alignmentViewer.records = alignments[orthoId];
-    alignmentViewer.drawAlignment(showSeq); 
+    alignmentViewer.drawAlignment(showSeq);
 }
 
 function record2Fasta(rec) {
@@ -74,7 +83,7 @@ function record2Fasta(rec) {
     fastaStr += rec.fwSequence + "\n";
     fastaStr += ">" + rec.orthologId + "_rv\n";
     fastaStr += rec.rvSequence + "\n";
-    
+
     return fastaStr;
 }
 
@@ -111,7 +120,7 @@ function finalizeSummary() {
     // generate summary text from template
     var template = $.templates("#tmplSummary");
     template.link("#resSummary", summary);
-    
+
     // whip up pie charts
     var plotCat = $.jqplot('chartCategories', [categories], {
         title: 'Functional categories for discovered orthologs',
@@ -128,7 +137,7 @@ function finalizeSummary() {
             // You can show the data 'value' or data 'label' instead.
             dataLabels: 'value'
           }
-        }, 
+        },
         legend: { show:true, location: 'e' }
     });
 /*
@@ -146,13 +155,13 @@ function finalizeSummary() {
             // You can show the data 'value' or data 'label' instead.
             dataLabels: 'value'
           }
-        }, 
-        legend: { 
+        },
+        legend: {
             renderer: $.jqplot.EnhancedLegendRenderer,
-            show:true, 
+            show:true,
             location: 'e',
             rendererOptions: { numberRows : 12 } }
-            
+
     });
 */
 }
@@ -161,10 +170,11 @@ function finalizeSummary() {
 $( document ).ready(function() {
     $('#tabs').tabs();
     finalizeSummary();
-//    alert(JSON.stringify(myRecords));    
+//    alert(JSON.stringify(myRecords));
     dynatable = $('#primer-table').dynatable({
         features: {
             //paginate: false,
+            pushState: false,
             search: false
         },
         dataset: {
@@ -192,7 +202,7 @@ $( document ).ready(function() {
     //$('#alignment').html( alignments['413291'] );
     alignmentViewer = new CanvasState(document.getElementById('alignmentCanvas'));
     updateAlignmentViewer(orthologId, false);
-    
+
     $('td.export-toggle').click(function() {
         this.toggleClass('selected');
     });
@@ -211,7 +221,7 @@ $( document ).ready(function() {
 $('#chckHead').click(function () {
     if (this.checked == false) {
         $('.chcktbl:checked').attr('checked', false);
-    } 
+    }
     else {
         $('.chcktbl:not(:checked)').attr('checked', true);
     }

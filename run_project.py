@@ -64,10 +64,9 @@ def parse_args():
 if __name__ == '__main__':
     print("\n%s v%s\n" % (program, version))
     args = parse_args()
-    data_dir = os.path.join(args.dir)
 
     # 0. initialize folder structure and DB
-    reference   = os.path.join(args.dir, 'genome', 'genome.fasta')
+    reference   = os.path.join(args.dir, config.get('Data', 'reference_dir'), 'genome.fasta')
     input_dir   = os.path.join(args.dir, config.get('Data', 'input_dir'))
     ortho_dir   = os.path.join(args.dir, config.get('Data', 'ortho_dir'))
     aligned_dir = os.path.join(args.dir, config.get('Data', 'aligned_dir'))
@@ -77,13 +76,19 @@ if __name__ == '__main__':
     blast_dir   = os.path.join(args.dir, config.get('Data', 'blast_dir'))
     report_dir  = os.path.join(args.dir, config.get('Data', 'report_dir'))
 
-    if not os.path.exists(args.dir):
-        utils.setup_output_folders(data_dir, args.input, args.reference, config)
-    logfile = open(os.path.join(args.dir, 'discomark.log'), 'wt')
-    print(datetime.datetime.now(), file=logfile)
-    print("Running DiscoMark with the following parameters:\n%s" % args, file=logfile)
-    model = database.DataBroker(args.dir)
-    model.initialize_db(args.dir)
+    if args.step <= 0:
+        if not os.path.exists(args.dir):
+            utils.setup_output_folders(args.dir, args.input, args.reference, config)
+        logfile = open(os.path.join(args.dir, 'discomark.log'), 'wt')
+        print(datetime.datetime.now(), file=logfile)
+        print("Running DiscoMark with the following parameters:\n%s" % args, file=logfile)
+        model = database.DataBroker(args.dir)
+        model.initialize_db(args.dir)
+    else:
+        logfile = open(os.path.join(args.dir, 'discomark.log'), 'at')
+        print("\n\n\n---%s" % datetime.datetime.now(), file=logfile)
+        print("Resuming DiscoMark with the following parameters:\n%s" % args, file=logfile)
+        model = database.DataBroker(args.dir)
 
     # 1. parse predicted orthologs
     if args.step <= 0:
@@ -105,12 +110,17 @@ if __name__ == '__main__':
     # 4. map trimmed alignments against reference genome
     if args.step <= 4:
         print("\n[4] Mapping alignments to reference...")
-        settings = config.items('04_BLAST_settings')
-        out_fn = steps.map_to_reference(trimmed_dir, mapped_dir, reference, settings, logfile)
-        model.load_blast_hits(out_fn)
-        hits = model.get_best_hits()
-        settings = config.items('04_MAFFT_settings')
-        steps.add_reference(trimmed_dir, mapped_dir, reference, hits, settings, logfile)
+        if args.reference > 0:
+            settings = config.items('04_BLAST_settings')
+            out_fn = steps.map_to_reference(trimmed_dir, mapped_dir, reference, settings, logfile)
+            model.load_blast_hits(out_fn)
+            hits = model.get_best_hits()
+            settings = config.items('04_MAFFT_settings')
+            steps.add_reference(trimmed_dir, mapped_dir, reference, hits, settings, logfile)
+        else:
+            print("\t-> no reference genome provided -> skipping this step...")
+            steps.convertFastaToClustal(trimmed_dir, mapped_dir)
+
     # 5. design primers
     if args.step <= 5:
         print("\n[5] Designing primers based on multiple alignments...")
@@ -130,5 +140,7 @@ if __name__ == '__main__':
     steps.create_report_dir(primer_dir, report_dir)
     print("\nGenerating data for report...\n", file=sys.stderr)
     model.primersets_to_records_js(os.path.join(report_dir, 'js', 'records.js'))
+    utils.generateAlignmentJs(primer_dir, os.path.join(report_dir, 'js'))
+    model.generateSummaryJs(os.path.join(report_dir, 'js', 'summary.js'))
 
     logfile.close()

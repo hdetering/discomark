@@ -2,11 +2,11 @@ function getAlignmentStats(aln) {
     var l = 0,
         n = 0,
         snps = [];
-        
+
     // get maximum seq length as alignment length
-    for (var seq_id in aln) { 
+    for (var seq_id in aln) {
         l = Math.max(l, aln[seq_id].length);
-        n++; 
+        n++;
     }
     // find variants in alignment
     for (var i=0; i<l; i++) {
@@ -20,7 +20,7 @@ function getAlignmentStats(aln) {
             snps.push(i);
         }
     }
-    
+
     return {'numSeqs': n, 'maxLen': l, 'snps': snps};
 }
 
@@ -37,7 +37,7 @@ function getSeqCoords(seq) {
             pos.push([a,i])
         }
     }
-    
+
     return pos;
 }
 
@@ -69,9 +69,9 @@ function cartoonSeqWriter(id, seq, snps, context, x, y) {
         context.lineWidth = 8;
         context.stroke();
     }
-    
+
     // print variants in different color
-    for (var i=0; i< snps.length; i++) {
+    for (var i=0; i<snps.length; i++) {
         if (seq.charAt(snps[i]) != '-') {
             context.strokeStyle = '#dd0000';
             context.beginPath();
@@ -91,11 +91,11 @@ function simpleSeqWriter(id, seq, snps, context, x, y) {
         context.fillStyle = '#222222';
     }
     context.fillText(seq, x, y);
-    
+
     // print variants in different color
     for (var i=0; i< snps.length; i++) {
         if (seq.charAt(snps[i]) != '-') {
-            var x_snp = x + context.measureText(seq.substr(0,snps[i]-1)).width;
+            var x_snp = x + context.measureText(seq.substr(0,snps[i])).width;
             context.fillStyle = '#dd0000';
             context.fillText(seq.charAt(snps[i]), x_snp, y);
         }
@@ -104,7 +104,7 @@ function simpleSeqWriter(id, seq, snps, context, x, y) {
 
 function CanvasState(canvas) {
   // **** First some setup! ****
-  
+
   this.records = null;
   this.container = canvas.parentNode;
   this.canvas = canvas;
@@ -127,21 +127,21 @@ function CanvasState(canvas) {
   this.htmlLeft = html.offsetLeft;
 
   // **** Keep track of state! ****
-  
+
   this.zoom = false;
   this.dragging = false; // Keep track of when we are dragging
   this.dragoffx = 0; // See mousedown and mousemove events for explanation
   this.dragoffy = 0;
-  
+
   // **** The events! ****
-  
+
   // This is an example of a closure!
   // Right here "this" means the CanvasState. But we are making events on the Canvas itself,
   // and when the events are fired on the canvas the variable "this" is going to mean the canvas!
   // Since we still want to use this particular CanvasState in the events we have to save a reference to it.
   // This is our reference!
   var myState = this;
-  
+
   // fixes a problem where double clicking causes text to get selected on the canvas
   canvas.addEventListener('selectstart', function(e) { e.preventDefault(); return false; }, false);
   // Up, down, and move are for dragging
@@ -177,18 +177,18 @@ function CanvasState(canvas) {
     myState.zoom = !myState.zoom;
     //myState.addShape(new Shape(mouse.x - 10, mouse.y - 10, 20, 20, 'rgba(0,255,0,.6)'));
   }, true);
-  
+
   // **** Options! ****
-  
+
   this.selectionColor = '#CC0000';
-  this.selectionWidth = 2;  
+  this.selectionWidth = 2;
   this.interval = 30;
   //setInterval(function() { myState.draw(); }, myState.interval);
 }
 
 CanvasState.prototype.drawAlignment = function(showSeq) {
     showSeq = typeof showSeq !== 'undefined' ? showSeq : false;
-    
+
     var aln = this.records;
     // get alignment length and depth
     var aln_stats = getAlignmentStats(aln);
@@ -196,7 +196,7 @@ CanvasState.prototype.drawAlignment = function(showSeq) {
     var l = aln_stats['maxLen'],
         n = aln_stats['numSeqs'],
         snps = aln_stats['snps'];
-    
+
     // initialize canvas
     var x = 200,
         y = 50,
@@ -208,10 +208,10 @@ CanvasState.prototype.drawAlignment = function(showSeq) {
     canvas.width  = xSpacing*l+x;
     canvas.height = y+((n+1)*ySpacing);
     //var styles = ['#000000', ''];
-    
+
     // clear canvas
     canvas.width = canvas.width;
-    
+
     for (var seq_id in aln) {
         // write seq name
         context.fillStyle = '#000000';
@@ -230,7 +230,7 @@ CanvasState.prototype.drawAlignment = function(showSeq) {
 // If you wanna be super-correct this can be tricky, we have to worry about padding and borders
 CanvasState.prototype.getMouse = function(e) {
   var element = this.canvas, offsetX = 0, offsetY = 0, mx, my;
-  
+
   // Compute the total offset
   if (element.offsetParent !== undefined) {
     do {
@@ -246,7 +246,7 @@ CanvasState.prototype.getMouse = function(e) {
 
   mx = e.pageX - offsetX;
   my = e.pageY - offsetY;
-  
+
   // We return a simple javascript object (a hash) with x and y defined
   return {x: mx, y: my};
-}    
+}

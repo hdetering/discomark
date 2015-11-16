@@ -25,14 +25,14 @@ def merge_species(input_dir, ortho_dir, orthologs, log_fh=sys.stderr):
     # combine species
     print("\nMerging orthologs for all species in folder %s" % ortho_dir, file=log_fh)
     for ortho in orthologs:
-        f = open(os.path.join(ortho_dir, "%s.fasta" % ortho.id), 'wt')
-        for db_seq in ortho.sequences:
-            seq = Seq(db_seq.sequence)
-            rec = SeqRecord(seq)
-            rec.id = db_seq.fasta_id
-            rec.description = db_seq.description
-            SeqIO.write(rec, f, 'fasta')
-        f.close()
+        if len(ortho.sequences) > 0:
+            with open(os.path.join(ortho_dir, "%s.fasta" % ortho.id), 'wt') as f:
+                for db_seq in ortho.sequences:
+                    seq = Seq(db_seq.sequence)
+                    rec = SeqRecord(seq)
+                    rec.id = db_seq.fasta_id
+                    rec.description = db_seq.description
+                    SeqIO.write(rec, f, 'fasta')
 
 
 ###########################
@@ -58,7 +58,7 @@ def align_orthologs(ortho_dir, aligned_dir, orthologs, settings, log_fh=sys.stde
             with open(align_fn, "wb") as handle:
                 handle.write(stdout)
         # otherwise just copy the ortholog file
-        else:
+        elif len(o.sequences) > 0:
             shutil.copyfile(ortho_fn, align_fn)
 
 
@@ -150,6 +150,12 @@ def add_reference(trimmed_dir, mapped_dir, genome, hits, mafft_settings, log_fh)
         with open(os.path.join(mapped_dir, '%s.mapped.aln' % o_id), 'wb') as handle:
             handle.write(stdout)
 
+# alternative handling if no reference was provided
+def convertFastaToClustal(in_dir, out_dir):
+    for in_path in glob(os.path.join(in_dir, '*.fasta')):
+        out_fn = os.path.basename(in_path).replace('.fasta', '.aln')
+        out_path = os.path.join(out_dir, out_fn)
+        AlignIO.convert(in_path, 'fasta', out_path, 'clustal')
 
 
 #####################
@@ -157,7 +163,7 @@ def add_reference(trimmed_dir, mapped_dir, genome, hits, mafft_settings, log_fh)
 #####################
 def design_primers(mapped_dir, primer_dir, prifi, logfile):
     print("\nDesigning primers using PriFi...\n", file=logfile)
-    mapped_files = glob(os.path.join(mapped_dir, '*.mapped.aln'))
+    mapped_files = glob(os.path.join(mapped_dir, '*.aln'))
     print("\tChecking for empty alignments...", file=logfile)
     for f in mapped_files:
         try:
@@ -195,6 +201,14 @@ def export_primer_alignments(primer_dir, orthologs):
         if len(primers) > 0:
             # get ortholog-reference alignment
             aln = AlignIO.read(os.path.join(primer_dir, "%s.prifi.aln" % db_ortho.id), 'clustal')
+            # rename sequences back to original IDs
+            rec_ids = [seq.fasta_id for seq in db_ortho.sequences]
+            n_rec = 0
+            for rec in aln:
+                rec.id = rec_ids[n_rec] if len(rec_ids[n_rec]) < 35 else rec_ids[n_rec][:30] + "[...]"
+                rec.description = rec.id
+                rec.seq = rec.seq.upper()
+                n_rec += 1
             # generate alignment sequence from primers
             pseqs = []
             i = 1
@@ -204,7 +218,7 @@ def export_primer_alignments(primer_dir, orthologs):
                 # generate gapped sequence
                 seq = ('-'*pos_fw[0] + ps.seq_fw + '-'*(pos_rv[0]-pos_fw[1]) +
                        Seq(ps.seq_rv).reverse_complement() + '-'*(len(aln[0])-pos_rv[1]))
-                rec = SeqRecord(seq, id="%s_%s-%s" % (db_ortho.id, i, i))
+                rec = SeqRecord(seq, id="%s_%s-%s" % (db_ortho.id, i, i), description='')
                 pseqs.append(rec)
                 i += 1
             with open(os.path.join(primer_dir, "%s.primer_aln.fasta" % db_ortho.id), 'wt') as f:

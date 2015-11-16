@@ -1,0 +1,1579 @@
+411847			
+411848	KOG0207	P	Cation transport ATPase
+411849	KOG1896	A	mRNA cleavage and polyadenylation factor II complex, subunit CFT1 (CPSF subunit)
+411850	KOG0324	S	Uncharacterized conserved protein
+411851	KOG2760	U	Vacuolar sorting protein VPS36
+411852	KOG3324	U	Mitochondrial import inner membrane translocase, subunit TIM23
+411853	KOG2319	U	Vacuolar assembly/sorting protein VPS9
+411854	KOG3340	G	Alpha-L-fucosidase
+411855	KOG1714	J	60s ribosomal protein L18
+411856	KOG1621	I	1D-myo-inositol-triphosphate 3-kinase A
+411857	NO related KOG	SR	NO related KOG
+411858	KOG3357	S	Uncharacterized conserved protein
+411859	KOG3800	O	Predicted E3 ubiquitin ligase containing RING finger, subunit of transcription/repair factor TFIIH and CDK-activating kinase assembly factor
+411860	KOG3760	G	Heparan sulfate-glucuronic acid C5-epimerase
+411861	NO related KOG	SR	NO related KOG
+411862	KOG1446	ABO	Histone H3 (Lys4) methyltransferase complex and RNA cleavage factor II complex, subunit SWD2
+411863	KOG0236	P	Sulfate/bicarbonate/oxalate exchanger SAT-1 and related transporters (SLC26 family)
+411864	KOG4390	P	Voltage-gated A-type K+ channel KCND
+411865	KOG1877	R	Putative transmembrane protein cmp44E
+411866	KOG1390	I	Acetyl-CoA acetyltransferase
+411867	KOG0900	J	40S ribosomal protein S20
+411868	KOG2160	O	Armadillo/beta-catenin-like repeat-containing protein
+411869	KOG3236	S	Predicted membrane protein
+411870	KOG3458	C	NADH:ubiquinone oxidoreductase, NDUFA8/PGIV/19 kDa subunit
+411871	KOG3575	T	FOG: Hormone receptors
+411872	KOG1676	A	K-homology type RNA binding proteins
+411873	KOG3239	R	Density-regulated protein related to translation initiation factor 1 (eIF-1/SUI1)
+411874	KOG1221	I	Acyl-CoA reductase
+411875	KOG2035	DL	Replication factor C, subunit RFC3
+411876	KOG3550	W	Receptor targeting protein Lin-7
+411877	KOG3781	W	Dystroglycan
+411878	KOG0118	R	FOG: RRM domain
+411879	KOG3851	C	Sulfide:quinone oxidoreductase/flavo-binding protein
+411880	KOG1028	TU	Ca2+-dependent phospholipid-binding protein Synaptotagmin, required for synaptic vesicle and secretory granule exocytosis
+411881	KOG2572	AJ	Ribosome biogenesis protein - Nop58p/Nop5p
+411882	KOG1242	J	Protein containing adaptin N-terminal region
+411883	KOG3074	K	Transcriptional regulator of the PUR family, single-stranded-DNA-binding
+411884	KOG0058	U	Peptide exporter, ABC superfamily
+411885	KOG2500	S	Uncharacterized conserved protein
+411886	KOG3161	O	Predicted E3 ubiquitin ligase
+411887	KOG0619	R	FOG: Leucine rich repeat
+411888	KOG4297	TV	C-type lectin
+411889	KOG1496	C	Malate dehydrogenase
+411890	KOG2398	D	Predicted proline-serine-threonine phosphatase-interacting protein (PSTPIP)
+411891	KOG0477	L	DNA replication licensing factor, MCM2 component
+411892	KOG1570	J	60S ribosomal protein L10A
+411893	KOG3792	R	Transcription factor NFAT, subunit NF90
+411894	KOG3468	C	NADH:ubiquinone oxidoreductase, NDUFB7/B18 subunit
+411895	NO related KOG	SR	NO related KOG
+411896	KOG0120	A	Splicing factor U2AF, large subunit (RRM superfamily)
+411897	KOG1144	J	Translation initiation factor 5B (eIF-5B)
+411898	KOG2870	C	NADH:ubiquinone oxidoreductase, NDUFS2/49 kDa subunit
+411899	KOG4048	S	Uncharacterized conserved protein
+411900	KOG2043	KTDL	Signaling protein SWIFT and related BRCT domain proteins
+411901	KOG3072	I	Long chain fatty acid elongase
+411902	KOG3403	J	Translation initiation factor 1A (eIF-1A)
+411903	KOG2770	E	Aminomethyl transferase
+411904	KOG3561	K	Aryl-hydrocarbon receptor nuclear translocator
+411905	KOG4244	T	Failed axon connections (fax) protein/glutathione S-transferase-like protein
+411906	KOG1116	IT	Sphingosine kinase, involved in sphingolipid metabolism
+411907	KOG2948	R	Predicted metal-binding protein
+411908	KOG3264	S	Uncharacterized conserved protein
+411909	KOG3294	T	WW domain binding protein WBP-2, contains GRAM domain
+411910	KOG3806	K	Predicted transcription factor
+411911	KOG1688	U	Golgi proteins involved in ER retention (RER)
+411912	KOG0307	U	Vesicle coat complex COPII, subunit SEC31
+411913	KOG0660	T	Mitogen-activated protein kinase
+411914	KOG0619	R	FOG: Leucine rich repeat
+411915	KOG1550	MOT	Extracellular protein SEL-1 and related proteins
+411916	KOG1123	KL	RNA polymerase II transcription initiation/nucleotide excision repair factor TFIIH, 3'-5' helicase subunit SSL2
+411917	KOG1749	J	40S ribosomal protein S23
+411918	KOG3610	T	Plexins (functional semaphorin receptors)
+411919	KOG3584	K	cAMP response element binding protein and related transcription factors
+411920	KOG0299	A	U3 snoRNP-associated protein (contains WD40 repeats)
+411921	KOG2085	T	Serine/threonine protein phosphatase 2A, regulatory subunit
+411922	KOG1027	T	Serine/threonine protein kinase and endoribonuclease ERN1/IRE1, sensor of the unfolded protein response pathway
+411923	KOG2015	O	NEDD8-activating complex, catalytic component UBA3
+411924	NO related KOG	SR	NO related KOG
+411925	KOG4067	S	Uncharacterized conserved protein
+411926	NO related KOG	SR	NO related KOG
+411927	KOG3079	F	Uridylate kinase/adenylate kinase
+411928	KOG4203	TZ	Armadillo/beta-Catenin/plakoglobin
+411929	KOG1534	K	Putative transcription factor FET5
+411930	KOG2504	G	Monocarboxylate transporter
+411931	KOG4072	U	Signal peptidase complex, subunit SPC25
+411932	KOG3742	G	Glycogen synthase
+411933	KOG2098	A	Predicted N6-adenine RNA methylase
+411934	KOG4289	T	Cadherin EGF LAG seven-pass G-type receptor
+411935	KOG4151	ODR	Myosin assembly protein/sexual cycle protein and related proteins
+411936	KOG3608	R	Zn finger proteins
+411937	KOG3290	I	Peroxisomal phytanoyl-CoA hydroxylase
+411938	KOG1735	Z	Actin depolymerizing factor
+411939	KOG1101	DR	Apoptosis inhibitor IAP1 and related BIR domain proteins
+411940	KOG3273	O	Predicted RNA-binding protein Pno1p interacting with Nob1p and involved in 26S proteasome assembly
+411941	KOG0437	J	Leucyl-tRNA synthetase
+411942	KOG3275	T	Zinc-binding protein of the histidine triad (HIT) family
+411943	KOG0939	OK	E3 ubiquitin-protein ligase/Putative upstream regulatory element binding protein
+411944	KOG4441	TR	Proteins containing BTB/POZ and Kelch domains, involved in regulatory/signal transduction processes
+411945	KOG2574	A	mRNA splicing factor PRP31
+411946	KOG2340	S	Uncharacterized conserved protein
+411947	KOG1815	O	Predicted E3 ubiquitin ligase
+411948	KOG2473	K	RNA polymerase III transcription factor (TF)IIIC subunit
+411949	KOG1637	J	Threonyl-tRNA synthetase
+411950	KOG1510	K	RNA polymerase II holoenzyme and mediator subcomplex, subunit SURB7/SRB7
+411951	KOG2402	K	Paf1/RNA polymerase II complex, RTF1 component (involved in regulation of TATA box-binding protein)
+411952	KOG0103	O	Molecular chaperones HSP105/HSP110/SSE1, HSP70 superfamily
+411953	KOG0458	J	Elongation factor 1 alpha
+411954	KOG4740	S	Uncharacterized conserved protein
+411955	KOG0806	E	Carbon-nitrogen hydrolase
+411956	KOG2708	O	Predicted metalloprotease with chaperone activity (RNAse H/HSP70 fold)
+411957	KOG1645	O	RING-finger-containing E3 ubiquitin ligase
+411958	KOG2040	E	Glycine dehydrogenase (decarboxylating)
+411959	KOG0714	O	Molecular chaperone (DnaJ superfamily)
+411960	KOG4322	DO	Anaphase-promoting complex (APC), subunit 5
+411961	KOG0007	A	Splicing factor 3a, subunit 1
+411962	KOG0977	DY	Nuclear envelope protein lamin, intermediate filament superfamily
+411963	KOG0837	K	Transcriptional activator of the JUN family
+411964	KOG3634	Z	Troponin
+411965	KOG0027	T	Calmodulin and related proteins (EF-Hand superfamily)
+411966	KOG3267	S	Uncharacterized conserved protein
+411967	KOG2758	J	Translation initiation factor 3, subunit e (eIF-3e)
+411968	KOG0934	U	Clathrin adaptor complex, small subunit
+411969	KOG0211	T	Protein phosphatase 2A regulatory subunit A and related proteins
+411970	KOG4720	I	Ethanolamine kinase
+411971	KOG3553	M	Tax interaction protein TIP1
+411972	KOG1498	O	26S proteasome regulatory complex, subunit RPN5/PSMD12
+411973	KOG3976	C	Mitochondrial F1F0-ATP synthase, subunit b/ATP4
+411974	KOG1029	TU	Endocytic adaptor protein intersectin
+411975	KOG1114	O	Tripeptidyl peptidase II
+411976	KOG0172	E	Lysine-ketoglutarate reductase/saccharopine dehydrogenase
+411977	KOG1368	E	Threonine aldolase
+411978	NO related KOG	SR	NO related KOG
+411979	NO related KOG	SR	NO related KOG
+411980	KOG2573	AJ	Ribosome biogenesis protein - Nop56p/Sik1p
+411981	KOG0118	R	FOG: RRM domain
+411982	KOG2354	K	RNA Polymerase C (III) 37 kDa subunit
+411983	KOG2219	S	Uncharacterized conserved protein
+411984	KOG1836	W	Extracellular matrix glycoprotein Laminin subunits alpha and gamma
+411985	KOG3466	C	NADH:ubiquinone oxidoreductase, NDUFB9/B22 subunit
+411986	KOG4240	T	Multidomain protein, contains SPEC repeats, PH, SH3, and separate rac-specific and rho-specific guanine nucleotide exchange factor domains
+411987	KOG1451	T	Oligophrenin-1 and related Rho GTPase-activating proteins
+411988	KOG2187	J	tRNA uracil-5-methyltransferase and related tRNA-modifying enzymes
+411989	KOG0332	A	ATP-dependent RNA helicase
+411990	KOG1219	T	Uncharacterized conserved protein, contains laminin, cadherin and EGF domains
+411991	NO related KOG	SR	NO related KOG
+411992	KOG3953	R	SOCS box protein SSB-1, contains SPRY domain
+411993	KOG2007	J	Cysteinyl-tRNA synthetase
+411994	KOG1552	R	Predicted alpha/beta hydrolase
+411995	KOG3821	T	Heparin sulfate cell surface proteoglycan
+411996	KOG4118	S	Uncharacterized conserved protein
+411997	KOG1816	O	Ubiquitin fusion-degradation protein
+411998	KOG0764	C	Mitochondrial FAD carrier protein
+411999	KOG2655	DZU	Septin family protein (P-loop GTPase)
+412000	KOG3525	O	Subtilisin-like proprotein convertase
+412001	KOG1379	T	Serine/threonine protein phosphatase
+412002	KOG3442	S	Uncharacterized conserved protein
+412003	KOG3595	Z	Dyneins, heavy chain
+412004	KOG3656	R	FOG: 7 transmembrane receptor
+412005	KOG0479	L	DNA replication licensing factor, MCM3 component
+412006	KOG0481	L	DNA replication licensing factor, MCM5 component
+412007	KOG0121	A	Nuclear cap-binding protein complex, subunit CBP20 (RRM superfamily)
+412008	KOG4258	T	Insulin/growth factor receptor (contains protein kinase domain)
+412009	KOG2925	J	Predicted translation initiation factor related to eIF-1A
+412010	KOG0787	T	Dehydrogenase kinase
+412011	KOG1938	D	Protein with predicted involvement in meiosis (GSG1)
+412012	KOG3025	C	Mitochondrial F1F0-ATP synthase, subunit c/ATP9/proteolipid
+412013	KOG0225	C	Pyruvate dehydrogenase E1, alpha subunit
+412014	KOG1354	T	Serine/threonine protein phosphatase 2A, regulatory subunit
+412015	NO related KOG	SR	NO related KOG
+412016	NO related KOG	SR	NO related KOG
+412017	KOG0906	TU	Phosphatidylinositol 3-kinase VPS34, involved in signal transduction
+412018	KOG0647	A	mRNA export protein (contains WD40 repeats)
+412019	KOG2338	K	Transcriptional effector CCR4-related protein
+412020	KOG0327	J	Translation initiation factor 4F, helicase subunit (eIF-4A) and related helicases
+412021	KOG1518	H	Coproporphyrinogen III oxidase CPO/HEM13
+412022	KOG3067	R	Translin family protein
+412023	KOG0969	L	DNA polymerase delta, catalytic subunit
+412024	KOG0355	B	DNA topoisomerase type II
+412025	KOG3849	O	GDP-fucose protein O-fucosyltransferase
+412026	KOG1962	V	B-cell receptor-associated protein and related proteins
+412027	KOG3047	K	Predicted transcriptional regulator UXT
+412028	KOG0583	T	Serine/threonine protein kinase
+412029	KOG0450	G	2-oxoglutarate dehydrogenase, E1 subunit
+412030	KOG1476	O	Beta-1,3-glucuronyltransferase B3GAT1/SQV-8
+412031	KOG2653	G	6-phosphogluconate dehydrogenase
+412032	KOG1028	TU	Ca2+-dependent phospholipid-binding protein Synaptotagmin, required for synaptic vesicle and secretory granule exocytosis
+412033	KOG0714	O	Molecular chaperone (DnaJ superfamily)
+412034	KOG1655	U	Protein involved in vacuolar protein sorting
+412035	NO related KOG	SR	NO related KOG
+412036	KOG4121	YU	Nuclear pore complex, Nup133 component (sc Nup133)
+412037	KOG3124	E	Pyrroline-5-carboxylate reductase
+412038	KOG3440	C	Ubiquinol cytochrome c reductase, subunit QCR7
+412039	KOG1742	J	60s ribosomal protein L15/L27
+412040	KOG0558	C	Dihydrolipoamide transacylase (alpha-keto acid dehydrogenase E2 subunit)
+412041	KOG1010	D	Rb (Retinoblastoma tumor suppressor)-related protein
+412042	KOG0986	T	G protein-coupled receptor kinase
+412043	KOG0021	Q	Glutathione synthetase
+412044	KOG4098	O	Molecular chaperone Prefoldin, subunit 2
+412045	KOG3167	A	Box H/ACA snoRNP component, involved in ribosomal RNA pseudouridinylation
+412046	KOG0033	T	Ca2+/calmodulin-dependent protein kinase, EF-Hand protein superfamily
+412047	KOG3390	K	General control of amino-acid synthesis 5-like 1
+412048	KOG3434	J	60S ribosomal protein L22
+412049	KOG3882	R	Tetraspanin family integral membrane protein
+412050	KOG3850	S	Predicted membrane protein
+412051	KOG2569	T	G protein-coupled seven transmembrane receptor
+412052	NO related KOG	SR	NO related KOG
+412053	KOG0060	IR	Long-chain acyl-CoA transporter, ABC superfamily (involved in peroxisome organization and biogenesis)
+412054	KOG2633	BK	Hismacro and SEC14 domain-containing proteins
+412055	KOG0819	U	Annexin
+412056	KOG1823	V	DRIM (Down-regulated in metastasis)-like proteins
+412057	KOG1321	H	Protoheme ferro-lyase (ferrochelatase)
+412058	KOG1255	C	Succinyl-CoA synthetase, alpha subunit
+412059	KOG2025	BD	Chromosome condensation complex Condensin, subunit G
+412060	KOG2721	S	Uncharacterized conserved protein
+412061	KOG0751	C	Mitochondrial aspartate/glutamate carrier protein Aralar/Citrin (contains EF-hand Ca2+-binding domains)
+412062	KOG4213	A	RNA-binding protein La
+412063	KOG1554	OT	COP9 signalosome, subunit CSN5
+412064	KOG3350	S	Uncharacterized conserved protein
+412065	KOG0079	R	GTP-binding protein H-ray, small G protein superfamily
+412066	KOG0740	O	AAA+-type ATPase
+412067	KOG1048	TW	Neural adherens junction protein Plakophilin and related Armadillo repeat proteins
+412068	KOG2024	G	Beta-Glucuronidase GUSB (glycosylhydrolase superfamily 2)
+412069	KOG1874	K	KEKE-like motif-containing transcription regulator (Rlr1)/suppressor of sin4
+412070	KOG3662	L	Cell division control protein/predicted DNA repair exonuclease
+412071	KOG1592	E	Asparaginase
+412072	NO related KOG	SR	NO related KOG
+412073	KOG0578	T	p21-activated serine/threonine protein kinase
+412074	KOG3178	R	Hydroxyindole-O-methyltransferase and related SAM-dependent methyltransferases
+412075	KOG0858	S	Predicted membrane protein
+412076	KOG0024	Q	Sorbitol dehydrogenase
+412077	KOG3761	I	Choline transporter
+412078	KOG1744	B	Histone H2B
+412079	KOG3352	C	Cytochrome c oxidase, subunit Vb/COX4
+412080	KOG1113	T	cAMP-dependent protein kinase types I and II, regulatory subunit
+412081	KOG2361	R	Predicted methyltransferase
+412082	KOG3171	T	Conserved phosducin-like protein
+412083	KOG1668	K	Elongation factor 1 beta/delta chain
+412084	KOG0062	EJ	ATPase component of ABC transporters with duplicated ATPase domains/Translation elongation factor EF-3b
+412085	KOG4036	S	Uncharacterized conserved protein
+412086	KOG1947	R	Leucine rich repeat proteins, some proteins contain F-box
+412087	KOG1058	U	Vesicle coat complex COPI, beta subunit
+412088	KOG4018	S	Uncharacterized conserved protein, contains RWD domain
+412089	KOG3591	O	Alpha crystallins
+412090	KOG4758	R	Predicted membrane protein
+412091	KOG4280	Z	Kinesin-like protein
+412092	KOG0099	T	G protein subunit Galphas, small G protein superfamily
+412093	KOG1499	OKT	Protein arginine N-methyltransferase PRMT1 and related enzymes
+412094	NO related KOG	SR	NO related KOG
+412095	KOG1308	OT	Hsp70-interacting protein Hip/Transient component of progesterone receptor complexes and an Hsp70-binding protein
+412096	NO related KOG	SR	NO related KOG
+412097	KOG4109	K	Histone H3 (Lys4) methyltransferase complex, subunit CPS25/DPY-30
+412098	KOG0755	C	Mitochondrial oxaloacetate carrier protein
+412099	KOG0008	K	Transcription initiation factor TFIID, subunit TAF1
+412100	KOG3187	R	Protein tyrosine phosphatase-like protein PTPLA (contains Pro instead of catalytic Arg)
+412101	KOG4589	D	Cell division protein FtsJ
+412102	KOG2499	G	Beta-N-acetylhexosaminidase
+412103	KOG4165	E	Gamma-glutamyl phosphate reductase
+412104	KOG0335	A	ATP-dependent RNA helicase
+412105	KOG1177	I	Long chain fatty acid acyl-CoA ligase
+412106	KOG1030	R	Predicted Ca2+-dependent phospholipid-binding protein
+412107	NO related KOG	SR	NO related KOG
+412108	KOG1426	S	FOG: RCC1 domain
+412109	KOG1118	IT	Lysophosphatidic acid acyltransferase endophilin/SH3GL, involved in synaptic vesicle formation
+412110	KOG2039	K	Transcriptional coactivator p100
+412111	KOG1147	J	Glutamyl-tRNA synthetase
+412112	KOG4541	YU	Nuclear transport receptor exportin 4 (importin beta superfamily)
+412113	KOG1404	E	Alanine-glyoxylate aminotransferase AGT2
+412114	KOG3783	S	Uncharacterized conserved protein
+412115	KOG2038	JK	CAATT-binding transcription factor/60S ribosomal subunit biogenesis protein
+412116	KOG3128	S	Uncharacterized conserved protein
+412117	KOG0955	R	PHD finger protein BR140/LIN-49
+412118	KOG0884	O	Similar to cyclophilin-type peptidyl-prolyl cis-trans isomerase
+412119	KOG1350	C	F0F1-type ATP synthase, beta subunit
+412120	KOG3406	J	40S ribosomal protein S12
+412121	KOG3098	S	Uncharacterized conserved protein
+412122	KOG0644	R	Uncharacterized conserved protein, contains WD40 repeat and BROMO domains
+412123	KOG1725	U	Protein involved in membrane traffic (YOP1/TB2/DP1/HVA22 family)
+412124	KOG3817	S	Uncharacterized conserved protein
+412125	KOG1652	U	Mitochondrial import inner membrane translocase, subunit TIM17
+412126	KOG4684	R	Uncharacterized conserved protein, contains C4-type Zn-finger
+412127	KOG1905	BK	Class IV sirtuins (SIR2 family)
+412128	KOG2648	J	Diphthamide biosynthesis protein
+412129	KOG1662	C	Mitochondrial F1F0-ATP synthase, subunit OSCP/ATP5
+412130	KOG3658	W	Tumor necrosis factor-alpha-converting enzyme (TACE/ADAM17) and related metalloproteases
+412131	KOG0891	L	DNA-dependent protein kinase
+412132	KOG2273	U	Membrane coat complex Retromer, subunit VPS5/SNX1, Sorting nexins, and related PX domain-containing proteins
+412133	KOG4319	K	DNA-binding nuclear protein p8
+412134	KOG0985	U	Vesicle coat protein clathrin, heavy chain
+412135	KOG2301	PT	Voltage-gated Ca2+ channels, alpha1 subunits
+412136	KOG2137	T	Protein kinase
+412137	KOG1830	Z	Wiskott Aldrich syndrome proteins
+412138	NO related KOG	SR	NO related KOG
+412139	NO related KOG	SR	NO related KOG
+412140	KOG3011	O	Ubiquitin-conjugating enzyme
+412141	KOG2161	G	Glucosidase I
+412142	KOG0379	R	Kelch repeat-containing proteins
+412143	KOG3681	W	Alpha-catenin
+412144	KOG0160	Z	Myosin class V heavy chain
+412145	KOG1694	J	60s ribosomal protein L6
+412146	KOG1076	J	Translation initiation factor 3, subunit c (eIF-3c)
+412147	KOG0353	R	ATP-dependent DNA helicase
+412148	KOG3101	R	Esterase D
+412149	KOG1198	CR	Zinc-binding oxidoreductase
+412150	KOG4676	A	Splicing factor, arginine/serine-rich
+412151	KOG2226	R	Proteins containing regions of low-complexity
+412152	KOG1089	R	Myotubularin-related phosphatidylinositol 3-phosphate 3-phosphatase MTM6
+412153	KOG2496	DKL	Cdk activating kinase (CAK)/RNA polymerase II transcription initiation/nucleotide excision repair factor TFIIH/TFIIK, cyclin H subunit
+412154	KOG1872	O	Ubiquitin-specific protease
+412155	KOG0504	R	FOG: Ankyrin repeat
+412156	KOG3136	S	Uncharacterized conserved protein
+412157	KOG3353	J	60S ribosomal protein L22
+412158	KOG0741	O	AAA+-type ATPase
+412159	KOG4012	B	Histone H1
+412160	KOG0582	T	Ste20-like serine/threonine protein kinase
+412161	KOG1851	S	Uncharacterized conserved protein
+412162	KOG0341	A	DEAD-box protein abstrakt
+412163	KOG3874	S	Uncharacterized conserved protein
+412164	KOG1169	IT	Diacylglycerol kinase
+412165	KOG0469	J	Elongation factor 2
+412166	KOG2090	O	Metalloendopeptidase family - mitochondrial intermediate peptidase
+412167	KOG2656	BK	DNA methyltransferase 1-associated protein-1
+412168	KOG0875	J	60S ribosomal protein L5
+412169	KOG0777	H	Geranylgeranyl pyrophosphate synthase/Polyprenyl synthetase
+412170	KOG0543	O	FKBP-type peptidyl-prolyl cis-trans isomerase
+412171	KOG3121	Z	Dynactin, subunit p25
+412172	KOG2563	R	Permease of the major facilitator superfamily
+412173	KOG4698	S	Uncharacterized conserved protein
+412174	KOG1475	A	Ribosomal protein RPL1/RPL2/RL4L4
+412175	KOG0650	J	WD40 repeat nucleolar protein Bop1, involved in ribosome biogenesis
+412176	KOG2193	AR	IGF-II mRNA-binding protein IMP, contains RRM and KH domains
+412177	KOG3206	O	Alpha-tubulin folding cofactor B
+412178	KOG1600	I	Fatty acid desaturase
+412179	KOG1279	B	Chromatin remodeling factor subunit and related transcription factors
+412180	KOG3238	P	Chloride ion current inducer protein
+412181	KOG2242	A	Scaffold/matrix specific factor hnRNP-U/SAF-A, contains SPRY domain
+412182	KOG4043	S	Uncharacterized conserved protein
+412183	KOG1036	D	Mitotic spindle checkpoint protein BUB3, WD repeat superfamily
+412184	KOG4029	K	Transcription factor HAND2/Transcription factor TAL1/TAL2/LYL1
+412185	KOG1014	I	17 beta-hydroxysteroid dehydrogenase type 3, HSD17B3
+412186	KOG1068	J	Exosomal 3'-5' exoribonuclease complex, subunit Rrp41 and related exoribonucleases
+412187	KOG2443	S	Uncharacterized conserved protein
+412188	KOG0282	S	mRNA splicing factor
+412189	KOG0166	U	Karyopherin (importin) alpha
+412190	KOG2821	K	RNA polymerase II transcription elongation factor Elongin/SIII, subunit elongin A
+412191	KOG0725	R	Reductases with broad range of substrate specificities
+412192	KOG0714	O	Molecular chaperone (DnaJ superfamily)
+412193	NO related KOG	SR	NO related KOG
+412194	KOG2357	S	Uncharacterized conserved protein
+412195	KOG0501	P	K+-channel KCNQ
+412196	KOG4351	S	Uncharacterized conserved protein
+412197	KOG0799	G	Branching enzyme
+412198	KOG1539	R	WD repeat protein
+412199	KOG3317	U	Translocon-associated complex TRAP, beta subunit
+412200	KOG2799	C	Succinyl-CoA synthetase, beta subunit
+412201	KOG0345	A	ATP-dependent RNA helicase
+412202	KOG3973	S	Uncharacterized conserved glycine-rich protein
+412203	KOG3770	I	Acid sphingomyelinase and PHM5 phosphate metabolism protein
+412204	KOG1393	I	Hydroxymethylglutaryl-CoA synthase
+412205	KOG2303	HR	Predicted NAD synthase, contains CN hydrolase domain
+412206	KOG3614	PT	Ca2+/Mg2+-permeable cation channels (LTRPC family)
+412207	KOG3285	DZ	Spindle assembly checkpoint protein
+412208	KOG1506	H	S-adenosylmethionine synthetase
+412209	KOG0292	U	Vesicle coat complex COPI, alpha subunit
+412210	KOG1589	S	Uncharacterized conserved protein
+412211	KOG3418	J	60S ribosomal protein L27
+412212	KOG1313	R	DHHC-type Zn-finger proteins
+412213	KOG2093	L	Translesion DNA polymerase - REV1 deoxycytidyl transferase
+412214	NO related KOG	SR	NO related KOG
+412215	KOG2815	J	Mitochondrial/choloroplast ribosomal protein S15
+412216	KOG3573	D	Caspase, apoptotic cysteine protease
+412217	KOG0642	D	Cell-cycle nuclear protein, contains WD-40 repeats
+412218	KOG2116	NI	Protein involved in plasmid maintenance/nuclear protein involved in lipid metabolism
+412219	KOG4015	I	Fatty acid-binding protein FABP
+412220	KOG3650	R	Predicted coiled-coil protein
+412221	KOG0357	O	Chaperonin complex component, TCP-1 epsilon subunit (CCT5)
+412222	KOG3421	J	60S ribosomal protein L14
+412223	KOG2937	A	Decapping enzyme complex, predicted pyrophosphatase DCP2
+412224	KOG3712	K	RFX family transcription factor
+412225	KOG0039	PQ	Ferric reductase, NADH/NADPH oxidase and related proteins
+412226	KOG0440	D	Cell cycle-associated protein Mob1-1
+412227	KOG2540	O	Cytochrome oxidase assembly factor COX11
+412228	NO related KOG	SR	NO related KOG
+412229	KOG4281	S	Uncharacterized conserved protein
+412230	KOG0186	E	Proline oxidase
+412231	KOG0547	U	Translocase of outer mitochondrial membrane complex, subunit TOM70/TOM72
+412232	KOG3988	O	Protein-tyrosine sulfotransferase TPST1/TPST2
+412233	KOG1222	U	Kinesin associated protein KAP
+412234	KOG0683	E	Glutamine synthetase
+412235	KOG0661	T	MAPK related serine/threonine protein kinase
+412236	KOG0313	Z	Microtubule binding protein YTM1 (contains WD40 repeats)
+412237	KOG1104	A	Nuclear cap-binding complex, subunit NCBP1/CBP80
+412238	KOG1922	TZ	Rho GTPase effector BNI1 and related formins
+412239	KOG3557	T	Epidermal growth factor receptor kinase substrate
+412240	KOG0896	O	Ubiquitin-conjugating enzyme E2
+412241	KOG0662	UT	Cyclin-dependent kinase CDK5
+412242	KOG2684	BK	Sirtuin 5 and related class III sirtuins (SIR2 family)
+412243	KOG3904	S	Predicted hydrolase RP2 (NUDIX/MutT superfamily)
+412244	KOG1973	B	Chromatin remodeling protein, contains PHD Zn-finger
+412245	KOG4103	C	Mitochondrial F1F0-ATP synthase, subunit g/ATP20
+412246	KOG1910	S	Uncharacterized conserved protein
+412247	KOG1787	U	Kinase A-anchor protein Neurobeachin and related BEACH and WD40 repeat proteins
+412248	KOG2300	S	Uncharacterized conserved protein
+412249	KOG0098	U	GTPase Rab2, small G protein superfamily
+412250	KOG2030	R	Predicted RNA-binding protein
+412251	KOG3003	O	Molecular chaperone of the GrpE family
+412252	KOG3575	T	FOG: Hormone receptors
+412253	KOG2882	P	p-Nitrophenyl phosphatase
+412254	KOG2204	G	Mannosyl-oligosaccharide alpha-1,2-mannosidase and related glycosyl hydrolases
+412255	KOG1329	I	Phospholipase D1
+412256	KOG0206	R	P-type ATPase
+412257	KOG3212	S	Uncharacterized conserved protein related to IojAP
+412258	KOG2825	P	Putative arsenite-translocating ATPase
+412259	KOG0813	R	Glyoxylase
+412260	KOG1020	BDL	Sister chromatid cohesion protein SCC2/Nipped-B
+412261	NO related KOG	SR	NO related KOG
+412262	KOG3093	H	5-formyltetrahydrofolate cyclo-ligase
+412263	KOG1853	Z	LIS1-interacting protein NUDE
+412264	KOG1206	I	Peroxisomal multifunctional beta-oxidation protein and related enzymes
+412265	KOG1722	J	60s ribosomal protein L24
+412266	KOG0604	T	MAP kinase-activated protein kinase 2
+412267	KOG4303	ET	Vesicular inhibitory amino acid transporter
+412268	KOG4566	T	Cytokine-inducible SH2 protein
+412269	KOG1821	S	Uncharacterized conserved protein
+412270	KOG1771	MO	GPI-alpha-mannosyltransferase III (GPI10/PIG-B) involved in glycosylphosphatidylinositol anchor biosynthesis
+412271	KOG0070	U	GTP-binding ADP-ribosylation factor Arf1
+412272	KOG2587	K	RNA polymerase III (C) subunit
+412273	KOG3291	J	Ribosomal protein S7
+412274	KOG0064	I	Peroxisomal long-chain acyl-CoA transporter, ABC superfamily
+412275	KOG4710	O	E3 ubiquitin ligase, VHL component (von Hippel-Lindau tumor suppressor in humans)
+412276	KOG4471	IU	Phosphatidylinositol 3-phosphate 3-phosphatase myotubularin MTM1
+412277	NO related KOG	SR	NO related KOG
+412278	KOG1458	G	Fructose-1,6-bisphosphatase
+412279	KOG3445	J	Mitochondrial/chloroplast ribosomal protein 36a
+412280	KOG1040	A	Polyadenylation factor I complex, subunit, Yth1 (CPSF subunit)
+412281	KOG1737	I	Oxysterol-binding protein
+412282	KOG2909	C	Vacuolar H+-ATPase V1 sector, subunit C
+412283	KOG0788	T	S-adenosylmethionine decarboxylase
+412284	KOG2723	R	Uncharacterized conserved protein, contains BTB/POZ domain
+412285	KOG3255	J	60S ribosomal protein L9
+412286	KOG2535	BK	RNA polymerase II elongator complex, subunit ELP3/histone acetyltransferase
+412287	KOG0233	C	Vacuolar H+-ATPase V0 sector, subunit c''
+412288	KOG0395	R	Ras-related GTPase
+412289	KOG2931	S	Differentiation-related gene 1 protein (NDR1 protein), related proteins
+412290	KOG1729	R	FYVE finger containing protein
+412291	KOG3680	S	Uncharacterized conserved protein
+412292	KOG1647	C	Vacuolar H+-ATPase V1 sector, subunit D
+412293	KOG1936	J	Histidyl-tRNA synthetase
+412294	KOG2140	R	Uncharacterized conserved protein
+412295	KOG1888	I	Putative phosphoinositide phosphatase
+412296	KOG2480	I	3-hydroxy-3-methylglutaryl-CoA (HMG-CoA) reductase
+412297	KOG2341	K	TATA box binding protein (TBP)-associated factor, RNA polymerase II
+412298	KOG3686	T	Rap1-GTPase-activating protein (Rap1GAP)
+412299	KOG4205	A	RNA-binding protein musashi/mRNA cleavage and polyadenylation factor I complex, subunit HRP1
+412300	KOG2915	J	tRNA(1-methyladenosine) methyltransferase, subunit GCD14
+412301	NO related KOG	SR	NO related KOG
+412302	KOG4097	CU	Succinate dehydrogenase membrane anchor subunit and related proteins
+412303	KOG3189	I	Phosphomannomutase
+412304	KOG2202	A	U2 snRNP splicing factor, small subunit, and related proteins
+412305	KOG1909	AYT	Ran GTPase-activating protein
+412306	KOG2926	I	Malonyl-CoA:ACP transacylase
+412307	KOG3039	S	Uncharacterized conserved protein
+412308	KOG4233	BL	DNA-bridging protein BAF
+412309	KOG3657	L	Mitochondrial DNA polymerase gamma, catalytic subunit
+412310	KOG3439	O	Protein conjugation factor involved in autophagy
+412311	KOG2715	R	Uncharacterized conserved protein, contains BTB/POZ domain
+412312	KOG0569	G	Permease of the major facilitator superfamily
+412313	KOG1954	TU	Endocytosis/signaling protein EHD1
+412314	KOG0765	C	Predicted mitochondrial carrier protein
+412315	KOG0637	G	Sucrose transporter and related proteins
+412316	KOG0426	O	Ubiquitin-protein ligase
+412317	KOG3364	M	Membrane protein involved in organellar division
+412318	KOG1942	L	DNA helicase, TBP-interacting protein
+412319	KOG1105	K	Transcription elongation factor TFIIS/Cofactor of enhancer-binding protein Sp1
+412320	KOG2000	Z	Gamma-tubulin complex, DGRIP91/SPC98 component
+412321	KOG4214	K	Myotrophin and similar proteins
+412322	KOG4707	J	Mitochondrial/chloroplast ribosomal protein L20
+412323	KOG0088	R	GTPase Rab21, small G protein superfamily
+412324	KOG1521	K	RNA polymerase I and III, subunit RPA40/RPC40
+412325	KOG4441	TR	Proteins containing BTB/POZ and Kelch domains, involved in regulatory/signal transduction processes
+412326	KOG0841	O	Multifunctional chaperone (14-3-3 family)
+412327	KOG0631	G	Galactokinase
+412328	KOG1370	H	S-adenosylhomocysteine hydrolase
+412329	KOG2164	O	Predicted E3 ubiquitin ligase
+412330	KOG1708	J	Mitochondrial/chloroplast ribosomal protein L24
+412331	KOG0752	C	Mitochondrial solute carrier protein
+412332	KOG4088	U	Translocon-associated complex TRAP, delta subunit
+412333	KOG2511	H	Nicotinic acid phosphoribosyltransferase
+412334	KOG2577	K	Transcription factor E2F/dimerization partner (TDP)
+412335	KOG3627	E	Trypsin
+412336	KOG4590	T	Signal transduction protein Enabled, contains WH1 domain
+412337	KOG3922	O	Sulfotransferases
+412338	KOG0570	K	Transcriptional coactivator
+412339	KOG2884	O	26S proteasome regulatory complex, subunit RPN10/PSMD4
+412340	KOG0148	AJ	Apoptosis-promoting RNA-binding protein TIA-1/TIAR (RRM superfamily)
+412341	KOG2734	S	Uncharacterized conserved protein
+412342	KOG0859	U	Synaptobrevin/VAMP-like protein
+412343	KOG3083	O	Prohibitin
+412344	KOG1146	R	Homeobox protein
+412345	KOG2394	R	WD40 protein DMR-N9
+412346	KOG4441	TR	Proteins containing BTB/POZ and Kelch domains, involved in regulatory/signal transduction processes
+412347	KOG1557	G	Fructose-biphosphate aldolase
+412348	KOG1266	T	Protein kinase
+412349	KOG0713	O	Molecular chaperone (DnaJ superfamily)
+412350	KOG3784	RTU	Sorting nexin protein SNX27
+412351	KOG3430	Z	Dynein light chain type 1
+412352	KOG3193	P	K+ channel subunit
+412353	KOG0694	T	Serine/threonine protein kinase
+412354	KOG3188	S	Uncharacterized conserved protein
+412355	KOG1367	G	3-phosphoglycerate kinase
+412356	KOG0046	Z	Ca2+-binding actin-bundling protein (fimbrin/plastin), EF-Hand protein superfamily
+412357	KOG3062	R	RNA polymerase II elongator associated protein
+412358	KOG0066	J	eIF2-interacting protein ABC50 (ABC superfamily)
+412359	KOG2617	C	Citrate synthase
+412360	KOG2759	C	Vacuolar H+-ATPase V1 sector, subunit H
+412361	KOG0691	O	Molecular chaperone (DnaJ superfamily)
+412362	NO related KOG	SR	NO related KOG
+412363	KOG1394	IQ	3-oxoacyl-(acyl-carrier-protein) synthase (I and II)
+412364	KOG2366	G	Alpha-D-galactosidase (melibiase)
+412365	KOG3026	A	Splicing factor SPF30
+412366	KOG1680	I	Enoyl-CoA hydratase
+412367	KOG4037	UT	Photoreceptor synaptic vesicle protein HRG4/UNC-119
+412368	KOG0911	O	Glutaredoxin-related protein
+412369	KOG2014	O	SMT3/SUMO-activating complex, AOS1/RAD31 component
+412370	KOG2111	S	Uncharacterized conserved protein, contains WD40 repeats
+412371	KOG4778	J	Mitochondrial ribosomal protein L28
+412372	KOG3953	R	SOCS box protein SSB-1, contains SPRY domain
+412373	KOG1705	S	Uncharacterized conserved protein, contains CXXC motifs
+412374	KOG2011	D	Sister chromatid cohesion complex Cohesin, subunit STAG/IRR1/SCC3
+412375	KOG3087	R	Serine/threonine protein kinase
+412376	NO related KOG	SR	NO related KOG
+412377	KOG2936	S	Uncharacterized conserved protein
+412378	KOG0305	DO	Anaphase promoting complex, Cdc20, Cdh1, and Ama1 subunits
+412379	KOG2212	G	Alpha-amylase
+412380	KOG2387	F	CTP synthase (UTP-ammonia lyase)
+412381	KOG0173	O	20S proteasome, regulatory subunit beta type PSMB7/PSMB10/PUP1
+412382	KOG4625	T	Notch signaling protein Neuralized, Nuez domain
+412383	KOG0190	O	Protein disulfide isomerase (prolyl 4-hydroxylase beta subunit)
+412384	KOG0771	U	Prolactin regulatory element-binding protein/Protein transport protein SEC12p
+412385	KOG0624	V	dsRNA-activated protein kinase inhibitor P58, contains TPR and DnaJ domains
+412386	KOG2772	G	Transaldolase
+412387	KOG1543	O	Cysteine proteinase Cathepsin L
+412388	KOG1587	Z	Cytoplasmic dynein intermediate chain
+412389	KOG1959	G	Glycosyl hydrolase, family 38 - alpha-mannosidase
+412390	KOG0823	O	Predicted E3 ubiquitin ligase
+412391	KOG3163	R	Uncharacterized conserved protein related to ribosomal protein S8E
+412392	KOG2700	F	Adenylosuccinate lyase
+412393	KOG1824	R	TATA-binding protein-interacting protein
+412394	KOG1088	S	Uncharacterized conserved protein
+412395	KOG2581	O	26S proteasome regulatory complex, subunit RPN3/PSMD3
+412396	KOG2176	U	Exocyst complex, subunit SEC15
+412397	KOG3280	J	Mitochondrial/chloroplast ribosomal protein L17
+412398	KOG2547	IM	Ceramide glucosyltransferase
+412399	KOG2894	S	Uncharacterized conserved protein XAP-5
+412400	KOG1961	UZ	Vacuolar sorting protein VPS52/suppressor of actin Sac2
+412401	KOG3467	B	Histone H4
+412402	KOG0994	W	Extracellular matrix glycoprotein Laminin subunit beta
+412403	KOG4003	V	Pyrazinamidase/nicotinamidase PNC1
+412404	KOG1772	C	Vacuolar H+-ATPase V1 sector, subunit G
+412405	NO related KOG	SR	NO related KOG
+412406	KOG3606	T	Cell polarity protein PAR6
+412407	KOG3024	S	Uncharacterized conserved protein
+412408	KOG4287	M	Pectin acetylesterase and similar proteins
+412409	KOG0112	R	Large RNA-binding protein (RRM superfamily)
+412410	KOG4490	U	Translocon-associated complex TRAP, gamma subunit
+412411	KOG3927	P	Na+/K+ ATPase, beta subunit
+412412	KOG4030	S	Uncharacterized conserved protein, contains SPRY domain
+412413	NO related KOG	SR	NO related KOG
+412414	KOG2337	H	Ubiquitin activating E1 enzyme-like protein
+412415	KOG1311	R	DHHC-type Zn-finger proteins
+412416	KOG0910	O	Thioredoxin-like protein
+412417	KOG4792	T	Crk family adapters
+412418	KOG2523	J	Predicted RNA-binding protein with PUA domain
+412419	KOG3629	T	Guanine-nucleotide releasing factor
+412420	KOG2168	D	Cullins
+412421	KOG2479	J	Translation initiation factor 3, subunit d (eIF-3d)
+412422	KOG1925	TZ	Rac1 GTPase effector FHOS
+412423	KOG0852	O	Alkyl hydroperoxide reductase, thiol specific antioxidant and related enzymes
+412424	KOG2246	G	Galactosyltransferases
+412425	KOG0808	E	Carbon-nitrogen hydrolase
+412426	KOG0940	O	Ubiquitin protein ligase RSP5/NEDD4
+412427	KOG0463	R	GTP-binding protein GP-1
+412428	KOG0275	R	Conserved WD40 repeat-containing protein
+412429	KOG0883	O	Cyclophilin type, U box-containing peptidyl-prolyl cis-trans isomerase
+412430	KOG2012	O	Ubiquitin activating enzyme UBA1
+412431	KOG2912	S	Predicted DNA methylase
+412432	NO related KOG	SR	NO related KOG
+412433	KOG1516	R	Carboxylesterase and related proteins
+412434	KOG0077	U	Vesicle coat complex COPII, GTPase subunit SAR1
+412435	KOG3957	I	Predicted L-carnitine dehydratase/alpha-methylacyl-CoA racemase
+412436	KOG1189	E	Global transcriptional regulator, cell division control protein
+412437	KOG2980	T	Integral membrane protease of the rhomboid family involved in different forms of regulated intramembrane proteolysis
+412438	KOG0183	O	20S proteasome, regulatory subunit alpha type PSMA7/PRE6
+412439	KOG0577	T	Serine/threonine protein kinase
+412440	KOG1664	C	Vacuolar H+-ATPase V1 sector, subunit E
+412441	KOG3664	T	Predicted patched transmembrane receptor
+412442	KOG0700	T	Protein phosphatase 2C/pyruvate dehydrogenase (lipoamide) phosphatase
+412443	KOG0701	A	dsRNA-specific nuclease Dicer and related ribonucleases
+412444	KOG1445	Z	Tumor-specific antigen (contains WD repeats)
+412445	KOG1656	U	Protein involved in glucose derepression and pre-vacuolar endosome protein sorting
+412446	KOG3422	J	Mitochondrial ribosomal protein L16
+412447	KOG2445	YU	Nuclear pore complex component (sc Seh1)
+412448	NO related KOG	SR	NO related KOG
+412449	KOG3415	U	Putative Rab5-interacting protein
+412450	KOG1429	GM	dTDP-glucose 4-6-dehydratase/UDP-glucuronic acid decarboxylase
+412451	KOG1675	R	Predicted cyclin
+412452	KOG3380	Z	Actin-related protein Arp2/3 complex, subunit ARPC5
+412453	KOG4625	T	Notch signaling protein Neuralized, Nuez domain
+412454	KOG1957	L	DNA topoisomerase III beta
+412455	KOG1746	DO	Defender against cell death protein/oligosaccharyltransferase, epsilon subunit
+412456	KOG0759	C	Mitochondrial oxoglutarate/malate carrier proteins
+412457	KOG0434	J	Isoleucyl-tRNA synthetase
+412458	KOG4529	S	Uncharacterized conserved protein
+412459	KOG2919	R	Guanine nucleotide-binding protein
+412460	KOG1391	I	Acetyl-CoA acetyltransferase
+412461	KOG3452	J	60S ribosomal protein L36
+412462	KOG3656	R	FOG: 7 transmembrane receptor
+412463	KOG3265	KB	Histone chaperone involved in gene silencing
+412464	KOG3392	A	Exon-exon junction complex, Magoh component
+412465	KOG4011	K	Transcription initiation factor TFIID, subunit TAF7
+412466	KOG4261	Z	Talin
+412467	KOG4528	S	Uncharacterized conserved protein
+412468	KOG0304	A	mRNA deadenylase subunit
+412469	KOG0728	O	26S proteasome regulatory complex, ATPase RPT6
+412470	KOG2001	Z	Gamma-tubulin complex, DGRIP84/SPC97 component
+412471	KOG3430	Z	Dynein light chain type 1
+412472	KOG2524	H	Cobyrinic acid a,c-diamide synthase
+412473	KOG0417	O	Ubiquitin-protein ligase
+412474	KOG3169	K	RNA polymerase II transcriptional regulation mediator
+412475	KOG0460	J	Mitochondrial translation elongation factor Tu
+412476	KOG3235	R	Subunit of the major N alpha-acetyltransferase
+412477	KOG1828	K	IRF-2-binding protein CELTIX-1, contains BROMO domain
+412478	KOG0868	O	Glutathione S-transferase
+412479	KOG3409	J	Exosomal 3'-5' exoribonuclease complex, subunit ski4 (Csl4)
+412480	KOG1605	K	TFIIF-interacting CTD phosphatase, including NLI-interacting factor (involved in RNA polymerase II regulation)
+412481	KOG2929	K	Transcription factor, component of CCR4 transcriptional complex
+412482	KOG1165	T	Casein kinase (serine/threonine/tyrosine protein kinase)
+412483	KOG1439	O	RAB proteins geranylgeranyltransferase component A (RAB escort protein)
+412484	KOG3998	U	Putative cargo transport protein ERV29
+412485	KOG0768	C	Mitochondrial carrier protein PET8
+412486	KOG3937	A	mRNA splicing factor
+412487	KOG2082	P	K+/Cl- cotransporter KCC1 and related transporters
+412488	KOG2403	C	Succinate dehydrogenase, flavoprotein subunit
+412489	KOG0628	E	Aromatic-L-amino-acid/L-histidine decarboxylase
+412490	KOG4092	C	Mitochondrial F1F0-ATP synthase, subunit f
+412491	KOG0698	T	Serine/threonine protein phosphatase
+412492	KOG1086	U	Cytosolic sorting protein/ADP-ribosylation factor effector GGA
+412493	KOG4659	S	Uncharacterized conserved protein (Rhs family)
+412494	KOG2703	R	C4-type Zn-finger protein
+412495	NO related KOG	SR	NO related KOG
+412496	KOG1636	L	DNA polymerase delta processivity factor (proliferating cell nuclear antigen)
+412497	KOG3417	T	Ras1 guanine nucleotide exchange factor
+412498	KOG0395	R	Ras-related GTPase
+412499	KOG0752	C	Mitochondrial solute carrier protein
+412500	KOG1207	Q	Diacetyl reductase/L-xylulose reductase
+412501	NO related KOG	SR	NO related KOG
+412502	KOG0397	J	60S ribosomal protein L11
+412503	KOG3312	S	Predicted membrane protein
+412504	KOG0037	T	Ca2+-binding protein, EF-Hand protein superfamily
+412505	KOG3398	K	Transcription factor MBF1
+412506	NO related KOG	SR	NO related KOG
+412507	KOG0739	O	AAA+-type ATPase
+412508	KOG1762	J	60s acidic ribosomal protein P1
+412509	KOG0074	R	GTP-binding ADP-ribosylation factor-like protein ARL3
+412510	KOG1571	O	Predicted E3 ubiquitin ligase
+412511	KOG0525	C	Branched chain alpha-keto acid dehydrogenase E1, beta subunit
+412512	KOG2286	U	Exocyst complex subunit SEC6
+412513	KOG3766	K	Polycomb group protein SCM/L(3)MBT (tumor-supressor in Drosophila and humans)
+412514	NO related KOG	SR	NO related KOG
+412515	NO related KOG	SR	NO related KOG
+412516	KOG3141	J	Mitochondrial/chloroplast ribosomal protein L3
+412517	KOG1754	J	40S ribosomal protein S15/S22
+412518	KOG3832	R	Predicted amino acid transporter
+412519	KOG2558	K	Negative regulator of histones
+412520	KOG0592	T	3-phosphoinositide-dependent protein kinase (PDK1)
+412521	KOG3428	A	Small nuclear ribonucleoprotein SMD1 and related snRNPs
+412522	KOG3078	F	Adenylate kinase
+412523	KOG3829	S	Uncharacterized conserved protein
+412524	KOG4263	T	Putative receptor CCR1
+412525	KOG2250	E	Glutamate/leucine/phenylalanine/valine dehydrogenases
+412526	KOG3262	J	H/ACA small nucleolar RNP component GAR1
+412527	KOG2712	K	Transcriptional coactivator
+412528	NO related KOG	SR	NO related KOG
+412529	KOG1711	J	Mitochondrial/chloroplast ribosomal protein L22
+412530	KOG3703	O	Heparan sulfate N-deacetylase/N-sulfotransferase
+412531	KOG0628	E	Aromatic-L-amino-acid/L-histidine decarboxylase
+412532	KOG1591	E	Prolyl 4-hydroxylase alpha subunit
+412533	KOG1879	G	UDP-glucose:glycoprotein glucosyltransferase
+412534	KOG1217	T	Fibrillins and related proteins containing Ca2+-binding EGF-like domains
+412535	KOG0302	R	Ribosome Assembly protein
+412536	KOG3242	A	Oligoribonuclease (3'->5' exoribonuclease)
+412537	KOG1484	P	Putative Zn2+ transporter MSC2 (cation diffusion facilitator superfamily)
+412538	KOG2217	A	U4/U6.U5 snRNP associated protein
+412539	KOG3637	W	Vitronectin receptor, alpha subunit
+412540	KOG1696	J	60s ribosomal protein L19
+412541	KOG0338	A	ATP-dependent RNA helicase
+412542	KOG3441	J	Mitochondrial ribosomal protein L14
+412543	KOG1997	T	PH domain-containing protein
+412544	NO related KOG	SR	NO related KOG
+412545	KOG1732	J	60S ribosomal protein L21
+412546	NO related KOG	SR	NO related KOG
+412547	KOG0399	E	Glutamate synthase
+412548	KOG0129	J	Predicted RNA-binding protein (RRM superfamily)
+412549	KOG3289	R	Uncharacterized conserved protein encoded by sequence overlapping the COX4 gene
+412550	KOG2694	P	Putative zinc transporter
+412551	NO related KOG	SR	NO related KOG
+412552	KOG0657	G	Glyceraldehyde 3-phosphate dehydrogenase
+412553	KOG0645	R	WD40 repeat protein
+412554	KOG0424	O	Ubiquitin-protein ligase
+412555	NO related KOG	SR	NO related KOG
+412556	KOG3767	R	Sideroflexin
+412557	NO related KOG	SR	NO related KOG
+412558	KOG0076	U	GTP-binding ADP-ribosylation factor-like protein yARL3
+412559	KOG0294	S	WD40 repeat-containing protein
+412560	KOG3741	A	Poly(A) ribonuclease subunit
+412561	NO related KOG	SR	NO related KOG
+412562	KOG2334	J	tRNA-dihydrouridine synthase
+412563	KOG1113	T	cAMP-dependent protein kinase types I and II, regulatory subunit
+412564	KOG1096	F	Adenosine monophosphate deaminase
+412565	NO related KOG	SR	NO related KOG
+412566	KOG1373	UO	Transport protein Sec61, alpha subunit
+412567	KOG3822	C	Succinyl-CoA:alpha-ketoacid-CoA transferase
+412568	KOG0050	AD	mRNA splicing protein CDC5 (Myb superfamily)
+412569	KOG0960	O	Mitochondrial processing peptidase, beta subunit, and related enzymes (insulinase superfamily)
+412570	KOG0921	K	Dosage compensation complex, subunit MLE
+412571	KOG1898	A	Splicing factor 3b, subunit 3
+412572	KOG0798	D	Uncharacterized conserved protein
+412573	KOG1067	R	Predicted RNA-binding polyribonucleotide nucleotidyltransferase
+412574	KOG1310	R	WD40 repeat protein
+412575	KOG3667	KT	STAT protein
+412576	KOG4112	U	Signal peptidase subunit
+412577	KOG2527	U	Sorting nexin SNX11
+412578	NO related KOG	SR	NO related KOG
+412579	KOG3358	R	Uncharacterized secreted protein SDF2 (Stromal cell-derived factor 2), contains MIR domains
+412580	KOG3842	T	Adaptor protein Pellino
+412581	KOG2754	O	Oligosaccharyltransferase, beta subunit
+412582	KOG0364	O	Chaperonin complex component, TCP-1 gamma subunit (CCT3)
+412583	KOG2669	A	Regulator of nuclear mRNA
+412584	KOG0131	A	Splicing factor 3b, subunit 4
+412585	KOG2314	J	Translation initiation factor 3, subunit b (eIF-3b)
+412586	KOG3529	R	Radixin, moesin and related proteins of the ERM family
+412587	KOG0885	O	Peptidyl-prolyl cis-trans isomerase
+412588	KOG0468	J	U5 snRNP-specific protein
+412589	KOG2051	A	Nonsense-mediated mRNA decay 2 protein
+412590	KOG0762	C	Mitochondrial carrier protein
+412591	KOG2118	S	Predicted membrane protein, contains two CBS domains
+412592	KOG1745	B	Histones H3 and H4
+412593	KOG4272	R	Predicted GTP-binding protein
+412594	KOG2847	I	Phosphate acyltransferase
+412595	KOG3287	U	Membrane trafficking protein, emp24/gp25L/p24 family
+412596	KOG2042	O	Ubiquitin fusion degradation protein-2
+412597	KOG3187	R	Protein tyrosine phosphatase-like protein PTPLA (contains Pro instead of catalytic Arg)
+412598	KOG2553	J	Pseudouridylate synthase
+412599	KOG2171	YU	Karyopherin (importin) beta 3
+412600	KOG0929	U	Guanine nucleotide exchange factor
+412601	KOG0420	O	Ubiquitin-protein ligase
+412602	KOG1495	C	Lactate dehydrogenase
+412603	KOG0042	C	Glycerol-3-phosphate dehydrogenase
+412604	KOG3457	O	Sec61 protein translocation complex, beta subunit
+412605	KOG0580	D	Serine/threonine protein kinase
+412606	KOG3759	T	Uncharacterized RUN domain protein
+412607	KOG4429	R	Uncharacterized conserved protein, contains SH3 and FCH domains
+412608	KOG3837	R	Uncharacterized conserved protein, contains DM14 and C2 domains
+412609	KOG1214	MW	Nidogen and related basement membrane protein proteins
+412610	NO related KOG	SR	NO related KOG
+412611	KOG2218	UD	ER to golgi transport protein/RAD50-interacting protein 1
+412612	KOG3476	Z	Microtubule-associated protein CRIPT
+412613	NO related KOG	SR	NO related KOG
+412614	KOG2747	B	Histone acetyltransferase (MYST family)
+412615	KOG4627	E	Kynurenine formamidase
+412616	KOG4436	R	Predicted GTPase activator NB4S/EVI5 (contains TBC domain)/Calmodulin-binding protein Pollux (contains PTB and TBC domains)
+412617	KOG2965	E	Arginase
+412618	KOG0152	A	Spliceosomal protein FBP11/Splicing factor PRP40
+412619	KOG0888	F	Nucleoside diphosphate kinase
+412620	KOG2532	G	Permease of the major facilitator superfamily
+412621	KOG0202	P	Ca2+ transporting ATPase
+412622	KOG1820	Z	Microtubule-associated protein
+412623	KOG0356	O	Mitochondrial chaperonin, Cpn60/Hsp60p
+412624	KOG0712	O	Molecular chaperone (DnaJ superfamily)
+412625	KOG2293	KT	Daxx-interacting protein MSP58/p78, contains FHA domain
+412626	KOG2154	J	Predicted nucleolar protein involved in ribosome biogenesis
+412627	KOG3675	R	Dipeptidyl peptidase III
+412628	KOG2350	R	Zn-finger protein joined to JAZF1 (predicted suppressor)
+412629	KOG2874	JD	rRNA processing protein
+412630	KOG2588	K	Predicted DNA-binding protein
+412631	KOG1012	R	Ca2+-dependent lipid-binding protein CLB1/vesicle protein vp115/Granuphilin A, contains C2 domain
+412632	KOG0204	P	Calcium transporting ATPase
+412633	KOG0583	T	Serine/threonine protein kinase
+412634	KOG0775	K	Transcription factor SIX and related HOX domain proteins
+412635	KOG0674	O	Calreticulin
+412636	KOG1923	TZ	Rac1 GTPase effector FRL
+412637	KOG0136	I	Acyl-CoA oxidase
+412638	KOG3070	J	Predicted RNA-binding protein containing PIN domain and invovled in translation or RNA processing
+412639	KOG3306	S	Predicted membrane protein
+412640	KOG1555	O	26S proteasome regulatory complex, subunit RPN11
+412641	KOG2135	R	Proteins containing the RNA recognition motif
+412642	KOG3543	T	Ca2+-dependent activator protein
+412643	KOG3199	H	Nicotinamide mononucleotide adenylyl transferase
+412644	KOG2888	R	Putative RNA binding protein
+412645	KOG3240	I	Phosphatidylinositol synthase
+412646	KOG0833	F	Cytidine deaminase
+412647	KOG4466	DK	Component of histone deacetylase complex (breast carcinoma metastasis suppressor 1 protein in human)
+412648	KOG1756	B	Histone 2A
+412649	KOG1024	T	Receptor-like protein tyrosine kinase RYK/derailed
+412650	KOG0179	O	20S proteasome, regulatory subunit beta type PSMB1/PRE7
+412651	NO related KOG	SR	NO related KOG
+412652	NO related KOG	SR	NO related KOG
+412653	KOG2197	T	Ypt/Rab-specific GTPase-activating protein GYP7 and related proteins
+412654	KOG0213	A	Splicing factor 3b, subunit 1
+412655	KOG4057	S	Uncharacterized conserved protein
+412656	KOG3814	T	Signaling protein van gogh/strabismus
+412657	KOG1360	H	5-aminolevulinate synthase
+412658	KOG2046	Z	Calponin
+412659	KOG0058	U	Peptide exporter, ABC superfamily
+412660	KOG4317	S	Predicted Zn-finger protein
+412661	NO related KOG	SR	NO related KOG
+412662	KOG2408	R	Peroxidase/oxygenase
+412663	KOG2360	D	Proliferation-associated nucleolar protein  (NOL1)
+412664	KOG1131	KL	RNA polymerase II transcription initiation/nucleotide excision repair factor TFIIH, 5'-3' helicase subunit RAD3
+412665	NO related KOG	SR	NO related KOG
+412666	KOG1721	R	FOG: Zn-finger
+412667	KOG0480	L	DNA replication licensing factor, MCM6 component
+412668	KOG2016	O	NEDD8-activating complex, APP-BP1/UBA5 component
+412669	KOG1220	G	Phosphoglucomutase/phosphomannomutase
+412670	KOG3237	S	Uncharacterized conserved protein
+412671	KOG2607	T	CDK5 activator-binding protein
+412672	NO related KOG	SR	NO related KOG
+412673	NO related KOG	SR	NO related KOG
+412674	KOG0097	U	GTPase Rab14, small G protein superfamily
+412675	KOG4195	P	Transient receptor potential-related channel 7
+412676	KOG1626	C	Inorganic pyrophosphatase/Nucleosome remodeling factor, subunit NURF38
+412677	KOG2672	H	Lipoate synthase
+412678	KOG3577	T	Smoothened and related G-protein-coupled receptors
+412679	KOG0270	S	WD40 repeat-containing protein
+412680	NO related KOG	SR	NO related KOG
+412681	KOG3399	R	Predicted Yippee-type zinc-binding protein
+412682	KOG4485	R	Uncharacterized conserved protein, contains ankyrin and FN3 repeats
+412683	KOG1062	U	Vesicle coat complex AP-1, gamma subunit
+412684	KOG2441	AB	mRNA splicing factor/probable chromatin binding snw family nuclear protein
+412685	NO related KOG	SR	NO related KOG
+412686	KOG0752	C	Mitochondrial solute carrier protein
+412687	KOG0890	TBLD	Protein kinase of the PI-3 kinase family involved in mitotic growth, DNA repair and meiotic recombination
+412688	KOG3668	IT	Phosphatidylinositol transfer protein
+412689	KOG2210	T	Oxysterol-binding protein
+412690	KOG1353	C	F0F1-type ATP synthase, alpha subunit
+412691	KOG0416	O	Ubiquitin-protein ligase
+412692	KOG0333	A	U5 snRNP-like RNA helicase subunit
+412693	KOG2084	B	Predicted histone tail methylase containing SET domain
+412694	KOG0419	O	Ubiquitin-protein ligase
+412695	KOG2216	S	Conserved coiled/coiled coil protein
+412696	KOG3196	C	NADH:ubiquinone oxidoreductase, NDUFV2/24 kD subunit
+412697	KOG2471	R	TPR repeat-containing protein
+412698	KOG3038	R	Histone acetyltransferase SAGA associated factor SGF29
+412699	KOG2736	T	Presenilin
+412700	NO related KOG	SR	NO related KOG
+412701	KOG3334	K	Transcription initiation factor TFIID, subunit TAF9 (also component of histone acetyltransferase SAGA)
+412702	KOG1809	U	Vacuolar protein sorting-associated protein
+412703	KOG1780	A	Small Nuclear ribonucleoprotein G
+412704	KOG0085	T	G protein subunit Galphaq/Galphay, small G protein superfamily
+412705	KOG1342	B	Histone deacetylase complex, catalytic component RPD3
+412706	KOG3653	T	Transforming growth factor beta/activin receptor subfamily of serine/threonine kinases
+412707	KOG4632	C	NADH:ubiquinone oxidoreductase, NDUFB5/SGDH subunit
+412708	KOG4004	W	Matricellular protein Osteonectin/SPARC/BM-40
+412709	KOG0009	JO	Ubiquitin-like/40S ribosomal S30 protein fusion
+412710	KOG3099	F	Bisphosphate 3'-nucleotidase BPNT1/Inositol polyphosphate 1-phosphatase
+412711	NO related KOG	SR	NO related KOG
+412712	KOG4212	A	RNA-binding protein hnRNP-M
+412713	KOG1392	I	Acetyl-CoA acetyltransferase
+412714	KOG0088	R	GTPase Rab21, small G protein superfamily
+412715	KOG2716	P	Polymerase delta-interacting protein PDIP1 and related proteins, contain BTB/POZ domain
+412716	KOG3704	O	Heparan sulfate D-glucosaminyl 3-O-sulfotransferase
+412717	NO related KOG	SR	NO related KOG
+412718	KOG1873	O	Ubiquitin-specific protease
+412719	KOG3852	S	Uncharacterized conserved protein
+412720	KOG1490	R	GTP-binding protein CRFG/NOG1 (ODN superfamily)
+412721	KOG4350	R	Uncharacterized conserved protein, contains BTB/POZ domain
+412722	KOG3628	R	Predicted AMP-binding protein
+412723	KOG2519	L	5'-3' exonuclease
+412724	KOG1332	U	Vesicle coat complex COPII, subunit SEC13
+412725	NO related KOG	SR	NO related KOG
+412726	KOG0724	O	Zuotin and related molecular chaperones (DnaJ superfamily), contains DNA-binding domains
+412727	KOG1712	F	Adenine phosphoribosyl transferases
+412728	KOG3215	S	Uncharacterized conserved protein
+412729	KOG2550	F	IMP dehydrogenase/GMP reductase
+412730	KOG0234	G	Fructose-6-phosphate 2-kinase/fructose-2,6-biphosphatase
+412731	KOG3793	K	Transcription factor NFAT, subunit NF45
+412732	NO related KOG	SR	NO related KOG
+412733	KOG1670	J	Translation initiation factor 4F, cap-binding subunit (eIF-4E) and related cap-binding proteins
+412734	KOG1872	O	Ubiquitin-specific protease
+412735	KOG3859	D	Septins (P-loop GTPases)
+412736	KOG0418	O	Ubiquitin-protein ligase
+412737	KOG1317	C	Fumarase
+412738	KOG2481	A	Protein required for normal rRNA processing
+412739	KOG0462	J	Elongation factor-type GTP-binding protein
+412740	KOG1857	K	Transcription accessory protein TEX, contains S1 domain
+412741	NO related KOG	SR	NO related KOG
+412742	KOG1436	F	Dihydroorotate dehydrogenase
+412743	KOG1766	R	Enhancer of rudimentary
+412744	KOG0835	R	Cyclin L
+412745	KOG0878	J	60S ribosomal protein L32
+412746	KOG1217	T	Fibrillins and related proteins containing Ca2+-binding EGF-like domains
+412747	KOG3464	J	60S ribosomal protein L44
+412748	KOG3204	J	60S ribosomal protein L13a
+412749	NO related KOG	SR	NO related KOG
+412750	KOG0056	P	Heavy metal exporter HMT1, ABC superfamily
+412751	KOG3213	K	Transcription factor IIB
+412752	KOG1422	P	Intracellular Cl- channel CLIC, contains GST domain
+412753	KOG2264	T	Exostosin EXT1L
+412754	KOG1246	R	DNA-binding protein jumonji/RBP2/SMCY, contains JmjC domain
+412755	NO related KOG	SR	NO related KOG
+412756	KOG3463	K	Transcription initiation factor IIA, gamma subunit
+412757	KOG0822	D	Protein kinase inhibitor
+412758	KOG2323	G	Pyruvate kinase
+412759	KOG1092	U	Ypt/Rab-specific GTPase-activating protein GYP1
+412760	KOG4203	TZ	Armadillo/beta-Catenin/plakoglobin
+412761	KOG1467	J	Translation initiation factor 2B, delta subunit (eIF-2Bdelta/GCD2)
+412762	KOG1079	K	Transcriptional repressor EZH1
+412763	KOG1951	J	GTP-binding protein AARP2 involved in 40S ribosome biogenesis
+412764	KOG3807	R	Predicted membrane protein ST7 (tumor suppressor in humans)
+412765	KOG1632	R	Uncharacterized PHD Zn-finger protein
+412766	KOG3966	TV	p53-mediated apoptosis protein EI24/PIG8
+412767	KOG0864	U	Ran-binding protein RANBP1 and related RanBD domain proteins
+412768	KOG3034	R	Isoamyl acetate-hydrolyzing esterase and related enzymes
+412769	KOG3052	C	Cytochrome c1
+412770	NO related KOG	SR	NO related KOG
+412771	KOG2245	A	Poly(A) polymerase and related nucleotidyltransferases
+412772	KOG0068	E	D-3-phosphoglycerate dehydrogenase, D-isomer-specific 2-hydroxy acid dehydrogenase superfamily
+412773	KOG3598	K	Thyroid hormone receptor-associated protein complex, subunit TRAP230
+412774	KOG0693	I	Myo-inositol-1-phosphate synthase
+412775	KOG1111	MOI	N-acetylglucosaminyltransferase complex, subunit PIG-A/SPT14, required for phosphatidylinositol biosynthesis/Sulfolipid synthase
+412776	KOG3645	T	Acetylcholine receptor
+412777	KOG0122	J	Translation initiation factor 3, subunit g (eIF-3g)
+412778	KOG1629	V	Bax-mediated apoptosis inhibitor TEGT/BI-1
+412779	NO related KOG	SR	NO related KOG
+412780	KOG0342	A	ATP-dependent RNA helicase pitchoune
+412781	KOG2235	S	Uncharacterized conserved protein
+412782	KOG0286	R	G-protein beta subunit
+412783	KOG0160	Z	Myosin class V heavy chain
+412784	KOG2343	R	Glucose-repressible protein and related proteins
+412785	KOG1164	T	Casein kinase (serine/threonine/tyrosine protein kinase)
+412786	KOG0030	Z	Myosin essential light chain, EF-Hand protein superfamily
+412787	NO related KOG	SR	NO related KOG
+412788	KOG3820	E	Aromatic amino acid hydroxylase
+412789	KOG1028	TU	Ca2+-dependent phospholipid-binding protein Synaptotagmin, required for synaptic vesicle and secretory granule exocytosis
+412790	KOG0406	O	Glutathione S-transferase
+412791	KOG3913	T	Wnt family of developmental regulators
+412792	KOG3172	A	Small nuclear ribonucleoprotein Sm D3
+412793	KOG1992	YU	Nuclear export receptor CSE1/CAS (importin beta superfamily)
+412794	KOG2638	G	UDP-glucose pyrophosphorylase
+412795	KOG1358	O	Serine palmitoyltransferase
+412796	KOG3394	R	Protein OS-9
+412797	KOG1689	A	mRNA cleavage factor I subunit
+412798	NO related KOG	SR	NO related KOG
+412799	KOG0326	A	ATP-dependent RNA helicase
+412800	NO related KOG	SR	NO related KOG
+412801	NO related KOG	SR	NO related KOG
+412802	KOG0811	U	SNARE protein PEP12/VAM3/Syntaxin 7/Syntaxin 17
+412803	KOG1019	BDT	Retinoblastoma pathway protein LIN-9/chromatin-associated protein Aly
+412804	KOG1867	O	Ubiquitin-specific protease
+412805	KOG1101	DR	Apoptosis inhibitor IAP1 and related BIR domain proteins
+412806	KOG1211	J	Amidases
+412807	KOG0857	J	60s ribosomal protein L10
+412808	KOG0203	P	Na+/K+ ATPase, alpha subunit
+412809	KOG0145	A	RNA-binding protein ELAV/HU (RRM superfamily)
+412810	NO related KOG	SR	NO related KOG
+412811	KOG1363	T	Predicted regulator of the ubiquitin pathway (contains UAS and UBX domains)
+412812	NO related KOG	SR	NO related KOG
+412813	KOG0232	C	Vacuolar H+-ATPase V0 sector, subunits c/c'
+412814	KOG0185	O	20S proteasome, regulatory subunit beta type PSMB4/PRE4
+412815	KOG1175	I	Acyl-CoA synthetase
+412816	KOG0749	C	Mitochondrial ADP/ATP carrier proteins
+412817	KOG2636	A	Splicing factor 3a, subunit 3
+412818	KOG1715	J	Mitochondrial/chloroplast ribosomal protein L12
+412819	KOG3678	W	SARM protein (with sterile alpha and armadillo motifs)
+412820	KOG3749	C	Phosphoenolpyruvate carboxykinase
+412821	KOG1646	J	40S ribosomal protein S6
+412822	KOG3295	J	60S Ribosomal protein L13
+412823	NO related KOG	SR	NO related KOG
+412824	KOG3643	T	GABA receptor
+412825	KOG3256	C	NADH:ubiquinone oxidoreductase, NDUFS8/23 kDa subunit
+412826	KOG0605	R	NDR and related serine/threonine kinases
+412827	KOG3526	O	Subtilisin-like proprotein convertase
+412828	KOG0829	J	60S ribosomal protein L18A
+412829	KOG2460	U	Signal recognition particle, subunit Srp68
+412830	KOG1078	U	Vesicle coat complex COPI, gamma subunit
+412831	NO related KOG	SR	NO related KOG
+412832	KOG3260	T	Calcyclin-binding protein CacyBP
+412833	KOG3589	T	G protein signaling regulators
+412834	NO related KOG	SR	NO related KOG
+412835	KOG0041	R	Predicted Ca2+-binding protein, EF-Hand protein superfamily
+412836	KOG0140	I	Medium-chain acyl-CoA dehydrogenase
+412837	NO related KOG	SR	NO related KOG
+412838	KOG3943	R	THUMP domain-containing proteins
+412839	KOG4161	KB	Methyl-CpG binding transcription regulators
+412840	KOG4009	C	NADH-ubiquinone oxidoreductase, subunit NDUFB10/PDSW
+412841	KOG1526	C	NADP-dependent isocitrate dehydrogenase
+412842	KOG0309	S	Conserved WD40 repeat-containing protein
+412843	KOG0384	K	Chromodomain-helicase DNA-binding protein
+412844	KOG1444	GOU	Nucleotide-sugar transporter VRG4/SQV-7
+412845	NO related KOG	SR	NO related KOG
+412846	KOG0100	O	Molecular chaperones GRP78/BiP/KAR2, HSP70 superfamily
+412847	KOG0815	J	60S acidic ribosomal protein P0
+412848	KOG1693	U	emp24/gp25L/p24 family of membrane trafficking proteins
+412849	KOG4440	PET	NMDA selective glutamate-gated ion channel receptor subunit GRIN1
+412850	KOG1155	DO	Anaphase-promoting complex (APC), Cdc23 subunit
+412851	KOG0559	C	Dihydrolipoamide succinyltransferase (2-oxoglutarate dehydrogenase, E2 subunit)
+412852	KOG1666	U	V-SNARE
+412853	KOG2112	I	Lysophospholipase
+412854	KOG0675	O	Calnexin
+412855	KOG0706	T	Predicted GTPase-activating protein
+412856	KOG3823	S	Uncharacterized conserved protein
+412857	KOG1150	O	Predicted molecular chaperone (DnaJ superfamily)
+412858	KOG0306	A	WD40-repeat-containing subunit of the 18S rRNA processing complex
+412859	KOG3048	O	Molecular chaperone Prefoldin, subunit 5
+412860	KOG4655	A	U3 small nucleolar ribonucleoprotein (snoRNP) component
+412861	KOG3714	O	Meprin A metalloprotease
+412862	KOG3933	J	Mitochondrial ribosomal protein S28
+412863	KOG2458	R	Endoplasmic reticulum protein EP58, contains filamin rod domain and KDEL motif
+412864	KOG1376	Z	Alpha tubulin
+412865	KOG0758	C	Mitochondrial carnitine-acylcarnitine carrier protein
+412866	KOG1494	C	NAD-dependent malate dehydrogenase
+412867	KOG1296	S	Uncharacterized conserved protein
+412868	KOG1917	R	Membrane-associated hematopoietic protein
+412869	KOG3517	K	Transcription factor PAX1/9
+412870	KOG0544	O	FKBP-type peptidyl-prolyl cis-trans isomerase
+412871	KOG4016	TU	Synaptic vesicle protein Synaptogyrin involved in regulation of Ca2+-dependent exocytosis
+412872	KOG3656	R	FOG: 7 transmembrane receptor
+412873	KOG4107	T	MP1 adaptor interacting protein P14
+412874	KOG2037	R	Guanylate-binding protein
+412875	KOG3078	F	Adenylate kinase
+412876	KOG4061	R	DMQ mono-oxygenase/Ubiquinone biosynthesis protein COQ7/CLK-1/CAT5
+412877	NO related KOG	SR	NO related KOG
+412878	KOG0852	O	Alkyl hydroperoxide reductase, thiol specific antioxidant and related enzymes
+412879	KOG2727	U	Rab3 GTPase-activating protein, non-catalytic subunit
+412880	KOG3848	W	Extracellular protein TEM7, contains PSI domain (tumor endothelial marker in humans)
+412881	KOG0262	K	RNA polymerase I, large subunit
+412882	KOG1006	T	Mitogen-activated protein kinase (MAPK) kinase MKK4
+412883	KOG3437	DO	Anaphase-promoting complex (APC), subunit 10
+412884	KOG0898	J	40S ribosomal protein S15
+412885	KOG2753	R	Uncharacterized conserved protein, contains PCI domain
+412886	NO related KOG	SR	NO related KOG
+412887	KOG0192	T	Tyrosine kinase specific for activated (GTP-bound) p21cdc42Hs
+412888	KOG1635	O	Peptide methionine sulfoxide reductase
+412889	KOG2215	U	Exocyst complex subunit
+412890	KOG2732	L	DNA polymerase delta, regulatory subunit 55
+412891	KOG3743	K	Recombination signal binding protein-J kappa(CBF1, Su(H), HS2NF5)
+412892	KOG3542	T	cAMP-regulated guanine nucleotide exchange factor
+412893	KOG2655	DZU	Septin family protein (P-loop GTPase)
+412894	KOG2764	RV	Putative transcriptional regulator DJ-1
+412895	KOG0019	O	Molecular chaperone (HSP90 family)
+412896	KOG3149	K	Transcription initiation factor IIF, auxiliary subunit
+412897	KOG1256	I	Long-chain acyl-CoA synthetases (AMP-forming)
+412898	KOG2975	J	Translation initiation factor 3, subunit f (eIF-3f)
+412899	KOG1217	T	Fibrillins and related proteins containing Ca2+-binding EGF-like domains
+412900	KOG0665	T	Jun-N-terminal kinase (JNK)
+412901	KOG0609	T	Calcium/calmodulin-dependent serine protein kinase/membrane-associated guanylate kinase
+412902	KOG0315	R	G-protein beta subunit-like protein (contains WD40 repeats)
+412903	KOG4834	R	Predicted DNA-binding protein, contains SANT domain
+412904	KOG3479	U	Mitochondrial import inner membrane translocase, subunit TIM9
+412905	KOG3460	A	Small nuclear ribonucleoprotein (snRNP) LSM3
+412906	KOG4596	S	Uncharacterized conserved protein
+412907	KOG3090	O	Prohibitin-like protein
+412908	KOG2036	R	Predicted P-loop ATPase fused to an acetyltransferase
+412909	KOG1964	YU	Nuclear pore complex, rNup107 component (sc Nup84)
+412910	KOG0047	P	Catalase
+412911	KOG2711	C	Glycerol-3-phosphate dehydrogenase/dihydroxyacetone 3-phosphate reductase
+412912	KOG0556	J	Aspartyl-tRNA synthetase
+412913	KOG3996	CO	Holocytochrome c synthase/heme-lyase
+412914	KOG0555	J	Asparaginyl-tRNA synthetase
+412915	NO related KOG	SR	NO related KOG
+412916	KOG1609	A	Protein involved in mRNA turnover and stability
+412917	KOG4495	K	RNA polymerase II transcription elongation factor Elongin/SIII, subunit elongin B
+412918	KOG2322	T	N-methyl-D-aspartate receptor glutamate-binding subunit
+412919	KOG0395	R	Ras-related GTPase
+412920	KOG0034	T	Ca2+/calmodulin-dependent protein phosphatase (calcineurin subunit B), EF-Hand superfamily protein
+412921	KOG1217	T	Fibrillins and related proteins containing Ca2+-binding EGF-like domains
+412922	KOG0630	E	Predicted pyridoxal-dependent decarboxylase
+412923	KOG3080	A	Nucleolar protein-like/EBNA1-binding protein
+412924	KOG0970	L	DNA polymerase alpha, catalytic subunit
+412925	KOG1933	I	Cholesterol transport protein (Niemann-Pick C disease protein)
+412926	KOG0290	S	Conserved WD40 repeat-containing protein AN11
+412927	NO related KOG	SR	NO related KOG
+412928	KOG3321	J	Mitochondrial ribosomal protein S10
+412929	KOG2839	T	Diadenosine and diphosphoinositol polyphosphate phosphohydrolase
+412930	KOG2287	G	Galactosyltransferases
+412931	KOG0378	J	40S ribosomal protein S4
+412932	KOG1660	V	Sorting nexin SNX6/TFAF2, contains PX domain
+412933	KOG2476	S	Uncharacterized conserved protein
+412934	NO related KOG	SR	NO related KOG
+412935	NO related KOG	SR	NO related KOG
+412936	KOG0536	C	Flavohemoprotein b5+b5R
+412937	KOG1751	J	60s ribosomal protein L23
+412938	KOG2777	A	tRNA-specific adenosine deaminase 1
+412939	KOG3727	D	Mitogen inducible gene product (contains ERM and PH domains)
+412940	KOG1034	K	Transcriptional repressor EED/ESC/FIE, required for transcriptional silencing, WD repeat superfamily
+412941	KOG1471	I	Phosphatidylinositol transfer protein SEC14 and related proteins
+412942	KOG0053	E	Cystathionine beta-lyases/cystathionine gamma-synthases
+412943	KOG4180	R	Predicted kinase
+412944	KOG4252	T	GTP-binding protein
+412945	KOG3015	C	F1-ATP synthase assembly protein
+412946	NO related KOG	SR	NO related KOG
+412947	KOG2751	T	Beclin-like protein
+412948	KOG2899	R	Predicted methyltransferase
+412949	KOG2198	J	tRNA cytosine-5-methylases and related enzymes of the NOL1/NOP2/sun superfamily
+412950	KOG3935	G	Predicted glycerate kinase
+412951	KOG2635	U	Medium subunit of clathrin adaptor complex
+412952	KOG0138	E	Glutaryl-CoA dehydrogenase
+412953	KOG1377	F	Uridine 5'- monophosphate synthase/orotate phosphoribosyltransferase
+412954	KOG3283	J	40S ribosomal protein S8
+412955	KOG2843	G	Fumarylacetoacetase
+412956	KOG2291	O	Oligosaccharyltransferase, alpha subunit (ribophorin I)
+412957	KOG0495	A	HAT repeat protein
+412958	KOG2562	A	Protein phosphatase 2 regulatory subunit
+412959	KOG2488	R	Acetyltransferase (GNAT) domain-containing protein
+412960	KOG1691	U	emp24/gp25L/p24 family of membrane trafficking proteins
+412961	KOG3436	J	60S ribosomal protein L35
+412962	KOG2674	ZU	Cysteine protease required for autophagy - Apg4p/Aut2p
+412963	KOG3075	G	Ribose 5-phosphate isomerase
+412964	KOG4018	S	Uncharacterized conserved protein, contains RWD domain
+412965	KOG3104	K	Mod5 protein sorting/negative effector of RNA Pol III synthesis
+412966	KOG0361	O	Chaperonin complex component, TCP-1 eta subunit (CCT7)
+412967	NO related KOG	SR	NO related KOG
+412968	NO related KOG	SR	NO related KOG
+412969	NO related KOG	SR	NO related KOG
+412970	KOG3301	J	Ribosomal protein S4
+412971	KOG2930	O	SCF ubiquitin ligase, Rbx1 component
+412972	KOG0563	G	Glucose-6-phosphate 1-dehydrogenase
+412973	KOG2260	D	Cell division cycle 37 protein, CDC37
+412974	KOG2230	G	Predicted beta-mannosidase
+412975	NO related KOG	SR	NO related KOG
+412976	KOG3900	T	Transforming growth factor beta, bone morphogenetic protein and related proteins
+412977	KOG0188	J	Alanyl-tRNA synthetase
+412978	KOG1119	CU	Mitochondrial Fe-S cluster biosynthesis protein ISA2 (contains a HesB-like domain)
+412979	KOG4196	K	bZIP transcription factor MafK
+412980	KOG3170	T	Conserved phosducin-like protein
+412981	NO related KOG	SR	NO related KOG
+412982	KOG3642	T	GABA receptor
+412983	KOG3037	R	Cell membrane glycoprotein
+412984	KOG2100	O	Dipeptidyl aminopeptidase
+412985	KOG1690	U	emp24/gp25L/p24 family of membrane trafficking proteins
+412986	KOG0385	K	Chromatin remodeling complex WSTF-ISWI, small subunit
+412987	KOG1041	J	Translation initiation factor 2C (eIF-2C) and related proteins
+412988	KOG0792	T	Protein tyrosine phosphatase PTPMEG, contains FERM domain
+412989	KOG1158	C	NADP/FAD dependent oxidoreductase
+412990	KOG2413	E	Xaa-Pro aminopeptidase
+412991	KOG0893	J	60S ribosomal protein L31
+412992	KOG4204	B	Histone deacetylase complex, SIN3 component
+412993	KOG0374	TR	Serine/threonine specific protein phosphatase PP1, catalytic subunit
+412994	KOG0417	O	Ubiquitin-protein ligase
+412995	KOG3709	U	PACS-1 cytosolic sorting protein
+412996	KOG4433	R	Tweety transmembrane/cell surface protein
+412997	KOG2141	T	Protein involved in high osmolarity signaling pathway
+412998	KOG3660	T	Sodium-neurotransmitter symporter
+412999	KOG1640	I	Predicted steroid reductase
+413000	KOG3209	R	WW domain-containing protein
+413001	KOG3539	W	Spondins, extracellular matrix proteins
+413002	KOG2410	E	Gamma-glutamyltransferase
+413003	KOG3732	UK	Staufen and related double-stranded-RNA-binding proteins
+413004	KOG3786	K	RNA polymerase II assessory factor Cdc73p
+413005	KOG3419	J	Mitochondrial/chloroplast ribosomal protein S16
+413006	KOG4523	S	Uncharacterized conserved protein
+413007	KOG4423	T	GTP-binding protein-like, RAS superfamily
+413008	KOG3049	C	Succinate dehydrogenase, Fe-S protein subunit
+413009	KOG0746	J	60S ribosomal protein L3 and related proteins
+413010	KOG0383	R	Predicted helicase
+413011	KOG0711	H	Polyprenyl synthetase
+413012	KOG2239	K	Transcription factor containing NAC and TS-N domains
+413013	KOG0215	K	RNA polymerase III, second largest subunit
+413014	KOG2053	Z	Mitochondrial inheritance and actin cytoskeleton organization protein
+413015	NO related KOG	SR	NO related KOG
+413016	KOG2177	O	Predicted E3 ubiquitin ligase
+413017	KOG3408	A	U1-like Zn-finger-containing protein, probabl erole in RNA processing/splicing
+413018	KOG0714	O	Molecular chaperone (DnaJ superfamily)
+413019	KOG2443	S	Uncharacterized conserved protein
+413020	NO related KOG	SR	NO related KOG
+413021	KOG1615	E	Phosphoserine phosphatase
+413022	KOG0617	T	Ras suppressor protein (contains leucine-rich repeats)
+413023	NO related KOG	SR	NO related KOG
+413024	NO related KOG	SR	NO related KOG
+413025	KOG0619	R	FOG: Leucine rich repeat
+413026	KOG0258	E	Alanine aminotransferase
+413027	KOG3955	MG	Heparan sulfate 6-O-sulfotransferase
+413028	KOG0214	K	RNA polymerase II, second largest subunit
+413029	KOG0882	O	Cyclophilin-related peptidyl-prolyl cis-trans isomerase
+413030	NO related KOG	SR	NO related KOG
+413031	KOG0393	R	Ras-related small GTPase, Rho type
+413032	KOG3893	G	Mannosyltransferase
+413033	KOG0061	Q	Transporter, ABC superfamily (Breast cancer resistance protein)
+413034	KOG1199	Q	Short-chain alcohol dehydrogenase/3-hydroxyacyl-CoA dehydrogenase
+413035	KOG3482	A	Small nuclear ribonucleoprotein (snRNP) SMF
+413036	KOG3081	U	Vesicle coat complex COPI, epsilon subunit
+413037	KOG1370	H	S-adenosylhomocysteine hydrolase
+413038	NO related KOG	SR	NO related KOG
+413039	KOG2344	U	Exocyst component protein and related proteins
+413040	KOG2052	T	Activin A type IB receptor, serine/threonine protein kinase
+413041	KOG4401	S	Uncharacterized conserved protein
+413042	KOG0653	D	Cyclin B and related kinase-activating proteins
+413043	KOG1831	K	Negative regulator of transcription
+413044	KOG2272	TZ	Focal adhesion protein PINCH-1, contains LIM domains
+413045	KOG0940	O	Ubiquitin protein ligase RSP5/NEDD4
+413046	NO related KOG	SR	NO related KOG
+413047	KOG3184	J	60S ribosomal protein L7
+413048	KOG0888	F	Nucleoside diphosphate kinase
+413049	KOG2072	J	Translation initiation factor 3, subunit a (eIF-3a)
+413050	KOG1316	E	Argininosuccinate lyase
+413051	KOG2330	A	Splicing factor 3b, subunit 2
+413052	NO related KOG	SR	NO related KOG
+413053	KOG2295	R	C2H2 Zn-finger protein
+413054	KOG4292	H	Cubilin, multiligand receptor mediating cobalamin absorption
+413055	KOG2002	P	TPR-containing nuclear phosphoprotein that regulates K(+) uptake
+413056	KOG0914	O	Thioredoxin-like protein
+413057	KOG2256	J	Predicted protein involved in nuclear export of pre-ribosomes
+413058	KOG2691	K	RNA polymerase II subunit 9
+413059	KOG3962	Z	Predicted actin-bundling protein
+413060	KOG1306	PT	Ca2+/Na+ exchanger NCX1 and related proteins
+413061	KOG0475	P	Cl- channel CLC-3 and related proteins (CLC superfamily)
+413062	KOG0334	A	RNA helicase
+413063	KOG3764	U	Vesicular amine transporter
+413064	KOG3588	G	Chondroitin synthase 1
+413065	KOG3095	K	Transcription initiation factor IIE, beta subunit
+413066	KOG0191	O	Thioredoxin/protein disulfide isomerase
+413067	KOG1567	F	Ribonucleotide reductase, beta subunit
+413068	KOG4223	TU	Reticulocalbin, calumenin, DNA supercoiling factor, and related Ca2+-binding proteins of the CREC family (EF-Hand protein superfamily)
+413069	KOG3736	O	Polypeptide N-acetylgalactosaminyltransferase
+413070	KOG1561	K	CCAAT-binding factor, subunit B (HAP2)
+413071	KOG3302	K	TATA-box binding protein (TBP), component of TFIID and TFIIIB
+413072	KOG0044	T	Ca2+ sensor (EF-Hand superfamily)
+413073	KOG0653	D	Cyclin B and related kinase-activating proteins
+413074	KOG0876	P	Manganese superoxide dismutase
+413075	KOG0350	A	DEAD-box ATP-dependent RNA helicase
+413076	KOG1628	J	40S ribosomal protein S3A
+413077	KOG3375	R	Phosphoprotein/predicted coiled-coil protein
+413078	KOG2658	C	NADH:ubiquinone oxidoreductase, NDUFV1/51kDa subunit
+413079	KOG0757	C	Mitochondrial carrier protein - Rim2p/Mrs12p
+413080	KOG1947	R	Leucine rich repeat proteins, some proteins contain F-box
+413081	KOG2352	E	Predicted spermine/spermidine synthase
+413082	KOG2253	A	U1 snRNP complex, subunit SNU71 and related PWI-motif proteins
+413083	KOG3470	O	Beta-tubulin folding cofactor A
+413084	NO related KOG	SR	NO related KOG
+413085	KOG1641	O	Mitochondrial chaperonin
+413086	KOG3459	A	Small nuclear ribonucleoprotein (snRNP) Sm core protein
+413087	KOG3594	S	FOG: Cadherin repeats
+413088	NO related KOG	SR	NO related KOG
+413089	KOG0196	T	Tyrosine kinase, EPH (ephrin) receptor family
+413090	KOG1268	M	Glucosamine 6-phosphate synthetases, contain amidotransferase and phosphosugar isomerase domains
+413091	KOG3491	S	Predicted membrane protein
+413092	KOG4116	C	Ubiquinol cytochrome c reductase, subunit QCR8
+413093	KOG2439	Y	Nuclear architecture related protein
+413094	KOG3424	J	40S ribosomal protein S24
+413095	KOG0123	AJ	Polyadenylate-binding protein (RRM superfamily)
+413096	KOG1651	O	Glutathione peroxidase
+413097	KOG1779	J	40s ribosomal protein S27
+413098	KOG4450	S	Uncharacterized conserved protein
+413099	KOG0533	A	RRM motif-containing protein
+413100	KOG2666	GT	UDP-glucose/GDP-mannose dehydrogenase
+413101	KOG2005	O	26S proteasome regulatory complex, subunit RPN1/PSMD2
+413102	KOG2270	TD	Serine/threonine protein kinase involved in cell cycle control
+413103	KOG2411	J	Aspartyl-tRNA synthetase, mitochondrial
+413104	KOG3222	F	Inosine triphosphate pyrophosphatase
+413105	KOG1556	O	26S proteasome regulatory complex, subunit RPN8/PSMD7
+413106	KOG2726	J	Mitochondrial polypeptide chain release factor
+413107	KOG1077	U	Vesicle coat complex AP-2, alpha subunit
+413108	KOG4031	U	Vesicle coat protein clathrin, light chain
+413109	NO related KOG	SR	NO related KOG
+413110	KOG0444	Z	Cytoskeletal regulator Flightless-I (contains leucine-rich and gelsolin repeats)
+413111	KOG3824	R	Huntingtin interacting protein HYPE
+413112	KOG0093	U	GTPase Rab3, small G protein superfamily
+413113	KOG0339	A	ATP-dependent RNA helicase
+413114	KOG0451	G	Predicted 2-oxoglutarate dehydrogenase, E1 subunit
+413115	KOG1608	U	Protein transporter of the TRAM (translocating chain-associating membrane) superfamily
+413116	KOG0725	R	Reductases with broad range of substrate specificities
+413117	NO related KOG	SR	NO related KOG
+413118	KOG1503	EF	Phosphoribosylpyrophosphate synthetase-associated protein
+413119	KOG0096	U	GTPase Ran/TC4/GSP1 (nuclear protein transport pathway), small G protein superfamily
+413120	KOG3250	OT	COP9 signalosome, subunit CSN7
+413121	KOG3871	W	Cell adhesion complex protein bystin
+413122	KOG1672	OC	ATP binding protein
+413123	KOG1151	T	Tousled-like protein kinase
+413124	KOG2058	U	Ypt/Rab GTPase activating protein
+413125	KOG1406	I	Peroxisomal 3-ketoacyl-CoA-thiolase P-44/SCP2
+413126	KOG1678	J	60s ribosomal protein L15
+413127	KOG4040	C	NADH:ubiquinone oxidoreductase, NDUFB8/ASHI subunit
+413128	KOG2688	D	Transcription-associated recombination protein - Thp1p
+413129	KOG3309	C	Ferredoxin
+413130	KOG4444	MU	Peroxisomal assembly protein PEX3
+413131	KOG1565	OW	Gelatinase A and related matrix metalloproteases
+413132	KOG4506	S	Uncharacterized conserved protein
+413133	KOG3165	R	Predicted nucleic-acid-binding protein, contains PIN domain
+413134	KOG3992	S	Uncharacterized conserved protein
+413135	KOG2526	E	Predicted aminopeptidases - M20/M25/M40 family
+413136	KOG4642	O	Chaperone-dependent E3 ubiquitin protein ligase (contains TPR repeats)
+413137	KOG1671	C	Ubiquinol cytochrome c reductase, subunit RIP1
+413138	KOG2189	C	Vacuolar H+-ATPase V0 sector, subunit a
+413139	KOG2611	S	Neurochondrin/leucine-rich protein (Neurochondrin)
+413140	KOG1430	IE	C-3 sterol dehydrogenase/3-beta-hydroxysteroid dehydrogenase and related dehydrogenases
+413141	KOG1750	J	Mitochondrial/chloroplast ribosomal protein S12
+413142	KOG0271	S	Notchless-like WD40 repeat-containing protein
+413143	KOG1551	S	Uncharacterized conserved protein
+413144	KOG3590	T	Protein kinase A anchoring protein
+413145	KOG3064	A	RNA-binding nuclear protein (MAK16) containing a distinct C4 Zn-finger
+413146	KOG2317	J	Putative translation initiation inhibitor UK114/IBM1
+413147	KOG0438	J	Mitochondrial/chloroplast ribosomal protein L2
+413148	KOG0687	O	26S proteasome regulatory complex, subunit RPN7/PSMD6
+413149	KOG0396	S	Uncharacterized conserved protein
+413150	NO related KOG	SR	NO related KOG
+413151	KOG3876	T	Arfaptin and related proteins
+413152	KOG2510	B	SWI-SNF chromatin-remodeling complex protein
+413153	KOG0908	O	Thioredoxin-like protein
+413154	NO related KOG	SR	NO related KOG
+413155	KOG2229	DZ	Protein required for actin cytoskeleton organization and cell cycle progression
+413156	KOG0646	R	WD40 repeat protein
+413157	KOG4535	R	HEAT and armadillo repeat-containing protein
+413158	NO related KOG	SR	NO related KOG
+413159	KOG3583	S	Uncharacterized conserved protein
+413160	KOG2285	O	E3 ubiquitin ligase, Cullin 1 component
+413161	KOG1806	L	DEAD box containing helicases
+413162	KOG0229	T	Phosphatidylinositol-4-phosphate 5-kinase
+413163	KOG1366	O	Alpha-macroglobulin
+413164	KOG2190	AR	PolyC-binding proteins alphaCP-1 and related KH domain proteins
+413165	KOG2981	R	Protein involved in autophagocytosis during starvation
+413166	KOG3269	S	Predicted membrane protein
+413167	KOG1037	KLO	NAD+ ADP-ribosyltransferase Parp, required for poly-ADP ribosylation of nuclear proteins
+413168	KOG1593	E	Asparaginase
+413169	KOG2625	S	Uncharacterized conserved protein
+413170	KOG0402	J	60S ribosomal protein L37
+413171	NO related KOG	SR	NO related KOG
+413172	KOG2538	L	Origin recognition complex, subunit 3
+413173	KOG3368	U	Transport protein particle (TRAPP) complex subunit
+413174	KOG3545	W	Olfactomedin and related extracellular matrix glycoproteins
+413175	KOG0311	O	Predicted E3 ubiquitin ligase
+413176	KOG0810	U	SNARE protein Syntaxin 1 and related proteins
+413177	KOG1933	I	Cholesterol transport protein (Niemann-Pick C disease protein)
+413178	KOG2957	C	Vacuolar H+-ATPase V0 sector, subunit d
+413179	NO related KOG	SR	NO related KOG
+413180	KOG2376	U	Signal recognition particle, subunit Srp72
+413181	KOG1407	S	WD40 repeat protein
+413182	KOG2928	L	Origin recognition complex, subunit 2
+413183	KOG0989	L	Replication factor C, subunit RFC4
+413184	KOG0668	TDK	Casein kinase II, alpha subunit
+413185	KOG0975	E	Branched chain aminotransferase BCAT1, pyridoxal phosphate enzymes type IV superfamily
+413186	KOG0083	R	GTPase Rab26/Rab37, small G protein superfamily
+413187	KOG0925	A	mRNA splicing factor ATP-dependent RNA helicase
+413188	KOG3180	C	Electron transfer flavoprotein, beta subunit
+413189	KOG2876	H	Molybdenum cofactor biosynthesis pathway protein
+413190	KOG1110	R	Putative steroid membrane receptor Hpr6.6/25-Dx
+413191	KOG0750	C	Mitochondrial solute carrier protein
+413192	NO related KOG	SR	NO related KOG
+413193	KOG1768	J	40s ribosomal protein S26
+413194	KOG4706	S	Uncharacterized conserved protein
+413195	NO related KOG	SR	NO related KOG
+413196	KOG0504	R	FOG: Ankyrin repeat
+413197	KOG0496	G	Beta-galactosidase
+413198	KOG0259	E	Tyrosine aminotransferase
+413199	KOG0036	F	Predicted mitochondrial carrier protein
+413200	KOG1897	L	Damage-specific DNA binding complex, subunit DDB1
+413201	KOG3719	I	Carnitine O-acyltransferase CPT2/YAT1
+413202	KOG1204	Q	Predicted dehydrogenase
+413203	KOG0395	R	Ras-related GTPase
+413204	NO related KOG	SR	NO related KOG
+413205	KOG0297	T	TNF receptor-associated factor
+413206	KOG3386	P	Copper transporter
+413207	KOG0707	F	Guanylate kinase
+413208	KOG0034	T	Ca2+/calmodulin-dependent protein phosphatase (calcineurin subunit B), EF-Hand superfamily protein
+413209	KOG2386	A	mRNA capping enzyme, guanylyltransferase (alpha) subunit
+413210	KOG1351	C	Vacuolar H+-ATPase V1 sector, subunit B
+413211	KOG2103	S	Uncharacterized conserved protein
+413212	KOG3472	S	Predicted small membrane protein
+413213	KOG3138	R	Predicted N-acetyltransferase
+413214	KOG2431	G	1, 2-alpha-mannosidase
+413215	KOG0932	U	Guanine nucleotide exchange factor EFA6
+413216	KOG3370	F	dUTPase
+413217	KOG1213	D	Sister chromatid cohesion complex Cohesin, subunit RAD21/SCC1
+413218	KOG0526	KLB	Nucleosome-binding factor SPN, POB3 subunit
+413219	KOG4027	S	Uncharacterized conserved protein
+413220	KOG1586	U	Protein required for fusion of vesicles in vesicular transport, alpha-SNAP
+413221	NO related KOG	SR	NO related KOG
+413222	KOG3865	T	Arrestin
+413223	KOG0351	L	ATP-dependent DNA helicase
+413224	KOG4164	D	Cyclin ik3-1/CABLES
+413225	KOG3656	R	FOG: 7 transmembrane receptor
+413226	KOG1225	TW	Teneurin-1 and related extracellular matrix proteins, contain EGF-like repeats
+413227	KOG3986	OT	Protein phosphatase, regulatory subunit PPP1R3C/D
+413228	KOG3766	K	Polycomb group protein SCM/L(3)MBT (tumor-supressor in Drosophila and humans)
+413229	KOG1866	O	Ubiquitin carboxyl-terminal hydrolase
+413230	KOG0067	K	Transcription factor CtBP
+413231	NO related KOG	SR	NO related KOG
+413232	KOG4081	N	Dynein light chain
+413233	KOG2156	O	Tubulin-tyrosine ligase-related protein
+413234	KOG2335	J	tRNA-dihydrouridine synthase
+413235	KOG0656	D	G1/S-specific cyclin D
+413236	KOG0072	U	GTP-binding ADP-ribosylation factor-like protein ARL1
+413237	KOG2388	M	UDP-N-acetylglucosamine pyrophosphorylase
+413238	NO related KOG	SR	NO related KOG
+413239	KOG4054	S	Uncharacterized conserved protein
+413240	KOG0104	O	Molecular chaperones GRP170/SIL1, HSP70 superfamily
+413241	KOG1545	P	Voltage-gated shaker-like K+ channel KCNA
+413242	KOG2004	O	Mitochondrial ATP-dependent protease PIM1/LON
+413243	NO related KOG	SR	NO related KOG
+413244	KOG1819	R	FYVE finger-containing proteins
+413245	KOG2095	L	DNA polymerase iota/DNA damage inducible protein
+413246	KOG0273	B	Beta-transducin family (WD-40 repeat) protein
+413247	KOG0459	J	Polypeptide release factor 3
+413248	KOG0718	O	Molecular chaperone (DnaJ superfamily)
+413249	KOG0682	P	Ammonia permease
+413250	NO related KOG	SR	NO related KOG
+413251	KOG0599	G	Phosphorylase kinase gamma subunit
+413252	KOG3097	S	Predicted membrane protein
+413253	NO related KOG	SR	NO related KOG
+413254	NO related KOG	SR	NO related KOG
+413255	KOG2346	S	Uncharacterized conserved protein
+413256	NO related KOG	SR	NO related KOG
+413257	KOG2531	G	Sugar (pentulose and hexulose) kinases
+413258	KOG3126	P	Porin/voltage-dependent anion-selective channel protein
+413259	KOG2083	P	Na+/K+ symporter
+413260	NO related KOG	SR	NO related KOG
+413261	KOG4297	TV	C-type lectin
+413262	KOG1046	EO	Puromycin-sensitive aminopeptidase and related aminopeptidases
+413263	KOG1624	J	Mitochondrial/chloroplast ribosomal protein L4
+413264	KOG2099	G	Glycogen phosphorylase
+413265	KOG0763	C	Mitochondrial ornithine transporter
+413266	KOG4386	S	Uncharacterized conserved protein
+413267	KOG2075	S	Topoisomerase TOP1-interacting protein BTBD1
+413268	KOG1692	U	Putative cargo transport protein EMP24 (p24 protein family)
+413269	KOG3252	S	Uncharacterized conserved protein
+413270	KOG4271	T	Rho-GTPase activating protein
+413271	KOG3094	S	Predicted membrane protein
+413272	KOG0971	DZ	Microtubule-associated protein dynactin DCTN1/Glued
+413273	KOG0441	P	Cu2+/Zn2+ superoxide dismutase SOD1
+413274	KOG3274	S	Uncharacterized conserved protein, AMMECR1
+413275	KOG1986	U	Vesicle coat complex COPII, subunit SEC23
+413276	KOG2580	U	Mitochondrial import inner membrane translocase, subunit TIM44
+413277	KOG2808	A	U5 snRNP-associated RNA splicing factor
+413278	KOG4785	K	Transcription factor CBF, beta subunit
+413279	KOG0236	P	Sulfate/bicarbonate/oxalate exchanger SAT-1 and related transporters (SLC26 family)
+413280	KOG1339	O	Aspartyl protease
+413281	KOG1721	R	FOG: Zn-finger
+413282	NO related KOG	SR	NO related KOG
+413283	KOG0448	O	Mitofusin 1 GTPase, involved in mitochondrila biogenesis
+413284	NO related KOG	SR	NO related KOG
+413285	KOG0139	I	Short-chain acyl-CoA dehydrogenase
+413286	KOG2790	HE	Phosphoserine aminotransferase
+413287	NO related KOG	SR	NO related KOG
+413288	NO related KOG	SR	NO related KOG
+413289	KOG1541	R	Predicted protein carboxyl methylase
+413290	KOG3818	L	DNA polymerase epsilon, subunit B
+413291	KOG3412	J	60S ribosomal protein L28
+413292	KOG2804	I	Phosphorylcholine transferase/cholinephosphate cytidylyltransferase
+413293	KOG0506	E	Glutaminase (contains ankyrin repeat)
+413294	KOG0052	J	Translation elongation factor EF-1 alpha/Tu
+413295	KOG0230	T	Phosphatidylinositol-4-phosphate 5-kinase and related FYVE finger-containing proteins
+413296	KOG2778	O	Ubiquitin C-terminal hydrolase
+413297	KOG3983	U	Golgi protein
+413298	KOG2296	R	Integral membrane protein
+413299	KOG2549	K	Transcription initiation factor TFIID, subunit TAF6 (also component of histone acetyltransferase SAGA)
+413300	KOG2597	R	Predicted aminopeptidase of the M17 family
+413301	KOG0219	L	Mismatch repair ATPase MSH2 (MutS family)
+413302	KOG1015	K	Transcription regulator XNP/ATRX, DEAD-box superfamily
+413303	KOG4293	T	Predicted membrane protein, contains DoH and Cytochrome b-561/ferric reductase transmembrane domains
+413304	KOG2640	S	Thioredoxin
+413305	KOG2283	TR	Clathrin coat dissociation kinase GAK/PTEN/Auxilin and related tyrosine phosphatases
+413306	NO related KOG	SR	NO related KOG
+413307	KOG1943	O	Beta-tubulin folding cofactor D
+413308	KOG0774	K	Transcription factor PBX and related HOX domain proteins
+413309	KOG1538	R	Uncharacterized conserved protein WDR10, contains WD40 repeats
+413310	KOG3208	U	SNARE protein GS28
+413311	NO related KOG	SR	NO related KOG
+413312	KOG2455	E	Delta-1-pyrroline-5-carboxylate dehydrogenase
+413313	KOG0877	J	40S ribosomal protein S2/30S ribosomal protein S5
+413314	KOG0078	TU	GTP-binding protein SEC4, small G protein superfamily, and related Ras family GTP-binding proteins
+413315	KOG2816	R	Predicted transporter ADD1 (major facilitator superfamily)
+413316	KOG2336	H	Molybdopterin biosynthesis-related protein
+413317	KOG1215	T	Low-density lipoprotein receptors containing Ca2+-binding EGF-like domains
+413318	KOG3656	R	FOG: 7 transmembrane receptor
+413319	KOG2856	TUZ	Adaptor protein PACSIN
+413320	KOG1562	E	Spermidine synthase
+413321	KOG3129	O	26S proteasome regulatory complex, subunit PSMD9
+413322	KOG1813	O	Predicted E3 ubiquitin ligase
+413323	KOG1987	DR	Speckle-type POZ protein SPOP and related proteins with TRAF, MATH and BTB/POZ domains
+413324	KOG0295	S	WD40 repeat-containing protein
+413325	NO related KOG	SR	NO related KOG
+413326	NO related KOG	SR	NO related KOG
+413327	KOG2277	D	S-M checkpoint control protein CID1 and related nucleotidyltransferases
+413328	KOG1973	B	Chromatin remodeling protein, contains PHD Zn-finger
+413329	KOG3705	O	Glycoprotein 6-alpha-L-fucosyltransferase
+413330	KOG1180	I	Acyl-CoA synthetase
+413331	KOG2802	R	Membrane protein HUEL (cation efflux superfamily)
+413332	KOG3900	T	Transforming growth factor beta, bone morphogenetic protein and related proteins
+413333	KOG2696	B	Histone acetyltransferase type b catalytic subunit
+413334	KOG1247	J	Methionyl-tRNA synthetase
+413335	KOG3957	I	Predicted L-carnitine dehydratase/alpha-methylacyl-CoA racemase
+413336	KOG0679	Z	Actin-related protein - Arp4p/Act3p
+413337	KOG1265	I	Phospholipase C
+413338	KOG3271	J	Translation initiation factor 5A (eIF-5A)
+413339	KOG0447	R	Dynamin-like GTP binding protein
+413340	NO related KOG	SR	NO related KOG
+413341	KOG4285	D	Mitotic phosphoprotein
+413342	KOG2918	O	Carboxymethyl transferase
+413343	KOG4564	T	Adenylate cyclase-coupled calcitonin receptor
+413344	KOG2641	T	Predicted seven transmembrane receptor - rhodopsin family
+413345	KOG2074	KL	RNA polymerase II transcription initiation/nucleotide excision repair factor TFIIH, subunit TFB1
+413346	NO related KOG	SR	NO related KOG
+413347	KOG3401	J	60S ribosomal protein L26
+413348	KOG1042	D	Germ-line stem cell division protein Hiwi/Piwi; negative developmental regulator
+413349	KOG1661	O	Protein-L-isoaspartate(D-aspartate) O-methyltransferase
+413350	KOG1505	I	Lysophosphatidic acid acyltransferase LPAAT and related acyltransferases
+413351	KOG0070	U	GTP-binding ADP-ribosylation factor Arf1
+413352	KOG0862	U	Synaptobrevin/VAMP-like protein SEC22
+413353	KOG3765	G	Predicted glycosyltransferase
+413354	KOG0296	S	Angio-associated migratory cell protein (contains WD40 repeats)
+413355	KOG1590	S	Uncharacterized conserved protein
+413356	NO related KOG	SR	NO related KOG
+413357	KOG3431	D	Apoptosis-related protein/predicted DNA-binding protein
+413358	NO related KOG	SR	NO related KOG
+413359	KOG1523	Z	Actin-related protein Arp2/3 complex, subunit ARPC1/p41-ARC
+413360	KOG1265	I	Phospholipase C
+413361	KOG2175	G	Protein predicted to be involved in carbohydrate metabolism
+413362	KOG1840	Z	Kinesin light chain
+413363	KOG2178	G	Predicted sugar kinase
+413364	KOG0620	K	Glucose-repressible alcohol dehydrogenase transcriptional effector CCR4 and related proteins
+413365	KOG4280	Z	Kinesin-like protein
+413366	KOG3469	C	Cytochrome c oxidase, subunit VIa/COX13
+413367	KOG0330	A	ATP-dependent RNA helicase
+413368	NO related KOG	SR	NO related KOG
+413369	KOG3372	U	Signal peptidase complex subunit
+413370	KOG1026	TU	Nerve growth factor receptor TRKA and related tyrosine kinases
+413371	KOG0075	R	GTP-binding ADP-ribosylation factor-like protein
+413372	KOG0153	R	Predicted RNA-binding protein (RRM superfamily)
+413373	KOG2571	M	Chitin synthase/hyaluronan synthase (glycosyltransferases)
+413374	KOG4077	C	Cytochrome c oxidase, subunit Va/COX6
+413375	KOG0935	U	Clathrin adaptor complex, small subunit
+413376	NO related KOG	SR	NO related KOG
+413377	KOG0263	K	Transcription initiation factor TFIID, subunit TAF5 (also component of histone acetyltransferase SAGA)
+413378	KOG3346	R	Phosphatidylethanolamine binding protein
+413379	KOG1777	R	Putative Zn-finger protein
+413380	KOG2654	S	Uncharacterized conserved protein
+413381	KOG3159	H	Lipoate-protein ligase A
+413382	KOG3113	S	Uncharacterized conserved protein
+413383	NO related KOG	SR	NO related KOG
+413384	KOG1516	R	Carboxylesterase and related proteins
+413385	KOG4479	K	Transcription factor e(y)2
+413386	KOG0276	U	Vesicle coat complex COPI, beta' subunit
+413387	KOG1842	R	FYVE finger-containing protein
+413388	KOG2020	YU	Nuclear transport receptor CRM1/MSN5 (importin beta superfamily)
+413389	KOG0482	L	DNA replication licensing factor, MCM7 component
+413390	NO related KOG	SR	NO related KOG
+413391	KOG0733	O	Nuclear AAA ATPase (VCP subfamily)
+413392	KOG4716	O	Thioredoxin reductase
+413393	KOG3991	S	Uncharacterized conserved protein
+413394	KOG2627	R	Nuclear protein ES2
+413395	KOG0566	U	Inositol-1,4,5-triphosphate 5-phosphatase (synaptojanin), INP51/INP52/INP53 family
+413396	KOG0927	R	Predicted transporter (ABC superfamily)
+413397	KOG1253	J	tRNA methyltransferase
+413398	KOG2780	A	Ribosome biogenesis protein RPF1, contains IMP4 domain
+413399	NO related KOG	SR	NO related KOG
+413400	KOG2484	R	GTPase
+413401	KOG0090	U	Signal recognition particle receptor, beta subunit (small G protein superfamily)
+413402	KOG0723	O	Molecular chaperone (DnaJ superfamily)
+413403	KOG3300	CD	NADH:ubiquinone oxidoreductase, B16.6 subunit/cell death-regulatory protein
+413404	KOG0395	R	Ras-related GTPase
+413405	KOG1784	A	Small Nuclear ribonucleoprotein splicing factor
+413406	KOG4123	G	Putative alpha 1,2 mannosyltransferase
+413407	KOG4155	R	FOG: WD40 repeat
+413408	KOG4307	R	RNA binding protein RBM12/SWAN
+413409	KOG3689	T	Cyclic nucleotide phosphodiesterase
+413410	KOG1847	A	mRNA splicing factor
+413411	KOG3320	J	40S ribosomal protein S7
+413412	KOG2347	U	Sec5 subunit of exocyst complex
+413413	KOG3453	C	Cytochrome c
+413414	KOG3190	S	Uncharacterized conserved protein
+413415	KOG0517	Z	Beta-spectrin
+413416	KOG3754	H	Gamma-glutamylcysteine synthetase
+413417	KOG1835	S	Uncharacterized conserved protein
+413418	KOG0054	Q	Multidrug resistance-associated protein/mitoxantrone resistance protein, ABC superfamily
+413419	KOG3318	S	Predicted membrane protein
+413420	KOG0464	J	Elongation factor G
+413421	KOG3656	R	FOG: 7 transmembrane receptor
+413422	KOG0370	R	Multifunctional pyrimidine synthesis protein CAD (includes carbamoyl-phophate synthetase, aspartate transcarbamylase, and glutamine amidotransferase)
+413423	KOG0738	O	AAA+-type ATPase
+413424	KOG0167	S	FOG: Armadillo/beta-catenin-like repeats
+413425	KOG0146	A	RNA-binding protein ETR-3 (RRM superfamily)

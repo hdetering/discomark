@@ -1,11 +1,26 @@
 from __future__ import division, print_function
 from discomark.models import *
-from sqlalchemy import create_engine, func
+from sqlalchemy import create_engine, desc, distinct, func
 from sqlalchemy.orm import sessionmaker
 import os, re, sys
 from glob import glob
 from Bio import SeqIO
 from Bio.Blast import NCBIXML
+
+# useful to compare sequences for identity
+class DnaSeq:
+    id = ''
+    dna = ''
+
+    def __init__(self, id, dna):
+        self.id = id
+        self.dna = dna
+
+    def __eq__(self, other):
+        return (isinstance(other, self.__class__) and self.id==other.id and self.dna==other.dna)
+
+    def __hash__(self):
+        return hash((self.id, self.dna))
 
 ###############################
 # DB access abstraction layer #
@@ -16,7 +31,7 @@ class DataBroker():
     def __init__(self, project_name):
         # choose whether to use an in-memory db or create a db file
         if project_name:
-            self.conn_str = 'sqlite:///%s/%s.db' % (project_name, project_name)
+            self.conn_str = 'sqlite:///%s/markers.db' % (project_name)
         else:
             print("\nUsing in-memory database.\n")
             self.conn_str = 'sqlite:///:memory:'
@@ -167,9 +182,10 @@ class DataBroker():
                 db_file.ortholog = db_ortho
                 session.add(db_file)
 
-                # loop sequences
-                for seq in SeqIO.parse(open(fn, 'rt'), 'fasta'):
-                    db_seq = Sequence(fasta_id=seq.id, description=seq.description, sequence=str(seq.seq.upper()))
+                # make sure sequences are unique
+                sequences = set([DnaSeq(r.id, str(r.seq)) for r in SeqIO.parse(open(fn, 'rt'), 'fasta')])
+                for seq in sequences:
+                    db_seq = Sequence(fasta_id=seq.id, description='', sequence=str(seq.dna.upper()))
                     db_seq.species = db_species
                     db_seq.ortholog = db_ortho
                     session.add(db_seq)
@@ -235,8 +251,14 @@ class DataBroker():
         session.commit()
 
 
-    def load_primers(self, primer_dir):
+    def load_primers(self, primer_dir, add=False):
         session = self.session
+
+        # truncate existing table if not in 'add' mode
+        if not add:
+            tab = Base.metadata.tables['primer_sets']
+            session.execute(tab.delete())
+            session.commit()
 
         regex = '''Primer set \d+\s+\((?P<pos_fw>\S+) / (?P<pos_rv>\S+)\)
 
@@ -293,15 +315,68 @@ Avg\. #sequences in primer alignments: \S+ / \S+
         session.commit()
 
     def primersets_to_records_js(self, target_fn):
-        primer_sets = self.session.query(PrimerSet).all()
+        #primer_sets = self.session.query(PrimerSet).all()
+        primer_sets = self.session.query(PrimerSet, func.count(distinct(Species.id)).label('n_species')) \
+                            .join(Ortholog).join(Sequence).join(Species) \
+                            .group_by(PrimerSet.id) \
+                            .order_by(desc("n_species"), Ortholog.id) \
+                            .all()
 
         rec_cnt = 0
         js = "var myRecords = [\n"
-        for ps in primer_sets:
-            js += ps.to_json(rec_cnt) + ',\n'
+        for res in primer_sets:
+            ps = res[0]
+            js += ps.to_json(rec_cnt, res[1]) + ',\n'
             rec_cnt += 1
         js += "\n];"
 
         with open(target_fn, 'wt') as outfile:
             print(outfile.name)
             outfile.write(js)
+
+    def generateSummaryJs(self, target_fn):
+        n_primers = self.session.query(func.count(PrimerSet.id)).one()[0]
+        n_orthologs = (self.session.query(
+            func.count(distinct(Ortholog.id)))
+            .join(PrimerSet)
+            .one()
+        )[0]
+        categories = (self.session.query(
+            Category.name,
+            func.count(distinct(Ortholog.id)))
+            .join(Function)
+            .join(Ortholog, Function.orthologs)
+            .join(PrimerSet)
+            .group_by(Category.name)
+            .all()
+        )
+        functions = (self.session.query(
+            Category.name,
+            Function.shortcode,
+            func.count(distinct(Ortholog.id)))
+                     .join(Function)
+            .join(Ortholog, Function.orthologs)
+            .join(PrimerSet)
+            .group_by(Function.shortcode)
+            .order_by(Category.name)
+            .all()
+        )
+
+        out_str = '''var summary = [{
+    'n_primers': %i,
+    'n_orthologs': %i
+}];
+
+    var categories = [
+    %s
+];
+
+var subcats = [
+    %s
+];''' % (n_primers, n_orthologs,
+             ',\n\t'.join(["['%s', %i]" % x for x in categories]),
+             ',\n\t'.join(["['%s', %i]" % (x[1], x[2]) for x in functions]),)
+
+        with open(target_fn, 'wt') as outfile:
+            print(outfile.name)
+            outfile.write(out_str)

@@ -1,3 +1,7 @@
 out
+input
 output
 *.pyc
+
+# temporary input
+example/RL_EST_min

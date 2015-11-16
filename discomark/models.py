@@ -132,11 +132,12 @@ class PrimerSet(Base):
     def __repr__(self):
         return "<PrimerSet(ortholog='%d', product=%dbp)>" % (self.ortholog.id, self.prod_len)
 
-    def to_json(self, idx):
+    def to_json(self, idx, n_spec):
         format_str = '''  {
     "index": "%s",
     "export": "0",
     "orthologId": "%s",
+    "species": "%s",
     "product-(bp)": "%s",
     "fwSequence": "%s",
     "rvSequence": "%s",
@@ -145,4 +146,4 @@ class PrimerSet(Base):
     "fwBlastHit": "%s",
     "rvBlastHit": "%s"
   }'''
-        return format_str % (idx, self.id, self.prod_len, self.seq_fw, self.seq_rv, self.tm_fw, self.tm_rv, len(self.seq_fw), len(self.seq_rv), self.blast_fw, self.blast_rv)
+        return format_str % (idx, self.ortholog.id, n_spec, self.prod_len, self.seq_fw, self.seq_rv, self.tm_fw, self.tm_rv, len(self.seq_fw), len(self.seq_rv), self.blast_fw, self.blast_rv)
