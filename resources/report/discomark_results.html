@@ -53,6 +53,11 @@
       <div id="primer-tab">
         <h2>Primer table</h2>
         <table id="primer-table">
+          <!-- after changing headers, adjust:
+                  - discomark.models.PrimerSet.to_json()
+                  - discomark.js::myAttributeWriter()
+                  - discomark.js::record2Fasta()
+          -->
           <thead>
             <td>export</td>
             <td>marker id</td>
@@ -68,7 +73,7 @@
           <tbody></tbody>
         </table>
       </div>
-  <a href="javascript:onDownload();">Download selected primers</a>
+  <a href="javascript:onDownloadFasta();">Download selected primers</a>
   <!--a class="button icon download" href="#"><span>Download selected primers</span></a-->
 
     <hr />

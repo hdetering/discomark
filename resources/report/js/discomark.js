@@ -78,10 +78,10 @@ function updateAlignmentViewer(markerId, showSeq) {
 
 function record2Fasta(rec) {
     var fastaStr = "";
-    fastaStr += ">" + rec.markerId + "_fw\n";
-    fastaStr += rec.fwSequence + "\n";
-    fastaStr += ">" + rec.markerId + "_rv\n";
-    fastaStr += rec.rvSequence + "\n";
+    fastaStr += ">" + rec.markerId + "_" + rec.ps_idx + "_fw\n";
+    fastaStr += rec["fwSequence-(5'-3')"] + "\n";
+    fastaStr += ">" + rec.markerId + "_" + rec.ps_idx + "_rv\n";
+    fastaStr += rec["rvSequence-(5'-3')"] + "\n";
 
     return fastaStr;
 }
