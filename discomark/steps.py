@@ -232,7 +232,7 @@ def export_primer_alignments(primer_dir, orthologs):
                 # generate gapped sequence
                 seq = ('-'*pos_fw[0] + ps.seq_fw + '-'*(pos_rv[0]-pos_fw[1]) +
                        Seq(ps.seq_rv).reverse_complement() + '-'*(len(aln[0])-pos_rv[1]))
-                rec = SeqRecord(seq, id="%s_%s-%s" % (db_ortho.id, i, i), description='')
+                rec = SeqRecord(seq, id="%s_%s" % (db_ortho.id, i), description='')
                 pseqs.append(rec)
                 i += 1
             with open(os.path.join(primer_dir, "%s.primer_aln.fasta" % db_ortho.id), 'wt') as f:

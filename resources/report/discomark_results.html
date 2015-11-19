@@ -40,30 +40,26 @@
 
     <div id="tabs">
       <ul>
-        <li><a href="#tabs-summary">Summary</a></li>
         <li><a href="#tabs-primerlist">Primer pairs</a></li>
-        <li><a href="#tabs-review">Review</a></li>
+        <li><a href="#tabs-plots">Plots</a></li>
+        <!-- <li><a href="#tabs-review">Review</a></li> -->
       </ul>
 
-    <div id="tabs-summary">
+    <div id="tabs-primerlist">
       <div id="resSummary"></div>
       <script id="tmplSummary" type="text/x-jsrender">
-        <p>Discomark discovered <b>{{:n_primers}}</b> primers for <b>{{:n_markers}}</b> markers.</p>
+        <p>Discomark found <b>{{:n_primers}}</b> primers for <b>{{:n_markers}}</b> markers.</p>
       </script>
-      <div id="chartCategories" style="height:400px; width:600px;"></div>
-    </div>
-
-    <div id="tabs-primerlist">
       <div id="primer-tab">
         <h2>Primer table</h2>
         <table id="primer-table">
           <thead>
             <td>export</td>
             <td>marker id</td>
-            <td>species</td>
-            <td>product (bp)</td>
-            <td>fw sequence</td>
-            <td>rv sequence</td>
+            <td>no. of species</td>
+            <td>est. product length (bp)</td>
+            <td>fw sequence (5'-3')</td>
+            <td>rv sequence (5'-3')</td>
             <td>Tm</td>
             <td>primer length</td>
             <td>fw Blast hit</td>
@@ -87,13 +83,19 @@
     </div>
   </div>
 
-    <div id="tabs-review">
-      alignments truncated by trimAl...
-      <hr />
-      information about sequences that mapped <> 1 times...
-      <hr />
-      orthologs without primers...
-    </div>
+  <div id="tabs-plots">
+    <div id="chartCategories" style="height:400px; width:600px;"></div>
+  </div>
+
+  <!--
+  <div id="tabs-review">
+    alignments truncated by trimAl...
+    <hr />
+    information about sequences that mapped <> 1 times...
+    <hr />
+    orthologs without primers...
+  </div>
+  -->
 </div>
 
 <div class="clearfix"></div>

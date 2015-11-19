@@ -8,21 +8,20 @@ function myAttributeWriter(record) {
     var html = "";
     if (this.id == "export") {
         html = /*JSON.stringify(record)+*/'<input type="checkbox" id="' + record.index + '" class="selector" ';
-        if (record['markerId'] == "413057") { console.log(record); }
+        if (record['markerId'] == "412698") { console.log(record); }
         if (record[this.id]=="1") {
             console.log("on!");
             html += "checked ";
         }
         html += '/>';
     }
+    // include primer pair index in ortholog_id field
+    else if (this.id == "markerId") {
+        html = record[this.id] + "_" + record['ps_idx'];
+    }
     // insert a link for NCBI records
-    else if (this.id == "fwBlastHit" || this.id == "rvBlastHit") {
-      if (record[this.id] != "None") {
+    else if ((this.id == "fwBlastHit" || this.id == "rvBlastHit") && (record[this.id] != "None")) {
         html = "<a href='http://www.ncbi.nlm.nih.gov/nuccore/" + record[this.id] + "' target='_blank'>" + record[this.id] + "</a>";
-      }
-      else {
-        html = record[this.id];
-      }
     }
     else {
         html = record[this.id];
@@ -123,7 +122,7 @@ function finalizeSummary() {
 
     // whip up pie charts
     var plotCat = $.jqplot('chartCategories', [categories], {
-        title: 'Functional categories for discovered markers',
+        title: 'Functional categories of markers',
         seriesDefaults: {
           // make this a donut chart.
           renderer:$.jqplot.DonutRenderer,
@@ -168,8 +167,8 @@ function finalizeSummary() {
 
 
 $( document ).ready(function() {
-    $('#tabs').tabs();
     finalizeSummary();
+    $('#tabs').tabs();
 //    alert(JSON.stringify(myRecords));
     dynatable = $('#primer-table').dynatable({
         features: {

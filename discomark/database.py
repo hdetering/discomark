@@ -263,7 +263,7 @@ class DataBroker():
             session.execute(tab.delete())
             session.commit()
 
-        regex = '''Primer set \d+\s+\((?P<pos_fw>\S+) / (?P<pos_rv>\S+)\)
+        regex = '''Primer set (?P<ps_idx>\d+)\s+\((?P<pos_fw>\S+) / (?P<pos_rv>\S+)\)
 
 Fw 5'-(?P<seq_fw>[^\n]+)
 Rv 5'-(?P<seq_rv>[^\n]+)
@@ -282,6 +282,7 @@ Avg\. #sequences in primer alignments: \S+ / \S+
             for t in primer_texts:
                 m = re.match(regex, t, re.DOTALL)
                 ps = PrimerSet(id_ortholog=o_id)
+                ps.ps_idx = int(m.group('ps_idx'))
                 ps.prod_len = int(m.group('prod_len'))
                 ps.pos_fw = m.group('pos_fw')
                 ps.pos_rv = m.group('pos_rv')

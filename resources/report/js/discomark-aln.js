@@ -53,7 +53,7 @@ function cartoonSeqWriter(id, seq, snps, context, x, y) {
     // identify sequence segments
     pos = getSeqCoords(seq);
     // primer or ref?
-    if (id.match(/\d{6}_primers/)) {
+    if (id.match(/\d{6}_\d+/)) {
         context.strokeStyle = '#549499';
     } else {
         context.strokeStyle = '#222222';
@@ -85,7 +85,8 @@ function cartoonSeqWriter(id, seq, snps, context, x, y) {
 
 function simpleSeqWriter(id, seq, snps, context, x, y) {
     context.font = '6pt Monospace';
-    if (id.match(/\d{6}_primers/)) {
+    console.log(id);
+    if (id.match(/\d{6}_\d+/)) {
         context.fillStyle = '#22dd00';
     } else {
         context.fillStyle = '#222222';
@@ -215,12 +216,12 @@ CanvasState.prototype.drawAlignment = function(showSeq) {
     for (var seq_id in aln) {
         // write seq name
         context.fillStyle = '#000000';
-        var new_seq_id = seq_id.replace(/(\d{6})_\d-/, '$1_primers_');
-        context.fillText(new_seq_id, 0, y);
+        //var new_seq_id = seq_id.replace(/(\d{6})_\d-/, '$1_primers_');
+        context.fillText(seq_id, 0, y);
         if (showSeq) {
-            simpleSeqWriter(new_seq_id, aln[seq_id], snps, context, x, y);
+            simpleSeqWriter(seq_id, aln[seq_id], snps, context, x, y);
         } else {
-            cartoonSeqWriter(new_seq_id, aln[seq_id], snps, context, x, y);
+            cartoonSeqWriter(seq_id, aln[seq_id], snps, context, x, y);
         }
         y += ySpacing;
     }

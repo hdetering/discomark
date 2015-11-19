@@ -119,6 +119,7 @@ class PrimerSet(Base):
     id          = Column(Integer, primary_key=True)
     id_ortholog = Column(Integer, ForeignKey('orthologs.id'))
     ortholog    = relationship("Ortholog", backref="primer_sets")
+    ps_idx      = Column(Integer)
     prod_len    = Column(Integer)
     pos_fw      = Column(String)
     pos_rv      = Column(String)
@@ -137,13 +138,14 @@ class PrimerSet(Base):
     "index": "%s",
     "export": "0",
     "markerId": "%s",
-    "species": "%s",
-    "product-(bp)": "%s",
-    "fwSequence": "%s",
-    "rvSequence": "%s",
+    "ps_idx": "%s",
+    "no.OfSpecies": "%s",
+    "est.ProductLength-(bp)": "%s",
+    "fwSequence-(5'-3')": "%s",
+    "rvSequence-(5'-3')": "%s",
     "tm": "%s/%s",
     "primerLength": "%s/%s",
     "fwBlastHit": "%s",
     "rvBlastHit": "%s"
   }'''
-        return format_str % (idx, self.ortholog.id, n_spec, self.prod_len, self.seq_fw, self.seq_rv, self.tm_fw, self.tm_rv, len(self.seq_fw), len(self.seq_rv), self.blast_fw, self.blast_rv)
+        return format_str % (idx, self.ortholog.id, self.ps_idx, n_spec, self.prod_len, self.seq_fw, self.seq_rv, self.tm_fw, self.tm_rv, len(self.seq_fw), len(self.seq_rv), self.blast_fw, self.blast_rv)
