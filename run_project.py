@@ -110,7 +110,7 @@ if __name__ == '__main__':
     # 4. map trimmed alignments against reference genome
     if args.step <= 4:
         print("\n[4] Mapping alignments to reference...")
-        if args.reference > 0:
+        if os.path.exists(reference):
             settings = config.items('04_BLAST_settings')
             out_fn = steps.map_to_reference(trimmed_dir, mapped_dir, reference, settings, logfile)
             model.load_blast_hits(out_fn)

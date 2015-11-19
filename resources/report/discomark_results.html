@@ -48,7 +48,7 @@
     <div id="tabs-summary">
       <div id="resSummary"></div>
       <script id="tmplSummary" type="text/x-jsrender">
-        <p>Discomark discovered <b>{{:n_primers}}</b> primers for <b>{{:n_orthologs}}</b> orthologs.</p>
+        <p>Discomark discovered <b>{{:n_primers}}</b> primers for <b>{{:n_markers}}</b> markers.</p>
       </script>
       <div id="chartCategories" style="height:400px; width:600px;"></div>
     </div>
@@ -59,7 +59,7 @@
         <table id="primer-table">
           <thead>
             <td>export</td>
-            <td>ortholog id</td>
+            <td>marker id</td>
             <td>species</td>
             <td>product (bp)</td>
             <td>fw sequence</td>
@@ -77,7 +77,7 @@
 
     <hr />
     <div id="alignment-viewer">
-      <h2>Alignment for locus <span id='ortholog-id'></span></h2>
+      <h2>Alignment for locus <span id='marker-id'></span></h2>
       <input type="checkbox" id="cb_showSeq">show sequence</input><br />
       <div id="alignment-pane">
         <canvas id="alignmentCanvas">

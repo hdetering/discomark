@@ -78,7 +78,7 @@ class DataBroker():
                 .all()
             )
             start = min([x[2] for x in hits])
-            end = min([x[3] for x in hits])
+            end   = max([x[3] for x in hits])
             ref2ortho[ref_id] = {'ortholog':o_id, 'range': (start, end), 'seqs': {x[1]: x[4] for x in hits}}
 
         return ref2ortho
@@ -215,8 +215,11 @@ class DataBroker():
             if seq_id == row[0]:
                 # extend reference position range if necessary
                 if ref_id == row[1]:
-                    start = min(start, int(row[8]))
-                    end = max(end, int(row[9]))
+                    reverse = (row[12] == 'minus')
+                    hit_start = int(row[8]) if not reverse else int(row[9])
+                    hit_end   = int(row[9]) if not reverse else int(row[8])
+                    start = min(start, hit_start)
+                    end   = max(end, hit_end)
                     max_len = max(max_len, int(row[3]))
                     strand = row[12]
                 continue
@@ -336,7 +339,7 @@ Avg\. #sequences in primer alignments: \S+ / \S+
 
     def generateSummaryJs(self, target_fn):
         n_primers = self.session.query(func.count(PrimerSet.id)).one()[0]
-        n_orthologs = (self.session.query(
+        n_markers = (self.session.query(
             func.count(distinct(Ortholog.id)))
             .join(PrimerSet)
             .one()
@@ -364,7 +367,7 @@ Avg\. #sequences in primer alignments: \S+ / \S+
 
         out_str = '''var summary = [{
     'n_primers': %i,
-    'n_orthologs': %i
+    'n_markers': %i
 }];
 
     var categories = [
@@ -373,7 +376,7 @@ Avg\. #sequences in primer alignments: \S+ / \S+
 
 var subcats = [
     %s
-];''' % (n_primers, n_orthologs,
+];''' % (n_primers, n_markers,
              ',\n\t'.join(["['%s', %i]" % x for x in categories]),
              ',\n\t'.join(["['%s', %i]" % (x[1], x[2]) for x in functions]),)
 

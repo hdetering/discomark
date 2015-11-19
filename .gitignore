@@ -4,4 +4,8 @@ output
 *.pyc
 
 # temporary input
-example/RL_EST_min
+example/min
+
+# temporary output
+tmp*
+validate

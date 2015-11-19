@@ -35,7 +35,7 @@ class PrimerPair:
         format_str = '''  {
     "index": "%s",
     "export": "0",
-    "orthologId": "%s",
+    "markerId": "%s",
     "species": "%s"
     "product-(bp)": "%s",
     "fwSequence": "%s",

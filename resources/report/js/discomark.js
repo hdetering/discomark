@@ -8,7 +8,7 @@ function myAttributeWriter(record) {
     var html = "";
     if (this.id == "export") {
         html = /*JSON.stringify(record)+*/'<input type="checkbox" id="' + record.index + '" class="selector" ';
-        if (record['orthologId'] == "413057") { console.log(record); }
+        if (record['markerId'] == "413057") { console.log(record); }
         if (record[this.id]=="1") {
             console.log("on!");
             html += "checked ";
@@ -49,7 +49,7 @@ function dataRowWriter(rowIndex, record, columns, cellWriter) {
       tr += cellWriter(columns[i], record);
     }
 
-    return '<tr data-id="' + record['orthologId'] + '">' + tr + '</tr>';
+    return '<tr data-id="' + record['markerId'] + '">' + tr + '</tr>';
   };
 
 function selectableRowWriter(rowIndex, record, columns, cellWriter) {
@@ -70,18 +70,18 @@ function updateDynatable(newRecords) {
     dt.process();
 }
 
-function updateAlignmentViewer(orthoId, showSeq) {
-    console.log(orthoId);
-    $('#ortholog-id').html(orthoId);
-    alignmentViewer.records = alignments[orthoId];
+function updateAlignmentViewer(markerId, showSeq) {
+    console.log(markerId);
+    $('#marker-id').html(markerId);
+    alignmentViewer.records = alignments[markerId];
     alignmentViewer.drawAlignment(showSeq);
 }
 
 function record2Fasta(rec) {
     var fastaStr = "";
-    fastaStr += ">" + rec.orthologId + "_fw\n";
+    fastaStr += ">" + rec.markerId + "_fw\n";
     fastaStr += rec.fwSequence + "\n";
-    fastaStr += ">" + rec.orthologId + "_rv\n";
+    fastaStr += ">" + rec.markerId + "_rv\n";
     fastaStr += rec.rvSequence + "\n";
 
     return fastaStr;
@@ -102,8 +102,8 @@ function onDownloadFasta() {
 
 function dtProcessingComplete() {
     $('#primer-table tr').click(function() {
-        var orthoId = $(this).data("id");
-        updateAlignmentViewer(orthoId, false);
+        var markerId = $(this).data("id");
+        updateAlignmentViewer(markerId, false);
     });
     $('input.selector').change(function() {
         var idx = parseInt($(this).attr('id'));
@@ -123,7 +123,7 @@ function finalizeSummary() {
 
     // whip up pie charts
     var plotCat = $.jqplot('chartCategories', [categories], {
-        title: 'Functional categories for discovered orthologs',
+        title: 'Functional categories for discovered markers',
         seriesDefaults: {
           // make this a donut chart.
           renderer:$.jqplot.DonutRenderer,
@@ -196,22 +196,22 @@ $( document ).ready(function() {
     });
     dtProcessingComplete(); // needs to be called manually once
 
-    // get ortholog id for first primer pair
-    var orthologId = myRecords[0]['orthologId'];
+    // get marker id for first primer pair
+    var markerId = myRecords[0]['markerId'];
 
     //$('#alignment').html( alignments['413291'] );
     alignmentViewer = new CanvasState(document.getElementById('alignmentCanvas'));
-    updateAlignmentViewer(orthologId, false);
+    updateAlignmentViewer(markerId, false);
 
     $('td.export-toggle').click(function() {
         this.toggleClass('selected');
     });
     $('#cb_showSeq').change(function() {
-        var orthoId = $('#ortholog-id').text();
+        var mId = $('#marker-id').text();
         if($(this).is(":checked")) {
-            updateAlignmentViewer(orthoId, true);
+            updateAlignmentViewer(mId, true);
         } else {
-            updateAlignmentViewer(orthoId, false);
+            updateAlignmentViewer(mId, false);
         }
     });
 });

@@ -1,6 +1,6 @@
 from __future__ import print_function
 from discomark.models import *
-import utils
+import discomark.utils
 import datetime
 import io
 import os
@@ -120,23 +120,30 @@ def add_reference(trimmed_dir, mapped_dir, genome, hits, mafft_settings, log_fh)
             rec_hits = hits[rec.id]
             in_fn  = os.path.join(trimmed_dir, "%s.trim.fasta" % rec_hits['ortholog'])
             out_fn = os.path.join(mapped_dir, "%s.ref.fasta" % rec_hits['ortholog'])
+            directions = set() # store set of mapping directions
             with open(out_fn, 'wt') as out_f:
                 # write out ortholog sequences
                 for seq in SeqIO.parse(in_fn, 'fasta'):
                     if seq.id in rec_hits['seqs']:
-                        # reverse complement sequence if necessary
-                        if rec_hits['seqs'][seq.id][1] == 'minus':
-                            seq = seq.reverse_complement()
-                            seq.id = seq.id + '_rv'
-                            seq.description = seq.id
+                        directions.add(rec_hits['seqs'][seq.id])
                     else:
                         print("[WARNING] ortholog sequence '%s' not found in Blast hits." % seq.id, file=log_fh)
                     SeqIO.write(seq, out_f, 'fasta')
-                #out_f.write(in_f.read())
-                # write out relevant slice of reference
-                start = max(0, rec_hits['range'][0]-100)
-                end = min(len(rec), rec_hits['range'][1]+100)
-                SeqIO.write(rec[start:end].upper(), out_f, 'fasta')
+                if len(directions) > 1:
+                    print("[WARNING] reference seq '%s' has ortholog seqs mapped in both directions, thus it will not be included in the alignment.")
+                else:
+                    # retrieve relevant slice of reference
+                    start = max(0, rec_hits['range'][0]-100)
+                    end = min(len(rec), rec_hits['range'][1]+100)
+                    rec_slice = rec[start:end]
+
+                    orientation = directions.pop()
+                    # reverse complement reference if necessary
+                    if orientation == 'minus':
+                        rec_slice.seq = rec_slice.seq.reverse_complement()
+                        rec_slice.id = rec_slice.id + '_rv'
+
+                    SeqIO.write(rec_slice.upper(), out_f, 'fasta')
 
     # align combined files using MAFFT
     print("Realigning Orthologs (including reference)...", file=log_fh)
@@ -147,7 +154,7 @@ def add_reference(trimmed_dir, mapped_dir, genome, hits, mafft_settings, log_fh)
         print("\t%s " % ' '.join(cline), file=log_fh)
         stdout = subprocess.Popen(cline, stdout=subprocess.PIPE, stderr=log_fh).communicate()[0] # this works with python <2.7
 
-        with open(os.path.join(mapped_dir, '%s.mapped.aln' % o_id), 'wb') as handle:
+        with open(os.path.join(mapped_dir, '%s.mapped.fasta' % o_id), 'wb') as handle:
             handle.write(stdout)
 
 # alternative handling if no reference was provided
@@ -163,30 +170,33 @@ def convertFastaToClustal(in_dir, out_dir):
 #####################
 def design_primers(mapped_dir, primer_dir, prifi, logfile):
     print("\nDesigning primers using PriFi...\n", file=logfile)
-    mapped_files = glob(os.path.join(mapped_dir, '*.aln'))
+    mapped_files = glob(os.path.join(mapped_dir, '*.mapped.fasta'))
     print("\tChecking for empty alignments...", file=logfile)
     for f in mapped_files:
         try:
-            align = AlignIO.read(f, 'clustal')
+            align = AlignIO.read(f, 'fasta')
+            filename = os.path.basename(f)
+            shutil.copyfile(f, os.path.join(primer_dir, filename))
         except Exception:
             print("[WARNING] Whoa! Empty alignment file?! (%s)" % f, file=logfile)
             continue
 
         # exchange seq names with numbers
         # (Clustal format truncates to len 30 but need to be unique for PriFi)
-        i = 0
-        for rec in align:
-            rec.id = str(i)
-            rec.name = str(i)
-            i += 1
+        #i = 0
+        #for rec in align:
+        #    rec.id = str(i)
+        #    rec.name = str(i)
+        #    i += 1
 
-        o_id = os.path.split(f)[1].split('.')[0]
-        handle = open(os.path.join(primer_dir, o_id+'.prifi.aln'), 'wt')
-        AlignIO.write(align, handle, 'clustal')
-        handle.close()
+        #o_id = os.path.split(f)[1].split('.')[0]
+        #handle = open(os.path.join(primer_dir, o_id+'.prifi.aln'), 'wt')
+        #AlignIO.write(align, handle, 'clustal')
+        #handle.close()
 
     # call PriFi for actual primer design
-    for f in glob(os.path.join(primer_dir, '*.prifi.aln')):
+    #for f in glob(os.path.join(primer_dir, '*.prifi.aln')):
+    for f in glob(os.path.join(primer_dir, '*.mapped.fasta')):
         print(os.getcwd(), file=logfile)
         prifi_params = [prifi, f]
         print(prifi_params, file=logfile)
@@ -200,15 +210,19 @@ def export_primer_alignments(primer_dir, orthologs):
         primers = db_ortho.primer_sets
         if len(primers) > 0:
             # get ortholog-reference alignment
-            aln = AlignIO.read(os.path.join(primer_dir, "%s.prifi.aln" % db_ortho.id), 'clustal')
+            aln = AlignIO.read(os.path.join(primer_dir, "%s.mapped.fasta" % db_ortho.id), 'fasta')
             # rename sequences back to original IDs
-            rec_ids = [seq.fasta_id for seq in db_ortho.sequences]
-            n_rec = 0
+            #rec_ids = [seq.fasta_id for seq in db_ortho.sequences]
+            #n_rec = 0
             for rec in aln:
-                rec.id = rec_ids[n_rec] if len(rec_ids[n_rec]) < 35 else rec_ids[n_rec][:30] + "[...]"
+                #rec.id = rec_ids[n_rec] if len(rec_ids[n_rec]) < 35 else rec_ids[n_rec][:30] + "[...]"
+                rec.id = rec.id if len(rec.id) < 35 else rec.id[:30] + "[...]"
                 rec.description = rec.id
                 rec.seq = rec.seq.upper()
-                n_rec += 1
+            #    n_rec += 1
+            #    # TODO: how to restore reference ID?
+            #    if len(rec_ids) == n_rec:
+            #        break
             # generate alignment sequence from primers
             pseqs = []
             i = 1
