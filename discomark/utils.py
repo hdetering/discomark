@@ -101,3 +101,12 @@ def generateAlignmentJs(primer_dir, target_dir):
     print(f.name)
     f.write(out_str)
     f.close()
+
+def purge_dir(path_to_dir):
+    for filename in os.listdir(path_to_dir):
+        file_path = os.path.join(path_to_dir, filename)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+        except Exception, e:
+            print(e, file=sys.stderr)

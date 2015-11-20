@@ -1,6 +1,6 @@
 from __future__ import print_function
 from discomark.models import *
-import discomark.utils
+from discomark import utils
 import datetime
 import io
 import os
@@ -43,7 +43,7 @@ def align_orthologs(ortho_dir, aligned_dir, orthologs, settings, log_fh=sys.stde
     # align each ortholog
     for o in orthologs:
         ortho_fn = os.path.join(ortho_dir, "%s.fasta" % o.id)
-        align_fn = os.path.join(aligned_dir, '%s.aligned.fasta' % o.id)
+        align_fn = os.path.join(aligned_dir, '%s.fasta' % o.id)
         # alignment makes sense only if file contains >1 sequences
         if len(o.sequences) > 1:
             #cline = ['mafft','--localpair','--maxiterate','16','--inputorder','--preservecase', ortho_fn]
@@ -72,7 +72,7 @@ def trim_alignments(aligned_dir, trimmed_dir, trimal, settings, log_fh=sys.stder
 
     for f in aligned_files:
         o_id = os.path.split(f)[1].split('.')[0]
-        out = os.path.join(trimmed_dir, "%s.trim.fasta" % o_id)
+        out = os.path.join(trimmed_dir, "%s.fasta" % o_id)
         trimal_params = [trimal, '-in', f, '-out', out, '-htmlout', "%s.html" % out]
         trimal_params += [x for x in sum(settings, ()) if len(x.strip())>0]
         subprocess.call(trimal_params, stdout=log_fh, stderr=log_fh)
@@ -113,13 +113,13 @@ def map_to_reference(query_dir, mapped_dir, genome, settings, log_fh=sys.stderr)
 
     return out_fn
 
-def add_reference(trimmed_dir, mapped_dir, genome, hits, mafft_settings, log_fh):
+def add_reference(source_dir, target_dir, genome, hits, mafft_settings, log_fh):
     # combine ortholog and reference sequences
     for rec in SeqIO.parse(open(genome, 'rt'), 'fasta'):
         if rec.id in hits:
             rec_hits = hits[rec.id]
-            in_fn  = os.path.join(trimmed_dir, "%s.trim.fasta" % rec_hits['ortholog'])
-            out_fn = os.path.join(mapped_dir, "%s.ref.fasta" % rec_hits['ortholog'])
+            in_fn  = os.path.join(source_dir, "%s.fasta" % rec_hits['ortholog'])
+            out_fn = os.path.join(target_dir, "%s.ref.fa" % rec_hits['ortholog'])
             directions = set() # store set of mapping directions
             with open(out_fn, 'wt') as out_f:
                 # write out ortholog sequences
@@ -147,14 +147,14 @@ def add_reference(trimmed_dir, mapped_dir, genome, hits, mafft_settings, log_fh)
 
     # align combined files using MAFFT
     print("Realigning Orthologs (including reference)...", file=log_fh)
-    for f in glob(os.path.join(mapped_dir, '*.ref.fasta')):
+    for f in glob(os.path.join(target_dir, '*.ref.fa')):
         o_id = os.path.split(f)[1].split('.')[0]
         # run MAFFT (preserve input order, so ref seq is last)
         cline = ['mafft'] + [x for x in sum(mafft_settings, ()) if len(x.strip())>0] + [f]
         print("\t%s " % ' '.join(cline), file=log_fh)
         stdout = subprocess.Popen(cline, stdout=subprocess.PIPE, stderr=log_fh).communicate()[0] # this works with python <2.7
 
-        with open(os.path.join(mapped_dir, '%s.mapped.fasta' % o_id), 'wb') as handle:
+        with open(os.path.join(target_dir, '%s.fasta' % o_id), 'wb') as handle:
             handle.write(stdout)
 
 # alternative handling if no reference was provided
@@ -168,15 +168,17 @@ def convertFastaToClustal(in_dir, out_dir):
 #####################
 # 5. design primers #
 #####################
-def design_primers(mapped_dir, primer_dir, prifi, logfile):
+def design_primers(source_dir, target_dir, prifi, logfile):
     print("\nDesigning primers using PriFi...\n", file=logfile)
-    mapped_files = glob(os.path.join(mapped_dir, '*.mapped.fasta'))
+    # get rid of previous files
+    utils.purge_dir(target_dir)
+    aln_files = glob(os.path.join(source_dir, '*.fasta'))
     print("\tChecking for empty alignments...", file=logfile)
-    for f in mapped_files:
+    for f in aln_files:
         try:
             align = AlignIO.read(f, 'fasta')
             filename = os.path.basename(f)
-            shutil.copyfile(f, os.path.join(primer_dir, filename))
+            shutil.copyfile(f, os.path.join(target_dir, filename))
         except Exception:
             print("[WARNING] Whoa! Empty alignment file?! (%s)" % f, file=logfile)
             continue
@@ -196,7 +198,7 @@ def design_primers(mapped_dir, primer_dir, prifi, logfile):
 
     # call PriFi for actual primer design
     #for f in glob(os.path.join(primer_dir, '*.prifi.aln')):
-    for f in glob(os.path.join(primer_dir, '*.mapped.fasta')):
+    for f in glob(os.path.join(target_dir, '*.fasta')):
         print(os.getcwd(), file=logfile)
         prifi_params = [prifi, f]
         print(prifi_params, file=logfile)
@@ -205,12 +207,12 @@ def design_primers(mapped_dir, primer_dir, prifi, logfile):
 
 
 # export primer-ortholog-reference alignment
-def export_primer_alignments(primer_dir, orthologs):
+def export_primer_alignments(source_dir, orthologs):
     for db_ortho in orthologs:
         primers = db_ortho.primer_sets
         if len(primers) > 0:
             # get ortholog-reference alignment
-            aln = AlignIO.read(os.path.join(primer_dir, "%s.mapped.fasta" % db_ortho.id), 'fasta')
+            aln = AlignIO.read(os.path.join(source_dir, "%s.fasta" % db_ortho.id), 'fasta')
             # rename sequences back to original IDs
             #rec_ids = [seq.fasta_id for seq in db_ortho.sequences]
             #n_rec = 0
@@ -235,7 +237,7 @@ def export_primer_alignments(primer_dir, orthologs):
                 rec = SeqRecord(seq, id="%s_%s" % (db_ortho.id, i), description='')
                 pseqs.append(rec)
                 i += 1
-            with open(os.path.join(primer_dir, "%s.primer_aln.fasta" % db_ortho.id), 'wt') as f:
+            with open(os.path.join(source_dir, "%s.primer_aln.fasta" % db_ortho.id), 'wt') as f:
                 AlignIO.write(MultipleSeqAlignment(pseqs+[r for r in aln]), f, 'fasta')
 
 

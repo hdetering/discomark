@@ -208,7 +208,9 @@ class DataBroker():
         # find best reference hits in local alignments
         f = open(blast_filename, 'rt')
         row = f.readline().strip().split()
-        seq_id, ref_id, max_len, start, end, strand = (row[0], row[1], int(row[3]), int(row[8]), int(row[9]), row[12])
+        seq_id, ref_id, max_len, strand = (row[0], row[1], int(row[3]), row[12])
+        start = int(row[8]) if strand == 'plus' else int(row[9])
+        end   = int(row[9]) if strand == 'plus' else int(row[8])
         # format: qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand
         for line in f:
             row = line.strip().split()
@@ -228,7 +230,9 @@ class DataBroker():
                 seq = session.query(Sequence).filter_by(fasta_id=seq_id).first()
                 mapping.sequence = seq
                 session.add(mapping)
-            seq_id, ref_id, max_len, start, end, strand = (row[0], row[1], int(row[3]), int(row[8]), int(row[9]), row[12])
+            seq_id, ref_id, max_len, strand = (row[0], row[1], int(row[3]), row[12])
+            start = int(row[8]) if strand == 'plus' else int(row[9])
+            end   = int(row[9]) if strand == 'plus' else int(row[8])
 
         session.commit()
 

@@ -10,9 +10,9 @@ num_threads = 1
 import argparse
 import datetime
 import os
+import shutil
 import sys
-# name of configparser module has been changed in Python3
-try:
+try: # name of configparser module has been changed in Python3
     import configparser # python3
 except ImportError:
     import ConfigParser as configparser # python2
@@ -32,6 +32,7 @@ def parse_args():
     parser.add_argument('-r', '--reference', help="reference genome file (FASTA)")
     parser.add_argument('-s', '--step', help="start from step N", type=int, default=0)
     parser.add_argument('-v', '--verbose', help="increase output verbosity", action='store_true')
+    parser.add_argument('--no-trim', help="skip alignment trimming step", action='store_true')
     parser.add_argument('--no-primer-blast', help="skip online primer BLAST (use, when running without internet connection", action='store_true')
     args = parser.parse_args()
 
@@ -64,6 +65,7 @@ def parse_args():
 if __name__ == '__main__':
     print("\n%s v%s\n" % (program, version))
     args = parse_args()
+    do_ref_map = args.reference and os.path.exists(args.reference)
 
     # 0. initialize folder structure and DB
     reference   = os.path.join(args.dir, config.get('Data', 'reference_dir'), 'genome.fasta')
@@ -89,6 +91,13 @@ if __name__ == '__main__':
         print("\n\n\n---%s" % datetime.datetime.now(), file=logfile)
         print("Resuming DiscoMark with the following parameters:\n%s" % args, file=logfile)
         model = database.DataBroker(args.dir)
+        # was a reference supplied in this call?
+        if do_ref_map and not os.path.exists(reference):
+            shutil.copyfile(args.reference, reference)
+        # was a reference supplied in an earlier call?
+        elif not do_ref_map and os.path.exists(reference):
+            do_ref_map = True
+
 
     # 1. parse predicted orthologs
     if args.step <= 0:
@@ -103,28 +112,29 @@ if __name__ == '__main__':
         settings = config.items('02_MAFFT_settings')
         steps.align_orthologs(ortho_dir, aligned_dir, orthologs, settings, logfile)
     # 3. trim alignments
-    if args.step <= 3:
+    if args.step <= 3 and not args.no_trim:
         print("\n[3] Trimming alignments...")
         settings = config.items('03_TrimAl_settings')
         steps.trim_alignments(aligned_dir, trimmed_dir, trimal, settings, logfile)
     # 4. map trimmed alignments against reference genome
     if args.step <= 4:
         print("\n[4] Mapping alignments to reference...")
-        if os.path.exists(reference):
+        if do_ref_map:
+            source_dir = trimmed_dir if not args.no_trim else aligned_dir
             settings = config.items('04_BLAST_settings')
-            out_fn = steps.map_to_reference(trimmed_dir, mapped_dir, reference, settings, logfile)
+            out_fn = steps.map_to_reference(source_dir, mapped_dir, reference, settings, logfile)
             model.load_blast_hits(out_fn)
             hits = model.get_best_hits()
             settings = config.items('04_MAFFT_settings')
-            steps.add_reference(trimmed_dir, mapped_dir, reference, hits, settings, logfile)
+            steps.add_reference(source_dir, mapped_dir, reference, hits, settings, logfile)
         else:
             print("\t-> no reference genome provided -> skipping this step...")
-            steps.convertFastaToClustal(trimmed_dir, mapped_dir)
 
     # 5. design primers
     if args.step <= 5:
         print("\n[5] Designing primers based on multiple alignments...")
-        steps.design_primers(mapped_dir, primer_dir, prifi, logfile)
+        source_dir = mapped_dir if do_ref_map else (trimmed_dir if not args.no_trim else aligned_dir)
+        steps.design_primers(source_dir, primer_dir, prifi, logfile)
         model.load_primers(primer_dir)
         model.export_primers_to_file(os.path.join(primer_dir, 'primers.fa'))
         orthologs = model.get_orthologs()
