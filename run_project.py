@@ -120,7 +120,7 @@ if __name__ == '__main__':
     if args.step <= 4:
         print("\n[4] Mapping alignments to reference...")
         if do_ref_map:
-            source_dir = trimmed_dir if not args.no_trim else aligned_dir
+            source_dir = aligned_dir
             settings = config.items('04_BLAST_settings')
             out_fn = steps.map_to_reference(source_dir, mapped_dir, reference, settings, logfile)
             model.load_blast_hits(out_fn)

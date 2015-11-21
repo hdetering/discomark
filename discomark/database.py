@@ -79,7 +79,10 @@ class DataBroker():
             )
             start = min([x[2] for x in hits])
             end   = max([x[3] for x in hits])
-            ref2ortho[ref_id] = {'ortholog':o_id, 'range': (start, end), 'seqs': {x[1]: x[4] for x in hits}}
+
+            if ref_id not in ref2ortho:
+                ref2ortho[ref_id] = []
+            ref2ortho[ref_id].append({'ortholog':o_id, 'range': (start, end), 'seqs': {x[1]: x[4] for x in hits}})
 
         return ref2ortho
 
@@ -161,7 +164,8 @@ class DataBroker():
         session = self.session
 
         print("\nLoading data from directory '%s' ..." % input_dir, file=log_fh)
-        species = sorted(next(os.walk(input_dir))[1])
+        #species = sorted(next(os.walk(input_dir))[1])
+        species = next(os.walk(input_dir))[1]
         print("\nFound %d species:\n\t%s\n" % (len(species), '\n\t'.join(species)), file=log_fh)
 
         # traverse species folders

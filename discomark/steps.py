@@ -114,36 +114,40 @@ def map_to_reference(query_dir, mapped_dir, genome, settings, log_fh=sys.stderr)
     return out_fn
 
 def add_reference(source_dir, target_dir, genome, hits, mafft_settings, log_fh):
+    # copy all source alignments to target dir (so alignments without ref mapping don't get lost)
+    for f in glob(os.path.join(source_dir, '*.fasta')):
+        shutil.copy(f, target_dir)
+
     # combine ortholog and reference sequences
     for rec in SeqIO.parse(open(genome, 'rt'), 'fasta'):
         if rec.id in hits:
-            rec_hits = hits[rec.id]
-            in_fn  = os.path.join(source_dir, "%s.fasta" % rec_hits['ortholog'])
-            out_fn = os.path.join(target_dir, "%s.ref.fa" % rec_hits['ortholog'])
-            directions = set() # store set of mapping directions
-            with open(out_fn, 'wt') as out_f:
-                # write out ortholog sequences
-                for seq in SeqIO.parse(in_fn, 'fasta'):
-                    if seq.id in rec_hits['seqs']:
-                        directions.add(rec_hits['seqs'][seq.id])
+            for rec_hits in hits[rec.id]:
+                in_fn  = os.path.join(target_dir, "%s.fasta" % rec_hits['ortholog'])
+                out_fn = os.path.join(target_dir, "%s.ref.fa" % rec_hits['ortholog'])
+                directions = set() # store set of mapping directions
+                with open(out_fn, 'wt') as out_f:
+                    # write out ortholog sequences
+                    for seq in SeqIO.parse(in_fn, 'fasta'):
+                        if seq.id in rec_hits['seqs']:
+                            directions.add(rec_hits['seqs'][seq.id])
+                        else:
+                            print("[WARNING] ortholog sequence '%s' not found in Blast hits." % seq.id, file=log_fh)
+                        SeqIO.write(seq, out_f, 'fasta')
+                    if len(directions) > 1:
+                        print("[WARNING] reference seq '%s' has ortholog seqs mapped in both directions, thus it will not be included in the alignment.")
                     else:
-                        print("[WARNING] ortholog sequence '%s' not found in Blast hits." % seq.id, file=log_fh)
-                    SeqIO.write(seq, out_f, 'fasta')
-                if len(directions) > 1:
-                    print("[WARNING] reference seq '%s' has ortholog seqs mapped in both directions, thus it will not be included in the alignment.")
-                else:
-                    # retrieve relevant slice of reference
-                    start = max(0, rec_hits['range'][0]-100)
-                    end = min(len(rec), rec_hits['range'][1]+100)
-                    rec_slice = rec[start:end]
+                        # retrieve relevant slice of reference
+                        start = max(0, rec_hits['range'][0]-100)
+                        end = min(len(rec), rec_hits['range'][1]+100)
+                        rec_slice = rec[start:end]
 
-                    orientation = directions.pop()
-                    # reverse complement reference if necessary
-                    if orientation == 'minus':
-                        rec_slice.seq = rec_slice.seq.reverse_complement()
-                        rec_slice.id = rec_slice.id + '_rv'
+                        orientation = directions.pop()
+                        # reverse complement reference if necessary
+                        if orientation == 'minus':
+                            rec_slice.seq = rec_slice.seq.reverse_complement()
+                            rec_slice.id = rec_slice.id + '_rv'
 
-                    SeqIO.write(rec_slice.upper(), out_f, 'fasta')
+                        SeqIO.write(rec_slice.upper(), out_f, 'fasta')
 
     # align combined files using MAFFT
     print("Realigning Orthologs (including reference)...", file=log_fh)
