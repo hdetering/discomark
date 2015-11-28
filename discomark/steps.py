@@ -187,21 +187,7 @@ def design_primers(source_dir, target_dir, prifi, logfile):
             print("[WARNING] Whoa! Empty alignment file?! (%s)" % f, file=logfile)
             continue
 
-        # exchange seq names with numbers
-        # (Clustal format truncates to len 30 but need to be unique for PriFi)
-        #i = 0
-        #for rec in align:
-        #    rec.id = str(i)
-        #    rec.name = str(i)
-        #    i += 1
-
-        #o_id = os.path.split(f)[1].split('.')[0]
-        #handle = open(os.path.join(primer_dir, o_id+'.prifi.aln'), 'wt')
-        #AlignIO.write(align, handle, 'clustal')
-        #handle.close()
-
     # call PriFi for actual primer design
-    #for f in glob(os.path.join(primer_dir, '*.prifi.aln')):
     for f in glob(os.path.join(target_dir, '*.fasta')):
         print(os.getcwd(), file=logfile)
         prifi_params = [prifi, f]
@@ -217,18 +203,13 @@ def export_primer_alignments(source_dir, orthologs):
         if len(primers) > 0:
             # get ortholog-reference alignment
             aln = AlignIO.read(os.path.join(source_dir, "%s.fasta" % db_ortho.id), 'fasta')
-            # rename sequences back to original IDs
-            #rec_ids = [seq.fasta_id for seq in db_ortho.sequences]
-            #n_rec = 0
+            # format sequences for output
             for rec in aln:
                 #rec.id = rec_ids[n_rec] if len(rec_ids[n_rec]) < 35 else rec_ids[n_rec][:30] + "[...]"
                 rec.id = rec.id if len(rec.id) < 35 else rec.id[:30] + "[...]"
                 rec.description = rec.id
                 rec.seq = rec.seq.upper()
-            #    n_rec += 1
-            #    # TODO: how to restore reference ID?
-            #    if len(rec_ids) == n_rec:
-            #        break
+            
             # generate alignment sequence from primers
             pseqs = []
             i = 1

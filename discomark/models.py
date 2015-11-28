@@ -146,6 +146,32 @@ class PrimerSet(Base):
     "tm": "%s/%s",
     "primerLength": "%s/%s",
     "fwBlastHit": "%s",
-    "rvBlastHit": "%s"
+    "rvBlastHit": "%s",
+    "class": "%s"
   }'''
-        return format_str % (idx, self.ortholog.id, self.ps_idx, n_spec, self.prod_len, self.seq_fw, self.seq_rv, self.tm_fw, self.tm_rv, len(self.seq_fw), len(self.seq_rv), self.blast_fw, self.blast_rv)
+        return format_str % (idx,
+                             self.ortholog.id,
+                             self.ps_idx,
+                             n_spec,
+                             self.prod_len,
+                             self.seq_fw,
+                             self.seq_rv,
+                             self.tm_fw, self.tm_rv,
+                             len(self.seq_fw), len(self.seq_rv),
+                             self.blast_fw,
+                             self.blast_rv,
+                             ','.join([f.shortcode for f in self.ortholog.functions]))
+
+    def to_csv(self, n_spec, sep=','):
+        field_values = ["%s_%s" % (self.ortholog.id, self.ps_idx),
+                        str(self.ortholog.id),
+                        ''.join([f.shortcode for f in self.ortholog.functions]),
+                        str(n_spec),
+                        str(self.prod_len),
+                        self.seq_fw,
+                        self.seq_rv,
+                        "%s/%s" % (self.tm_fw, self.tm_rv),
+                        "%s/%s" % (len(self.seq_fw), len(self.seq_rv)),
+                        self.blast_fw if self.blast_fw else '-',
+                        self.blast_rv if self.blast_rv else '-']
+        return sep.join(field_values) + '\n'

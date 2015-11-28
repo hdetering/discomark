@@ -1,4 +1,4 @@
-var textAlign = ["center", "center", "center", "center", "start", "start", "center", "center", "start", "start"];
+var textAlign = ["center", "center", "center", "center", "center", "start", "start", "center", "center", "start", "start"];
 var dynatable = null,
     dt_dirty = false;
 var alignmentViewer = null;

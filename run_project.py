@@ -150,6 +150,7 @@ if __name__ == '__main__':
     steps.create_report_dir(primer_dir, report_dir)
     print("\nGenerating data for report...\n", file=sys.stderr)
     model.primersets_to_records_js(os.path.join(report_dir, 'js', 'records.js'))
+    model.primersets_to_csv(os.path.join(report_dir, 'primers.xls'), '\t')
     utils.generateAlignmentJs(primer_dir, os.path.join(report_dir, 'js'))
     model.generateSummaryJs(os.path.join(report_dir, 'js', 'summary.js'))
 

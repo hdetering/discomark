@@ -54,15 +54,14 @@ function cartoonSeqWriter(id, seq, snps, context, x, y) {
     pos = getSeqCoords(seq);
     // primer or ref?
     if (id.match(/\d{6}_\d+/)) {
-        context.strokeStyle = '#549499';
+        context.strokeStyle = '#3498db';
     } else {
-        context.strokeStyle = '#222222';
+        context.strokeStyle = '#2c3e50';
     }
     // draw sequence segments
     for (var i=0; i<pos.length; i++) {
         var x1 = pos[i][0],
             x2 = pos[i][1];
-//            alert(seq_id + ": " + x1 + "-" + x2);
         context.beginPath();
         context.moveTo(x+x1, y);
         context.lineTo(x+x2, y);
@@ -71,9 +70,9 @@ function cartoonSeqWriter(id, seq, snps, context, x, y) {
     }
 
     // print variants in different color
+    context.strokeStyle = '#d35400';
     for (var i=0; i<snps.length; i++) {
         if (seq.charAt(snps[i]) != '-') {
-            context.strokeStyle = '#dd0000';
             context.beginPath();
             context.moveTo(x+snps[i], y);
             context.lineTo(x+snps[i]+2, y);
@@ -84,20 +83,19 @@ function cartoonSeqWriter(id, seq, snps, context, x, y) {
 }
 
 function simpleSeqWriter(id, seq, snps, context, x, y) {
-    context.font = '6pt Monospace';
     console.log(id);
     if (id.match(/\d{6}_\d+/)) {
-        context.fillStyle = '#22dd00';
+        context.fillStyle = '#3498db';
     } else {
-        context.fillStyle = '#222222';
+        context.fillStyle = '#2c3e50';
     }
     context.fillText(seq, x, y);
 
     // print variants in different color
+    context.fillStyle = '#d35400';
     for (var i=0; i< snps.length; i++) {
         if (seq.charAt(snps[i]) != '-') {
             var x_snp = x + context.measureText(seq.substr(0,snps[i])).width;
-            context.fillStyle = '#dd0000';
             context.fillText(seq.charAt(snps[i]), x_snp, y);
         }
     }
@@ -217,8 +215,10 @@ CanvasState.prototype.drawAlignment = function(showSeq) {
         // write seq name
         context.fillStyle = '#000000';
         //var new_seq_id = seq_id.replace(/(\d{6})_\d-/, '$1_primers_');
+        context.font = '8pt Arial';
         context.fillText(seq_id, 0, y);
         if (showSeq) {
+            context.font = '6pt Monospace';
             simpleSeqWriter(seq_id, aln[seq_id], snps, context, x, y);
         } else {
             cartoonSeqWriter(seq_id, aln[seq_id], snps, context, x, y);

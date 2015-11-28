@@ -327,7 +327,6 @@ Avg\. #sequences in primer alignments: \S+ / \S+
         session.commit()
 
     def primersets_to_records_js(self, target_fn):
-        #primer_sets = self.session.query(PrimerSet).all()
         primer_sets = self.session.query(PrimerSet, func.count(distinct(Species.id)).label('n_species')) \
                             .join(Ortholog).join(Sequence).join(Species) \
                             .group_by(PrimerSet.id) \
@@ -345,6 +344,24 @@ Avg\. #sequences in primer alignments: \S+ / \S+
         with open(target_fn, 'wt') as outfile:
             print(outfile.name)
             outfile.write(js)
+
+    def primersets_to_csv(self, target_fn, sep=','):
+        primer_sets = self.session.query(PrimerSet, func.count(distinct(Species.id)).label('n_species')) \
+                            .join(Ortholog).join(Sequence).join(Species) \
+                            .group_by(PrimerSet.id) \
+                            .order_by(desc("n_species"), Ortholog.id) \
+                            .all()
+
+        field_names = ['id','marker_id', 'class','n_species','prod_len',
+                       'fw_sequence','rv_sequence','Tm','primer_len','fw_blast_hit','rv_blast_hit']
+        csv = sep.join(field_names) + '\n'
+        for res in primer_sets:
+            ps = res[0]
+            csv += ps.to_csv(res[1], sep)
+
+        with open(target_fn, 'wt') as outfile:
+            print(outfile.name)
+            outfile.write(csv)
 
     def generateSummaryJs(self, target_fn):
         n_primers = self.session.query(func.count(PrimerSet.id)).one()[0]
