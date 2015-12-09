@@ -189,10 +189,12 @@ class DataBroker():
                 # make sure sequences are unique
                 sequences = set([DnaSeq(r.id, str(r.seq)) for r in SeqIO.parse(open(fn, 'rt'), 'fasta')])
                 for seq in sequences:
-                    db_seq = Sequence(fasta_id=seq.id, description='', sequence=str(seq.dna.upper()))
+                    db_seq = Sequence(fasta_id=seq.id, description='', residues=str(seq.dna.upper()))
                     db_seq.species = db_species
                     db_seq.ortholog = db_ortho
                     session.add(db_seq)
+                    session.flush()
+                    db_seq.description = "id=%d,id_species=%d" % (db_seq.id, db_species.id)
 
         # save data to database
         session.commit()
@@ -405,6 +407,55 @@ var subcats = [
 ];''' % (n_primers, n_markers,
              ',\n\t'.join(["['%s', %i]" % x for x in categories]),
              ',\n\t'.join(["['%s', %i]" % (x[1], x[2]) for x in functions]),)
+
+        with open(target_fn, 'wt') as outfile:
+            print(outfile.name)
+            outfile.write(out_str)
+
+    def generateCountsJs(self, target_fn):
+        n_markers = (self.session.query(
+            Species,
+            func.count(distinct(Sequence.id_ortholog)))
+            .join(Sequence)
+            .group_by(Species)
+            .all()
+        )
+        n_species = len(n_markers) # how many species are there?
+
+        out_str  = "var sets = [ "
+
+        # output single-species marker counts
+        out_str += "{sets: ['%s'], size: %d}" % (n_markers[0][0].id, n_markers[0][1])
+        for rec in n_markers[1:]:
+            out_str += ",\n\t{sets: ['%s'], size: %d}" % (rec[0].id, rec[1])
+
+        # determine overlaps
+        from sqlalchemy.sql.expression import alias, join, select
+        seq_tab = Base.metadata.tables['sequences']
+        aka = [alias(seq_tab) for n in range(n_species)]
+
+        for n_levels in range(2,n_species+1):
+            cols = [func.count(distinct(aka[0].c.id_ortholog)), aka[0].c.id_species]
+            joins = aka[0]
+
+            # build selected columns and joins
+            for i in range(1,n_levels):
+                cols += [aka[i].c.id_species]
+                joins = join(j, aka[i], aka[0].c.id_ortholog == aka[i].c.id_ortholog)
+            # create select statement on columns and joins
+            stmt = select(cols).select_from(joins)
+            # add filtering clauses
+            for i in range(1,n_levels):
+                stmt = stmt.where(aka[i-1].c.id_species < aka[i].c.id_species)
+            # add grouping clauses
+            for i in range(n_levels):
+                stmt = stmt.group_by(aka[i].c.id_species)
+            # execute query statement
+            result = self.session.execute(stmt).fetchall()
+            for rec in result:
+                out_str += ",\n\t{sets: [%s], size: %d}" % (','.join(["'%s'" % rec[i+1] for i in range(n_levels)]), rec[0])
+
+        out_str += "];"
 
         with open(target_fn, 'wt') as outfile:
             print(outfile.name)

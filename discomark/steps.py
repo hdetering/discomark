@@ -4,6 +4,7 @@ from discomark import utils
 import datetime
 import io
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -28,7 +29,7 @@ def merge_species(input_dir, ortho_dir, orthologs, log_fh=sys.stderr):
         if len(ortho.sequences) > 0:
             with open(os.path.join(ortho_dir, "%s.fasta" % ortho.id), 'wt') as f:
                 for db_seq in ortho.sequences:
-                    seq = Seq(db_seq.sequence)
+                    seq = Seq(db_seq.residues)
                     rec = SeqRecord(seq)
                     rec.id = db_seq.fasta_id
                     rec.description = db_seq.description
@@ -73,7 +74,7 @@ def trim_alignments(aligned_dir, trimmed_dir, trimal, settings, log_fh=sys.stder
     for f in aligned_files:
         o_id = os.path.split(f)[1].split('.')[0]
         out = os.path.join(trimmed_dir, "%s.fasta" % o_id)
-        trimal_params = [trimal, '-in', f, '-out', out, '-htmlout', "%s.html" % out]
+        trimal_params = [trimal, '-in', f, '-out', out, '-htmlout', "%s.html" % out, '-keepheader']
         trimal_params += [x for x in sum(settings, ()) if len(x.strip())>0]
         subprocess.call(trimal_params, stdout=log_fh, stderr=log_fh)
 
@@ -205,11 +206,10 @@ def export_primer_alignments(source_dir, orthologs):
             aln = AlignIO.read(os.path.join(source_dir, "%s.fasta" % db_ortho.id), 'fasta')
             # format sequences for output
             for rec in aln:
-                #rec.id = rec_ids[n_rec] if len(rec_ids[n_rec]) < 35 else rec_ids[n_rec][:30] + "[...]"
-                rec.id = rec.id if len(rec.id) < 35 else rec.id[:30] + "[...]"
-                rec.description = rec.id
+                #rec.id = rec.id if len(rec.id) < 35 else rec.id[:30] + '[...]'
+                #rec.description = rec.id
                 rec.seq = rec.seq.upper()
-            
+
             # generate alignment sequence from primers
             pseqs = []
             i = 1
@@ -222,6 +222,16 @@ def export_primer_alignments(source_dir, orthologs):
                 rec = SeqRecord(seq, id="%s_%s" % (db_ortho.id, i), description='')
                 pseqs.append(rec)
                 i += 1
+                # determine number of species covered by primer set
+                input_seqs = MultipleSeqAlignment([r for r in aln if r.description.find('id_species=')>-1])
+                species_ids_fw = set()
+                for desc in [r.description for r in input_seqs[:,pos_fw[0]:pos_fw[1]] if r.seq.count('-')==0]:
+                    species_ids_fw.update(re.findall('id_species=(\d+)', desc))
+                species_ids_rv = set()
+                for desc in [r.description for r in input_seqs[:,pos_rv[0]:pos_rv[1]] if r.seq.count('-')==0]:
+                    species_ids_rv.update(re.findall('id_species=(\d+)', desc))
+                n_species = min(len(species_ids_fw), len(species_ids_rv))
+                ps.num_species = n_species
             with open(os.path.join(source_dir, "%s.primer_aln.fasta" % db_ortho.id), 'wt') as f:
                 AlignIO.write(MultipleSeqAlignment(pseqs+[r for r in aln]), f, 'fasta')
 

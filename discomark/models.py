@@ -77,7 +77,7 @@ class Sequence(Base):
     id_ortholog = Column(Integer, ForeignKey('orthologs.id'))
     fasta_id    = Column(String)
     description = Column(String)
-    sequence    = Column(Text)
+    residues    = Column(Text)
     length      = Column(Integer)
     species     = relationship("Species", backref="sequences")
 
@@ -112,6 +112,24 @@ class Mapping(Base):
     def __repr__(self):
         return "<Mapping(seq='%s', ref='%s', len=%d, strand='%s')>" % (self.sequence.fasta_id, self.refseq, self.length, self.strand)
 
+#class Alignment(Base):
+#    """ Alignments are collections of AlignedSequences. """
+#    __tablename__ = 'alignments'
+#
+#    id          = Column(Integer, primary_key=True)
+#    id_ortholog = Column(Integer, ForeignKey('orthologs.id'))
+#    length      = Column(Integer)
+#    ortholog    = relationship("Ortholog", backref="alignments")
+
+#class AlignedSequence(Base):
+#    """ AlignedSequences represent the individual sequences in Alignments. """
+#    __tablename__ = 'aligned_sequences'
+#
+#    id          = Column(Integer, primary_key=True)
+#    id_sequence = Column(Integer, ForeignKey('sequences.id'))
+#    residues    = Column(Text)
+#    sequence    = relationship("Sequence")
+
 class PrimerSet(Base):
     """ Primers are templates for PCR amplification of Orthologs. """
     __tablename__ = 'primer_sets'
@@ -129,6 +147,7 @@ class PrimerSet(Base):
     tm_rv       = Column(Float)
     blast_fw    = Column(String) # NCBI accession
     blast_rv    = Column(String) # NCBI accession
+    num_species = Column(Integer)
 
     def __repr__(self):
         return "<PrimerSet(ortholog='%d', product=%dbp)>" % (self.ortholog.id, self.prod_len)
@@ -152,7 +171,7 @@ class PrimerSet(Base):
         return format_str % (idx,
                              self.ortholog.id,
                              self.ps_idx,
-                             n_spec,
+                             self.num_species,
                              self.prod_len,
                              self.seq_fw,
                              self.seq_rv,
@@ -166,7 +185,7 @@ class PrimerSet(Base):
         field_values = ["%s_%s" % (self.ortholog.id, self.ps_idx),
                         str(self.ortholog.id),
                         ''.join([f.shortcode for f in self.ortholog.functions]),
-                        str(n_spec),
+                        str(self.num_species),
                         str(self.prod_len),
                         self.seq_fw,
                         self.seq_rv,

@@ -139,6 +139,7 @@ if __name__ == '__main__':
         model.export_primers_to_file(os.path.join(primer_dir, 'primers.fa'))
         orthologs = model.get_orthologs()
         steps.export_primer_alignments(primer_dir, orthologs)
+        model.session.commit() # save modifications to records in DB
     # 6. primer BLAST
     if args.step <= 6 and not args.no_primer_blast:
         print("\n[6] Searching primer sequences in BLAST database...")
@@ -153,5 +154,6 @@ if __name__ == '__main__':
     model.primersets_to_csv(os.path.join(report_dir, 'primers.xls'), '\t')
     utils.generateAlignmentJs(primer_dir, os.path.join(report_dir, 'js'))
     model.generateSummaryJs(os.path.join(report_dir, 'js', 'summary.js'))
+    model.generateCountsJs(os.path.join(report_dir, 'js', 'counts.js'))
 
     logfile.close()

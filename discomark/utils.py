@@ -92,7 +92,8 @@ def generateAlignmentJs(primer_dir, target_dir):
     for fn in filenames:
         o_id = os.path.split(fn)[1].split('.')[0]
         aln = AlignIO.read(fn, 'fasta')
-        out_str += "'%s': {\n%s\n},\n" % (o_id, ',\n'.join(["'%s': '%s'" % (r.id, r.seq) for r in aln]))
+        out_str += "'%s': {\n%s\n},\n" % (o_id,
+          ',\n'.join(["'%s': '%s'" % ((r.id if len(r.id) < 35 else r.id[:30] + '[...]'), r.seq) for r in aln]))
 
     out_str = out_str[:-2]
     out_str += "\n};"
