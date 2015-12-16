@@ -115,47 +115,40 @@ class DataBroker():
             return instance
 
     # load general ortholog info (available orthologs + functional annotations)
-    def initialize_db(self, data_dir):
+    def initialize_db(self, data_dir, anno_fn=""):
         # create database tables
         self.create_schema()
         session = self.session
 
-        print("\nLoading functional categories ...")
-        cat_fn = os.path.join(data_dir, 'fun.txt')
-        if not os.path.exists(cat_fn):
-            print("\tWarning: file '%s' is missing! Orthologs will not be functionally annotated." % cat_fn)
+        print("\nLoading ortholog annotations ...")
+        if not os.path.exists(anno_fn):
+            #print("\tWarning: file '%s' is missing! Orthologs will not be functionally annotated." % anno_fn)
             return False
 
-        for l in open(cat_fn):
+        for l in open(anno_fn):
             line = l.rstrip()
+            cols = l.strip().split('\t')
             if len(line) == 0:
                 continue
-            if not line.startswith(' '):
-                db_cat = Category(name=line.strip())
-                session.add(db_cat)
-            else:
-                m = re.search(r' \[(\w)\] (.+)', line)
-                code = m.group(1)
-                desc = m.group(2)
-                db_fun = Function(shortcode=code, description=desc)
-                db_fun.category = db_cat
-                session.add(db_fun)
-        session.commit()
+            if len(cols) < 2:
+                print("annotation file '%s' seems to have unexpected format (expected: <ortholog-id>TAB<annotation-id>TAB<annotation-text>)" % anno_fn)
+                return False
 
-        print("\nLoading ortholog annotations ...")
-        anno_fn = os.path.join(data_dir, 'ortho2fun.csv')
-        if not os.path.exists(anno_fn):
-            print("\tWarning: file '%s' is missing! Orthologs will not be functionally annotated." % anno_fn)
-            return False
+            scode = cols[1]
+            desc  = '' if len(cols)==2 else cols[2]
 
-        for line in open(anno_fn):
-            o_id, cog, fun, prot = line.strip('\n').split('\t')
-            db_ortho = Ortholog(id=int(o_id), prot=prot)
-            session.add(db_ortho)
-            for f in list(fun):
-                db_fun = session.query(Function).filter(Function.shortcode==f).one()
-                db_ortho.functions.append(db_fun)
-                session.add(db_ortho)
+            #if not line.startswith(' '):
+            #    db_cat = Category(name=line.strip())
+            #    session.add(db_cat)
+            #else:
+
+            db_fun = self.get_or_create(Function, shortcode=scode)
+            if len(desc) > 0:
+                db_fun.description = desc
+            #db_fun.category = db_cat
+
+            db_ortho = self.get_or_create(Ortholog, id=int(cols[0]))
+            db_ortho.functions.append(db_fun)
         session.commit()
 
     # loading input data
@@ -328,18 +321,18 @@ Avg\. #sequences in primer alignments: \S+ / \S+
 
         session.commit()
 
-    def primersets_to_records_js(self, target_fn):
-        primer_sets = self.session.query(PrimerSet, func.count(distinct(Species.id)).label('n_species')) \
-                            .join(Ortholog).join(Sequence).join(Species) \
-                            .group_by(PrimerSet.id) \
-                            .order_by(desc("n_species"), Ortholog.id) \
-                            .all()
+    def primersets_to_records_js(self, target_fn, mode="array"):
+        primer_sets = self.session.query(PrimerSet) \
+                                  .order_by(PrimerSet.id_ortholog) \
+                                  .all()
 
         rec_cnt = 0
         js = "var myRecords = [\n"
-        for res in primer_sets:
-            ps = res[0]
-            js += ps.to_json(rec_cnt, res[1]) + ',\n'
+        for ps in primer_sets:
+            if mode == 'array':
+                js += '\t' + ps.to_json_array(rec_cnt) + ',\n'
+            else:
+                js += ps.to_json(rec_cnt, res[1]) + ',\n'
             rec_cnt += 1
         js += "\n];"
 
@@ -354,8 +347,8 @@ Avg\. #sequences in primer alignments: \S+ / \S+
                             .order_by(desc("n_species"), Ortholog.id) \
                             .all()
 
-        field_names = ['id','marker_id', 'class','n_species','prod_len',
-                       'fw_sequence','rv_sequence','Tm','primer_len','fw_blast_hit','rv_blast_hit']
+        field_names = ['id','marker_id','n_species','prod_len',
+                       'fw_sequence','rv_sequence','Tm','primer_len','fw_blast_hit','rv_blast_hit','annotations']
         csv = sep.join(field_names) + '\n'
         for res in primer_sets:
             ps = res[0]
@@ -372,6 +365,14 @@ Avg\. #sequences in primer alignments: \S+ / \S+
             .join(PrimerSet)
             .one()
         )[0]
+        n_species = (self.session.query(
+            PrimerSet.num_species,
+            func.count(distinct(Ortholog.id)),
+            func.count(PrimerSet.id))
+            .join(Ortholog)
+            .group_by(PrimerSet.num_species)
+            .all()
+        )
         categories = (self.session.query(
             Category.name,
             func.count(distinct(Ortholog.id)))
@@ -398,13 +399,18 @@ Avg\. #sequences in primer alignments: \S+ / \S+
     'n_markers': %i
 }];
 
-    var categories = [
+var species = [
+    %s
+];
+
+var categories = [
     %s
 ];
 
 var subcats = [
     %s
 ];''' % (n_primers, n_markers,
+             ',\n\t'.join(["[%d, %d, %d]" % x for x in n_species]),
              ',\n\t'.join(["['%s', %i]" % x for x in categories]),
              ',\n\t'.join(["['%s', %i]" % (x[1], x[2]) for x in functions]),)
 
@@ -441,7 +447,7 @@ var subcats = [
             # build selected columns and joins
             for i in range(1,n_levels):
                 cols += [aka[i].c.id_species]
-                joins = join(j, aka[i], aka[0].c.id_ortholog == aka[i].c.id_ortholog)
+                joins = join(joins, aka[i], aka[0].c.id_ortholog == aka[i].c.id_ortholog)
             # create select statement on columns and joins
             stmt = select(cols).select_from(joins)
             # add filtering clauses

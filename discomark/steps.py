@@ -135,7 +135,7 @@ def add_reference(source_dir, target_dir, genome, hits, mafft_settings, log_fh):
                             print("[WARNING] ortholog sequence '%s' not found in Blast hits." % seq.id, file=log_fh)
                         SeqIO.write(seq, out_f, 'fasta')
                     if len(directions) > 1:
-                        print("[WARNING] reference seq '%s' has ortholog seqs mapped in both directions, thus it will not be included in the alignment.")
+                        print("[WARNING] reference seq '%s' has ortholog seqs mapped in both directions, thus it will not be included in the alignment." % rec.id)
                     else:
                         # retrieve relevant slice of reference
                         start = max(0, rec_hits['range'][0]-100)

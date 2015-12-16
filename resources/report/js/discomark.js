@@ -1,73 +1,78 @@
-var textAlign = ["center", "center", "center", "center", "center", "start", "start", "center", "center", "start", "start"];
-var dynatable = null,
-    dt_dirty = false;
+//var textAlign = ["center", "center", "center", "center", "center", "start", "start", "center", "center", "start", "start"];
+//var dynatable = null,
+//    dt_dirty = false;
 var alignmentViewer = null;
 
-function myAttributeWriter(record) {
-    // `this` is the column object in settings.columns
-    var html = "";
-    if (this.id == "export") {
-        html = /*JSON.stringify(record)+*/'<input type="checkbox" id="' + record.index + '" class="selector" ';
-        if (record['markerId'] == "412698") { console.log(record); }
-        if (record[this.id]=="1") {
-            console.log("on!");
-            html += "checked ";
-        }
-        html += '/>';
-    }
-    // include primer pair index in ortholog_id field
-    else if (this.id == "markerId") {
-        html = record[this.id] + "_" + record['ps_idx'];
-    }
-    // insert a link for NCBI records
-    else if ((this.id == "fwBlastHit" || this.id == "rvBlastHit") && (record[this.id] != "None")) {
-        html = "<a href='http://www.ncbi.nlm.nih.gov/nuccore/" + record[this.id] + "' target='_blank'>" + record[this.id] + "</a>";
-    }
-    else {
-        html = record[this.id];
-    }
-    return html;
-};
+// obsolete (DynaTable)
+// function myAttributeWriter(record) {
+//     // `this` is the column object in settings.columns
+//     var html = "";
+//     if (this.id == "export") {
+//         html = /*JSON.stringify(record)+*/'<input type="checkbox" id="' + record.index + '" class="selector" ';
+//         if (record['markerId'] == "412698") { console.log(record); }
+//         if (record[this.id]=="1") {
+//             console.log("on!");
+//             html += "checked ";
+//         }
+//         html += '/>';
+//     }
+//     // include primer pair index in ortholog_id field
+//     else if (this.id == "markerId") {
+//         html = record[this.id] + "_" + record['ps_idx'];
+//     }
+//     // insert a link for NCBI records
+//     else if ((this.id == "fwBlastHit" || this.id == "rvBlastHit") && (record[this.id] != "None")) {
+//         html = "<a href='http://www.ncbi.nlm.nih.gov/nuccore/" + record[this.id] + "' target='_blank'>" + record[this.id] + "</a>";
+//     }
+//     else {
+//         html = record[this.id];
+//     }
+//     return html;
+// };
 
-function simpleCellWriter(column, record) {
-    var html = column.attributeWriter(record)
-        td = '<td';
+// obsolete (DynaTable)
+// function simpleCellWriter(column, record) {
+//     var html = column.attributeWriter(record)
+//         td = '<td';
+//
+//     // add css style
+//     td += ' style="text-align: ' + textAlign[column.index] + ';"';
+//
+//     console.log(record['export']);
+//     return td +' id="' +JSON.stringify(record)+ '">' + html + '</td>';
+// };
 
-    // add css style
-    td += ' style="text-align: ' + textAlign[column.index] + ';"';
+// obsolete (DynaTable)
+// function dataRowWriter(rowIndex, record, columns, cellWriter) {
+//     var tr = '';
+//
+//     // grab the record's attribute for each column
+//     for (var i = 0, len = columns.length; i < len; i++) {
+//       tr += cellWriter(columns[i], record);
+//     }
+//
+//     return '<tr data-id="' + record['markerId'] + '">' + tr + '</tr>';
+//   };
 
-    console.log(record['export']);
-    return td +' id="' +JSON.stringify(record)+ '">' + html + '</td>';
-};
+// obsolete (DynaTable)
+// function selectableRowWriter(rowIndex, record, columns, cellWriter) {
+//     var tr = '<td>Möp!</td>';
+//
+//     // grab the record's attribute for each column
+//     for (var i = 0, len = columns.length; i < len; i++) {
+//       tr += cellWriter(columns[i], record);
+//     }
+//
+//     return '<tr>' + tr + '</tr>';
+// }
 
-function dataRowWriter(rowIndex, record, columns, cellWriter) {
-    var tr = '';
-
-    // grab the record's attribute for each column
-    for (var i = 0, len = columns.length; i < len; i++) {
-      tr += cellWriter(columns[i], record);
-    }
-
-    return '<tr data-id="' + record['markerId'] + '">' + tr + '</tr>';
-  };
-
-function selectableRowWriter(rowIndex, record, columns, cellWriter) {
-    var tr = '<td>Möp!</td>';
-
-    // grab the record's attribute for each column
-    for (var i = 0, len = columns.length; i < len; i++) {
-      tr += cellWriter(columns[i], record);
-    }
-
-    return '<tr>' + tr + '</tr>';
-}
-
-function updateDynatable(newRecords) {
-    var dt = dynatable.data('dynatable');
-    dt.records.updateFromJson({records: myRecords});
-    dt.records.init();
-    dt.process();
-}
+// obsolete (DynaTable)
+// function updateDynatable(newRecords) {
+//     var dt = dynatable.data('dynatable');
+//     dt.records.updateFromJson({records: myRecords});
+//     dt.records.init();
+//     dt.process();
+// }
 
 function updateAlignmentViewer(markerId, showSeq) {
     console.log(markerId);
@@ -115,13 +120,111 @@ function dtProcessingComplete() {
     });
 };
 
+function setupPrimerTable(tableId) {
+  $(tableId).DataTable( {
+      data: myRecords,
+      columns: [
+          { title: "idx" },
+          { title: "export" },
+          { title: "markerId" },
+          { title: "primerSet"},
+          { title: "species" },
+          { title: "product" },
+          { title: "fw sequence" },
+          { title: "rv sequence" },
+          { title: "Tm" },
+          { title: "primer length" },
+          { title: "fw BLAST hit" },
+          { title: "rv BLAST hit" },
+          { title: "annotation"}
+      ],
+      columnDefs: [
+        { visible: false, targets: [0,2] },
+        { orderData: [4,2], targets: [4] },
+        { targets: 1,
+          searchable: false,
+          orderable: false,
+          className: 'dt-body-center',
+          render: function (data, type, row, meta){
+            return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+          }
+        },
+        { targets: 3,
+          render: function (data, type, row, meta){
+            return row[2]+ '_' + data;
+          }
+        },
+        { targets: [10,11],
+          render: function (data, type, row, meta){
+            var html = '';
+            var terms = data.split(',');
+            for (i=0; i<terms.length; ++i) {
+              if (terms[i].substring(0, 3) == 'GO:') {
+                html += "<a href='http://www.ebi.ac.uk/QuickGO/GTerm?id=" + terms[i] + "' target='_blank'>" + terms[i] +  "</a>";
+              } else {
+                html += data;
+              }
+            }
+            return html;
+          }
+        },
+        { targets: 12,
+          render: function (data, type, row, meta){
+            var terms = data.split(',');
+            for (i=0; i<terms.length; ++index) {
+              if (terms[i].substring(0, 3) == 'GI:') {
+                return "<a href='http://www.ebi.ac.uk/QuickGO/GTerm?id=" + data + "' target='_blank'>" + data +  "</a>";
+              } else {
+                return data;
+              }
+            }
+          }
+        }
+      ],
+      order: [[4, 'desc'], [2, 'asc']],
+      displayLength: 25,
+      // add checkbox to mark rows for export
+      drawCallback: function ( settings ) {
+          var api = this.api();
+          var rows = api.rows( {page:'current'} ).nodes();
+          var last = null;
+
+          api.column(2, {page:'current'} ).data().each( function ( group, i ) {
+              if ( last !== group ) {
+                  $(rows).eq( i ).before(
+                      '<tr class="group"><td colspan="11">'+group+'</td></tr>'
+                  );
+
+                  last = group;
+              }
+          } );
+        }
+  } );
+
+  // make rows selectable
+  var table = $(tableId).DataTable();
+  $(tableId + ' tbody').on( 'click', 'tr', function () {
+    if ( $(this).hasClass('selected') ) {
+      $(this).removeClass('selected');
+    }
+    else {
+      if (Object.keys(this).length > 0) {
+        table.$('tr.selected').removeClass('selected');
+        $(this).addClass('selected');
+        var markerId = myRecords[this._DT_RowIndex][2];
+        updateAlignmentViewer(markerId, false);
+      }
+    }
+  } );
+}
+
 function finalizeSummary() {
     // generate summary text from template
     var template = $.templates("#tmplSummary");
     template.link("#resSummary", summary);
 
     // whip up pie charts
-    var plotCat = $.jqplot('chartCategories', [categories], {
+    /*var plotCat = $.jqplot('chartCategories', [categories], {
         title: 'Functional categories of markers',
         seriesDefaults: {
           // make this a donut chart.
@@ -138,7 +241,7 @@ function finalizeSummary() {
           }
         },
         legend: { show:true, location: 'e' }
-    });
+    });*/
 /*
     var plotCat = $.jqplot('chartSubCategories', [subcats], {
         seriesDefaults: {
@@ -163,14 +266,25 @@ function finalizeSummary() {
 
     });
 */
+    // populate species vs. primers table
+    $('#tabSumSpecies').DataTable( {
+      data: species,
+      paging: false,
+      searching: false,
+      columns: [
+        { title: "#Species" },
+        { title: "#Orthologs" },
+        { title: "#PrimerPairs" }
+      ]
+    } );
 }
 
-
 $( document ).ready(function() {
+    setupPrimerTable('#primer-t');
     finalizeSummary();
     $('#tabs').tabs();
 //    alert(JSON.stringify(myRecords));
-    dynatable = $('#primer-table').dynatable({
+    /*dynatable = $('#primer-table').dynatable({
         features: {
             //paginate: false,
             pushState: false,
@@ -194,9 +308,11 @@ $( document ).ready(function() {
         }
     });
     dtProcessingComplete(); // needs to be called manually once
+    */
 
     // get marker id for first primer pair
-    var markerId = myRecords[0]['markerId'];
+    //var markerId = myRecords[0]['markerId'];
+    var markerId = myRecords[0][2];
 
     //$('#alignment').html( alignments['413291'] );
     alignmentViewer = new CanvasState(document.getElementById('alignmentCanvas'));

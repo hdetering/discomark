@@ -6,7 +6,7 @@
   <!--link rel="stylesheet" type="text/css" href="css/jquery-ui.css"-->
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" type="text/css" href="css/theme.css">
-  <link rel="stylesheet" type="text/css" href="css/jquery.dynatable.css">
+  <!--link rel="stylesheet" type="text/css" href="css/jquery.dynatable.css"-->
   <!--script src="js/jquery-2.1.1.min.js"></script-->
   <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
   <!--script src="js/jquery-ui-1.11.0.min.js"></script-->
@@ -22,6 +22,9 @@
   <script type="text/javascript" src="jqplot/plugins/jqplot.donutRenderer.min.js"></script>
   <script type="text/javascript" src="jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
 
+  <script src="js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.datatable.aux.css">
   <script src="js/dynatable/jquery.dynatable.js"></script>
   <script src="js/summary.js"></script>
   <script src="js/records.js"></script>
@@ -48,16 +51,16 @@
     <div id="tabs-primerlist">
       <div id="resSummary"></div>
       <script id="tmplSummary" type="text/x-jsrender">
-        <p>Discomark found <b>{{:n_primers}}</b> primers for <b>{{:n_markers}}</b> markers.</p>
+        <p>Discomark found <b>{{:n_primers}}</b> primer pairs for <b>{{:n_markers}}</b> markers.</p>
       </script>
       <div id="primer-tab">
         <h2>Primer table</h2>
-        <table id="primer-table">
-          <!-- after changing headers, adjust:
+        <!--<table id="primer-table">
+          <!- after changing headers, adjust:
                   - discomark.models.PrimerSet.to_json()
                   - discomark.js::myAttributeWriter()
                   - discomark.js::record2Fasta()
-          -->
+          ->
           <thead>
             <td>export</td>
             <td>marker id</td>
@@ -72,7 +75,8 @@
             <td>rv Blast hit</td>
           </thead>
           <tbody></tbody>
-        </table>
+        </table>-->
+        <table id="primer-t" class="compact display" width="100%"></table>
       </div>
   <a href="javascript:onDownloadFasta();">Download selected primers</a>
   <!--a class="button icon download" href="#"><span>Download selected primers</span></a-->
@@ -91,6 +95,9 @@
 
   <div id="tabs-plots">
     <div id="chartCategories" style="height:400px; width:600px;"></div>
+    <div id="divSumSpecies" style="width:300px;">
+      <table id="tabSumSpecies" class="display" width="100%"></table>
+    </div>
   </div>
 
   <!--
@@ -105,7 +112,7 @@
 </div>
 
 <div class="clearfix"></div>
-<div id="footer"><p>&#169; Detering &amp; Rutschmann 2015</p></div>
+<div id="footer"><p>&#169; Detering &amp; Rutschmann 2016</p></div>
 </div>
 
 </body>

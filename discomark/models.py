@@ -181,10 +181,27 @@ class PrimerSet(Base):
                              self.blast_rv,
                              ','.join([f.shortcode for f in self.ortholog.functions]))
 
+    def to_json_array(self, idx):
+        # idx, export, marker_id, ps_idx, species, prod_len, seq_fw, seq_rv, Tm, len, blast_fw, blast_rv, categories
+        format_str = '''[%d, 0, "%s", "%s", %d, %d, "%s", "%s", "%0.1f/%0.1f", "%d/%d", "%s", "%s", "%s"]'''
+
+        return format_str % (idx,
+                             self.ortholog.id,
+                             self.ps_idx,
+                             self.num_species,
+                             self.prod_len,
+                             self.seq_fw,
+                             self.seq_rv,
+                             self.tm_fw, self.tm_rv,
+                             len(self.seq_fw), len(self.seq_rv),
+                             self.blast_fw,
+                             self.blast_rv,
+                             ','.join([f.shortcode for f in self.ortholog.functions])
+        )
+
     def to_csv(self, n_spec, sep=','):
         field_values = ["%s_%s" % (self.ortholog.id, self.ps_idx),
                         str(self.ortholog.id),
-                        ''.join([f.shortcode for f in self.ortholog.functions]),
                         str(self.num_species),
                         str(self.prod_len),
                         self.seq_fw,
@@ -192,5 +209,6 @@ class PrimerSet(Base):
                         "%s/%s" % (self.tm_fw, self.tm_rv),
                         "%s/%s" % (len(self.seq_fw), len(self.seq_rv)),
                         self.blast_fw if self.blast_fw else '-',
-                        self.blast_rv if self.blast_rv else '-']
+                        self.blast_rv if self.blast_rv else '-',
+                        ','.join([f.shortcode for f in self.ortholog.functions])]
         return sep.join(field_values) + '\n'

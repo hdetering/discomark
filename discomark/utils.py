@@ -75,8 +75,8 @@ def setup_output_folders(out_dir, input_seqs, genome, config):
 
     # copy resource files
     resource_dir = os.path.join('.', 'resources')
-    shutil.copy(os.path.join(resource_dir, 'fun.txt'), out_dir)
-    shutil.copy(os.path.join(resource_dir, 'ortho2fun.csv'), out_dir)
+    #shutil.copy(os.path.join(resource_dir, 'fun.txt'), out_dir)
+    #shutil.copy(os.path.join(resource_dir, 'ortho2fun.csv'), out_dir)
 
     # copy input data
     if genome:

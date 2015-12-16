@@ -31,6 +31,7 @@ def parse_args():
     parser.add_argument('-i', '--input', action='append', help="input folder for sample (at least two '-i' options must be specified)")
     parser.add_argument('-r', '--reference', help="reference genome file (FASTA)")
     parser.add_argument('-s', '--step', help="start from step N", type=int, default=0)
+    parser.add_argument('-a', '--annot', help="annotation file for input markers")
     parser.add_argument('-v', '--verbose', help="increase output verbosity", action='store_true')
     parser.add_argument('--no-trim', help="skip alignment trimming step", action='store_true')
     parser.add_argument('--no-primer-blast', help="skip online primer BLAST (use, when running without internet connection", action='store_true')
@@ -85,7 +86,7 @@ if __name__ == '__main__':
         print(datetime.datetime.now(), file=logfile)
         print("Running DiscoMark with the following parameters:\n%s" % args, file=logfile)
         model = database.DataBroker(args.dir)
-        model.initialize_db(args.dir)
+        model.initialize_db(args.dir, args.annot)
     else:
         logfile = open(os.path.join(args.dir, 'discomark.log'), 'at')
         print("\n\n\n---%s" % datetime.datetime.now(), file=logfile)
