@@ -121,7 +121,7 @@ class DataBroker():
         session = self.session
 
         print("\nLoading ortholog annotations ...")
-        if not os.path.exists(anno_fn):
+        if not (anno_fn and os.path.exists(anno_fn)):
             #print("\tWarning: file '%s' is missing! Orthologs will not be functionally annotated." % anno_fn)
             return False
 
@@ -428,7 +428,11 @@ var subcats = [
         )
         n_species = len(n_markers) # how many species are there?
 
-        out_str  = "var sets = [ "
+        out_str  = "var species_key = [\n"
+        out_str += ',\n'.join(["\t[%d, '%s', %d]" % (x[0].id, x[0].name, x[1]) for x in n_markers])
+        out_str += "\n];\n\n"
+
+        out_str += "var marker_sets_input = [ "
 
         # output single-species marker counts
         out_str += "{sets: ['%s'], size: %d}" % (n_markers[0][0].id, n_markers[0][1])

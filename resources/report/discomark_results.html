@@ -7,26 +7,34 @@
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" type="text/css" href="css/theme.css">
   <!--link rel="stylesheet" type="text/css" href="css/jquery.dynatable.css"-->
-  <!--script src="js/jquery-2.1.1.min.js"></script-->
-  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/jquery-2.1.1.min.js"></script>
+  <!--script src="http://code.jquery.com/jquery-2.1.1.min.js"></script-->
   <!--script src="js/jquery-ui-1.11.0.min.js"></script-->
+
+  <!-- tabs support -->
   <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
   <script src="js/jsviews.js"></script>
 
   <!-- jqPlot -->
   <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="jqplot/excanvas.js"></script><![endif]-->
   <!--script language="javascript" type="text/javascript" src="jquery-1.4.4.min.js"></script-->
-  <script language="javascript" type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
+  <!--script language="javascript" type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
   <link rel="stylesheet" type="text/css" href="jqplot/jquery.jqplot.css" />
   <script type="text/javascript" src="jqplot/plugins/jqplot.pieRenderer.min.js"></script>
   <script type="text/javascript" src="jqplot/plugins/jqplot.donutRenderer.min.js"></script>
-  <script type="text/javascript" src="jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
+  <script type="text/javascript" src="jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script-->
+
+  <!-- Venn diagrams -->
+  <script src="js/d3/d3.js" charset="utf-8"></script>
+  <script src="js/venn/venn.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/venn.css">
 
   <script src="js/jquery.dataTables.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="css/jquery.datatable.aux.css">
-  <script src="js/dynatable/jquery.dynatable.js"></script>
+  <!--script src="js/dynatable/jquery.dynatable.js"></script-->
   <script src="js/summary.js"></script>
+  <script src="js/counts.js"></script>
   <script src="js/records.js"></script>
   <script src="js/alignments.js"></script>
   <script src="js/discomark-aln.js"></script>
@@ -94,9 +102,16 @@
   </div>
 
   <div id="tabs-plots">
-    <div id="chartCategories" style="height:400px; width:600px;"></div>
+    <!--div id="chartCategories" style="height:400px; width:600px;"></div-->
+    <div style="overflow:hidden;">
+      <h3>Markers available for input species</h3>
+      <div style="width:40%;float:left;padding-right:10px"><table id="tab-venn-markers-input" class="display compact"></table></div>
+      <div id="chart-venn-markers-input"></div>
+
+    <div/>
     <div id="divSumSpecies" style="width:300px;">
-      <table id="tabSumSpecies" class="display" width="100%"></table>
+      <h3>Species overlap for identified primer sets</h3>
+      <table id="tabSumSpecies" class="display compact" width="100%"></table>
     </div>
   </div>
 

@@ -156,6 +156,16 @@ function setupPrimerTable(tableId) {
         },
         { targets: [10,11],
           render: function (data, type, row, meta){
+            if (data != 'None') {
+              return "<a href='http://www.ncbi.nlm.nih.gov/nucleotide/" + data + "' target='_blank'>" + data +  "</a>";
+            }
+            else {
+              return data;
+            }
+          }
+        },
+        { targets: 12,
+          render: function (data, type, row, meta){
             var html = '';
             var terms = data.split(',');
             for (i=0; i<terms.length; ++i) {
@@ -166,18 +176,6 @@ function setupPrimerTable(tableId) {
               }
             }
             return html;
-          }
-        },
-        { targets: 12,
-          render: function (data, type, row, meta){
-            var terms = data.split(',');
-            for (i=0; i<terms.length; ++index) {
-              if (terms[i].substring(0, 3) == 'GI:') {
-                return "<a href='http://www.ebi.ac.uk/QuickGO/GTerm?id=" + data + "' target='_blank'>" + data +  "</a>";
-              } else {
-                return data;
-              }
-            }
           }
         }
       ],
@@ -218,10 +216,72 @@ function setupPrimerTable(tableId) {
   } );
 }
 
+function setupVenn(div_id, dataset) {
+  var chart = venn.VennDiagram()
+                  .width(400)
+                  .height(400);
+
+  var div = d3.select(div_id);
+  div.datum(dataset).call(chart);
+
+  var tooltip = d3.select("body").append("div")
+      .attr("class", "venntooltip")
+
+  div.selectAll("path")
+      .style("stroke-opacity", 0)
+      .style("stroke", "#fff")
+      .style("stroke-width", 0)
+
+  div.selectAll("g")
+  .on("mouseover", function(d, i) {
+      // sort all the areas relative to the current item
+      venn.sortAreas(div, d);
+
+      // Display a tooltip with the current size
+      tooltip.transition().duration(400).style("opacity", .9);
+      tooltip.text("{" + d.sets + "}: " + d.size);
+
+      // highlight the current path
+      var selection = d3.select(this).transition("tooltip").duration(400);
+      selection.select("path")
+          .style("stroke-width", 3)
+          .style("fill-opacity", d.sets.length == 1 ? .4 : .1)
+          .style("stroke-opacity", 1);
+  })
+
+  .on("mousemove", function() {
+      tooltip.style("left", (d3.event.pageX) + "px")
+             .style("top", (d3.event.pageY - 28) + "px");
+  })
+
+  .on("mouseout", function(d, i) {
+      tooltip.transition().duration(400).style("opacity", 0);
+      var selection = d3.select(this).transition("tooltip").duration(400);
+      selection.select("path")
+          .style("stroke-width", 0)
+          .style("fill-opacity", d.sets.length == 1 ? .25 : .0)
+          .style("stroke-opacity", 0);
+  });
+}
+
 function finalizeSummary() {
     // generate summary text from template
     var template = $.templates("#tmplSummary");
     template.link("#resSummary", summary);
+
+    // whip up venn diagrams (data included in counts.js)
+    setupVenn("#chart-venn-markers-input", marker_sets_input);
+    $('#tab-venn-markers-input').DataTable( {
+      data: species_key,
+      paging: false,
+      searching: false,
+      info: false,
+      columns: [
+        { title: "ID" },
+        { title: "Species" },
+        { title: "#Input markers" }
+      ]
+    } );
 
     // whip up pie charts
     /*var plotCat = $.jqplot('chartCategories', [categories], {
@@ -271,6 +331,7 @@ function finalizeSummary() {
       data: species,
       paging: false,
       searching: false,
+      info: false,
       columns: [
         { title: "#Species" },
         { title: "#Orthologs" },
