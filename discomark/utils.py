@@ -109,5 +109,5 @@ def purge_dir(path_to_dir):
         try:
             if os.path.isfile(file_path):
                 os.unlink(file_path)
-        except Exception, e:
+        except Exception as e:
             print(e, file=sys.stderr)

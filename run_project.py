@@ -12,6 +12,7 @@ import datetime
 import os
 import shutil
 import sys
+sys.path += ['./util/prifi'] # make sure external packages are found
 try: # name of configparser module has been changed in Python3
     import configparser # python3
 except ImportError:
@@ -19,6 +20,7 @@ except ImportError:
 from discomark import database, steps, utils
 
 config = configparser.ConfigParser()
+config.optionxform = str
 config.read("discomark.conf")
 
 prifi   = config.get('Tools', 'prifi')
@@ -134,13 +136,16 @@ if __name__ == '__main__':
     # 5. design primers
     if args.step <= 5:
         print("\n[5] Designing primers based on multiple alignments...")
+        settings = config.items('05_PriFi_settings')
         source_dir = mapped_dir if do_ref_map else (trimmed_dir if not args.no_trim else aligned_dir)
-        steps.design_primers(source_dir, primer_dir, prifi, logfile)
+        steps.design_primers(source_dir, primer_dir, settings, logfile)
         model.load_primers(primer_dir)
         model.export_primers_to_file(os.path.join(primer_dir, 'primers.fa'))
         orthologs = model.get_orthologs()
         steps.export_primer_alignments(primer_dir, orthologs)
         model.session.commit() # save modifications to records in DB
+
+    sys.exit(0)
     # 6. primer BLAST
     if args.step <= 6 and not args.no_primer_blast:
         print("\n[6] Searching primer sequences in BLAST database...")

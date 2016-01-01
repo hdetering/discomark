@@ -10,13 +10,14 @@ import subprocess
 import sys
 from glob import glob
 from Bio import SeqIO, AlignIO
+from Bio.Align import AlignInfo
 from Bio.Align import MultipleSeqAlignment
 #from Bio.Align.Applications import MafftCommandline # can only be used with python >=2.7
 from Bio.Blast import NCBIWWW, NCBIXML
 from Bio.Blast.Applications import NcbiblastnCommandline
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
-
+import prifipy
 
 ################################
 # 1. parse predicted orthologs #
@@ -173,7 +174,35 @@ def convertFastaToClustal(in_dir, out_dir):
 #####################
 # 5. design primers #
 #####################
-def design_primers(source_dir, target_dir, prifi, logfile):
+
+def design_primers(source_dir, target_dir, settings, logfile):
+    print("\nDesigning primers using PriFi...\n", file=logfile)
+    # get rid of previous files
+    utils.purge_dir(target_dir)
+    aln_files = glob(os.path.join(source_dir, '*.fasta'))
+    print("\tChecking for empty alignments...", file=logfile)
+    for f in aln_files:
+        try:
+            align = AlignIO.read(f, 'fasta')
+            filename = os.path.basename(f)
+            shutil.copyfile(f, os.path.join(target_dir, filename))
+        except Exception:
+            print("[WARNING] Whoa! Empty alignment file?! (%s)" % f, file=logfile)
+            continue
+
+    # call PriFi for actual primer design
+    for f in glob(os.path.join(target_dir, '*.fasta')):
+        aln = AlignIO.read(f, 'fasta')
+        summary = AlignInfo.SummaryInfo(aln)
+        l = aln.get_alignment_length()
+        primerpairs = prifipy.findprimers(1, list(aln), summary, l, settings)
+        if not primerpairs:
+            print("%s: No valid primer pair found" % f, file=logfile)
+        else:
+            print('%s: Found %d primer pair suggestions. Writing primer files:' % (f, len(primerpairs)))
+            prifipy.writePrimersToFiles(f, primerpairs, 1)
+
+def design_primers_bak(source_dir, target_dir, prifi, logfile):
     print("\nDesigning primers using PriFi...\n", file=logfile)
     # get rid of previous files
     utils.purge_dir(target_dir)
