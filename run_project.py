@@ -145,7 +145,6 @@ if __name__ == '__main__':
         steps.export_primer_alignments(primer_dir, orthologs)
         model.session.commit() # save modifications to records in DB
 
-    sys.exit(0)
     # 6. primer BLAST
     if args.step <= 6 and not args.no_primer_blast:
         print("\n[6] Searching primer sequences in BLAST database...")

@@ -187,7 +187,7 @@ def design_primers(source_dir, target_dir, settings, logfile):
             filename = os.path.basename(f)
             shutil.copyfile(f, os.path.join(target_dir, filename))
         except Exception:
-            print("[WARNING] Whoa! Empty alignment file?! (%s)" % f, file=logfile)
+            print("[WARNING] Empty alignment file?! (%s)" % f, file=logfile)
             continue
 
     # call PriFi for actual primer design
@@ -195,14 +195,14 @@ def design_primers(source_dir, target_dir, settings, logfile):
         aln = AlignIO.read(f, 'fasta')
         summary = AlignInfo.SummaryInfo(aln)
         l = aln.get_alignment_length()
-        primerpairs = prifipy.findprimers(1, list(aln), summary, l, settings)
+        primerpairs = prifipy.findprimers(0, list(aln), summary, l, settings, logfile)
         if not primerpairs:
             print("%s: No valid primer pair found" % f, file=logfile)
         else:
             print('%s: Found %d primer pair suggestions. Writing primer files:' % (f, len(primerpairs)))
-            prifipy.writePrimersToFiles(f, primerpairs, 1)
+            prifipy.writePrimersToFiles(f, primerpairs, 1, logfile)
 
-def design_primers_bak(source_dir, target_dir, prifi, logfile):
+def design_primers_cl(source_dir, target_dir, prifi, logfile):
     print("\nDesigning primers using PriFi...\n", file=logfile)
     # get rid of previous files
     utils.purge_dir(target_dir)
@@ -214,7 +214,7 @@ def design_primers_bak(source_dir, target_dir, prifi, logfile):
             filename = os.path.basename(f)
             shutil.copyfile(f, os.path.join(target_dir, filename))
         except Exception:
-            print("[WARNING] Whoa! Empty alignment file?! (%s)" % f, file=logfile)
+            print("[WARNING] Empty alignment file?! (%s)" % f, file=logfile)
             continue
 
     # call PriFi for actual primer design
