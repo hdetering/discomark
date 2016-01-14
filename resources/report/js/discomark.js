@@ -283,49 +283,6 @@ function finalizeSummary() {
       ]
     } );
 
-    // whip up pie charts
-    /*var plotCat = $.jqplot('chartCategories', [categories], {
-        title: 'Functional categories of markers',
-        seriesDefaults: {
-          // make this a donut chart.
-          renderer:$.jqplot.DonutRenderer,
-          rendererOptions:{
-            // Donut's can be cut into slices like pies.
-            sliceMargin: 3,
-            // Pies and donuts can start at any arbitrary angle.
-            startAngle: -90,
-            showDataLabels: true,
-            // By default, data labels show the percentage of the donut/pie.
-            // You can show the data 'value' or data 'label' instead.
-            dataLabels: 'value'
-          }
-        },
-        legend: { show:true, location: 'e' }
-    });*/
-/*
-    var plotCat = $.jqplot('chartSubCategories', [subcats], {
-        seriesDefaults: {
-          // make this a donut chart.
-          renderer:$.jqplot.DonutRenderer,
-          rendererOptions:{
-            // Donut's can be cut into slices like pies.
-            sliceMargin: 2,
-            // Pies and donuts can start at any arbitrary angle.
-            startAngle: -90,
-            showDataLabels: true,
-            // By default, data labels show the percentage of the donut/pie.
-            // You can show the data 'value' or data 'label' instead.
-            dataLabels: 'value'
-          }
-        },
-        legend: {
-            renderer: $.jqplot.EnhancedLegendRenderer,
-            show:true,
-            location: 'e',
-            rendererOptions: { numberRows : 12 } }
-
-    });
-*/
     // populate species vs. primers table
     $('#tabSumSpecies').DataTable( {
       data: species,

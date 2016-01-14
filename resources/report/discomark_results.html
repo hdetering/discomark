@@ -15,15 +15,6 @@
   <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
   <script src="js/jsviews.js"></script>
 
-  <!-- jqPlot -->
-  <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="jqplot/excanvas.js"></script><![endif]-->
-  <!--script language="javascript" type="text/javascript" src="jquery-1.4.4.min.js"></script-->
-  <!--script language="javascript" type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="jqplot/jquery.jqplot.css" />
-  <script type="text/javascript" src="jqplot/plugins/jqplot.pieRenderer.min.js"></script>
-  <script type="text/javascript" src="jqplot/plugins/jqplot.donutRenderer.min.js"></script>
-  <script type="text/javascript" src="jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script-->
-
   <!-- Venn diagrams -->
   <script src="js/d3/d3.js" charset="utf-8"></script>
   <script src="js/venn/venn.js"></script>
@@ -63,27 +54,6 @@
       </script>
       <div id="primer-tab">
         <h2>Primer table</h2>
-        <!--<table id="primer-table">
-          <!- after changing headers, adjust:
-                  - discomark.models.PrimerSet.to_json()
-                  - discomark.js::myAttributeWriter()
-                  - discomark.js::record2Fasta()
-          ->
-          <thead>
-            <td>export</td>
-            <td>marker id</td>
-            <td>class</td>
-            <td>no. of species</td>
-            <td>est. product length (bp)</td>
-            <td>fw sequence (5'-3')</td>
-            <td>rv sequence (5'-3')</td>
-            <td>Tm</td>
-            <td>primer length</td>
-            <td>fw Blast hit</td>
-            <td>rv Blast hit</td>
-          </thead>
-          <tbody></tbody>
-        </table>-->
         <table id="primer-t" class="compact display" width="100%"></table>
       </div>
   <a href="javascript:onDownloadFasta();">Download selected primers</a>
@@ -102,7 +72,6 @@
   </div>
 
   <div id="tabs-plots">
-    <!--div id="chartCategories" style="height:400px; width:600px;"></div-->
     <div style="overflow:hidden;">
       <h3>Markers available for input species</h3>
       <div style="width:40%;float:left;padding-right:10px"><table id="tab-venn-markers-input" class="display compact"></table></div>
