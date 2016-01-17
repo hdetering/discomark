@@ -22,10 +22,10 @@ Additionally, you'll need the following Python packages:
 
 No explicit installation is necessary. Just download the sources and you're ready to go.
 
-To make the required programs available please set the following environment variables (replace `/path/to/discomark` with the location to which you downloaded the program and change `linux` to `mac` if you're on an Apple computer):
+To make the required programs available please set the following environment variables (replace `/path/to/discomark` with the location to which you downloaded the program and change `linux` to `mac` if you're on a Mac):
 ```
 export PYTHONPATH=/path/to/discomark/util/
-export PATH=/path/to/discomark/bin/linux
+export PATH=/path/to/discomark/bin/linux:$PATH
 ```
 
 ## How to run DiscoMark
