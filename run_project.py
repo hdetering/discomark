@@ -23,9 +23,6 @@ config = configparser.ConfigParser()
 config.optionxform = str
 config.read("discomark.conf")
 
-prifi   = config.get('Tools', 'prifi')
-trimal  = config.get('Tools', 'trimal')
-
 def parse_args():
     parser = argparse.ArgumentParser(description="Discover phylogenetic markers from orthologous sequences.")
 
@@ -118,7 +115,7 @@ if __name__ == '__main__':
     if args.step <= 3 and not args.no_trim:
         print("\n[3] Trimming alignments...")
         settings = config.items('03_TrimAl_settings')
-        steps.trim_alignments(aligned_dir, trimmed_dir, trimal, settings, logfile)
+        steps.trim_alignments(aligned_dir, trimmed_dir, settings, logfile)
     # 4. map trimmed alignments against reference genome
     if args.step <= 4:
         print("\n[4] Mapping alignments to reference...")

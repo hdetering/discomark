@@ -67,7 +67,7 @@ def align_orthologs(ortho_dir, aligned_dir, orthologs, settings, log_fh=sys.stde
 ######################
 # 3. trim alignments #
 ######################
-def trim_alignments(aligned_dir, trimmed_dir, trimal, settings, log_fh=sys.stderr):
+def trim_alignments(aligned_dir, trimmed_dir, settings, log_fh=sys.stderr):
     print("\nTrimming alignments...", file=log_fh)
     aligned_files = next(os.walk(aligned_dir))[2]
     aligned_files = [os.path.join(aligned_dir, f) for f in os.listdir(aligned_dir) if os.path.isfile(os.path.join(aligned_dir,f))]
@@ -75,7 +75,7 @@ def trim_alignments(aligned_dir, trimmed_dir, trimal, settings, log_fh=sys.stder
     for f in aligned_files:
         o_id = os.path.split(f)[1].split('.')[0]
         out = os.path.join(trimmed_dir, "%s.fasta" % o_id)
-        trimal_params = [trimal, '-in', f, '-out', out, '-htmlout', "%s.html" % out, '-keepheader']
+        trimal_params = ['trimal', '-in', f, '-out', out, '-htmlout', "%s.html" % out, '-keepheader']
         trimal_params += [x for x in sum(settings, ()) if len(x.strip())>0]
         subprocess.call(trimal_params, stdout=log_fh, stderr=log_fh)
 
