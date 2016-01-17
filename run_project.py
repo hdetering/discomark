@@ -104,7 +104,7 @@ if __name__ == '__main__':
         model.create_db_from_input(input_dir)
     orthologs = model.get_orthologs()
     if args.step <= 1:
-        print("\n[1] Merging orthologs from input folders...")
+        print("\n[1] Combining orthologs from input folders...")
         steps.merge_species(input_dir, ortho_dir, orthologs, logfile)
     # 2. align ortholog files
     if args.step <= 2:
