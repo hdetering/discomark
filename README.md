@@ -36,6 +36,8 @@ export PATH=/path/to/discomark/bin/linux:$PATH
 
 ## How to run DiscoMark
 
+Make sure your [input data](https://github.com/hdetering/discomark/wiki#input-data) is properly formatted.
+
 ```
 cd discomark
 python run_project.py -i example/hamstr/Cloeon -i example/hamstr/Baetis -r example/reference/Cloeon.fasta -d output
