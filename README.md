@@ -33,11 +33,12 @@ If you have the programs BLAST+, MAFFT and TrimAl installed on your system you d
 
 ## How to run DiscoMark
 
-Make sure your [input data](https://github.com/hdetering/discomark/wiki#input-data) is properly formatted. 
+Make sure your [input data](https://github.com/hdetering/discomark/wiki#input-data) is formatted as FASTA format. 
+Let´s say you want to discover markers for two species (i.e. species1 and species2) and use a reference (i.e. reference.fasta), you will call DiscoMark like this:
 
 ```
 cd discomark
-python run_project.py -i example/hamstr/Cloeon -i example/hamstr/Baetis -r example/reference/Cloeon.fasta -d output
+python run_project.py -i example/hamstr/species1 -i example/hamstr/species2 -r example/reference/reference.fasta -d output
 ```
 
 See the wiki for more info on the [command line options](https://github.com/hdetering/discomark/wiki/Command-Line-Options).
