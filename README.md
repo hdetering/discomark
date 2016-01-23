@@ -10,7 +10,7 @@ Discover phylogenetic markers from orthologous sequences.
 
 DiscoMark, uses the following programs:
 * [Python](https://www.python.org) (>= 2.7)
-* [NCBI Blast+](http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST)
+* [NCBI Blast+](http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST) (>= 2.2.29)
 * [MAFFT](http://mafft.cbrc.jp/alignment/software) (>= 6.864b)
 * [TrimAl](https://github.com/scapella/trimal) (>= 1.2)
 
@@ -22,21 +22,18 @@ Additionally, you'll need the following Python packages:
 
 ## Installation
 
-No explicit installation is necessary. Just download the sources and you're ready to go.
-
+Download DiscoMark (when setting the `PATH` environment variable, replace `linux` with `mac` if you're on a Mac):
 ```
 git clone https://github.com/hdetering/discomark.git
-```
-
-the `PYTHONPATH` environment variable must be set to make the PriFiPy package visible. Optionally, if you cannot install the programs (BLAST+, MAFFT, TrimAl) on your system you can use the binaries by adding the appropriate binary folder (`linux` or `mac`) to your `PATH` environment variable. Here's how you set the variables (replace `/path/to/discomark` with the location to which you downloaded the program and change `linux` to `mac` if you're on a Mac):
-```
 export PYTHONPATH=/path/to/discomark/util/
 export PATH=/path/to/discomark/bin/linux:$PATH
 ```
 
+If you have the programs BLAST+, MAFFT and TrimAl installed on your system you don't need the `export PATH=[...]` statement.
+
 ## How to run DiscoMark
 
-Make sure your [input data](https://github.com/hdetering/discomark/wiki#input-data) is properly formatted.
+Make sure your [input data](https://github.com/hdetering/discomark/wiki#input-data) is properly formatted. 
 
 ```
 cd discomark
