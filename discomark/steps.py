@@ -199,7 +199,7 @@ def design_primers(source_dir, target_dir, settings, logfile):
         if not primerpairs:
             print("%s: No valid primer pair found" % f, file=logfile)
         else:
-            print('%s: Found %d primer pair suggestions. Writing primer files:' % (f, len(primerpairs)))
+            print('%s: Found %d primer pair suggestions. Writing primer files:' % (f, len(primerpairs)), file=logfile)
             prifipy.writePrimersToFiles(f, primerpairs, 1, logfile)
 
 def design_primers_cl(source_dir, target_dir, prifi, logfile):
@@ -251,6 +251,7 @@ def export_primer_alignments(source_dir, orthologs):
                 rec = SeqRecord(seq, id="%s_%s" % (db_ortho.id, i), description='')
                 pseqs.append(rec)
                 i += 1
+
                 # determine number of species covered by primer set
                 input_seqs = MultipleSeqAlignment([r for r in aln if r.description.find('id_species=')>-1])
                 species_ids_fw = set()
@@ -261,6 +262,16 @@ def export_primer_alignments(source_dir, orthologs):
                     species_ids_rv.update(re.findall('id_species=(\d+)', desc))
                 n_species = min(len(species_ids_fw), len(species_ids_rv))
                 ps.num_species = n_species
+
+                # determine number of SNPs between primers
+                n_snps = 0
+                sub_aln = aln[:,(pos_fw[1]+1):(pos_rv[0]-1)]
+                for pos in range(len(sub_aln[0])):
+                    if len(set(sub_aln[:,pos])-set("-N")) > 1:
+                        n_snps += 1
+                ps.num_snps = n_snps
+
+            # write primers + sequences alignment
             with open(os.path.join(source_dir, "%s.primer_aln.fasta" % db_ortho.id), 'wt') as f:
                 AlignIO.write(MultipleSeqAlignment(pseqs+[r for r in aln]), f, 'fasta')
 

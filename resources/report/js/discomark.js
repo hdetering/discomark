@@ -129,6 +129,7 @@ function setupPrimerTable(tableId) {
           { title: "markerId" },
           { title: "primerSet"},
           { title: "species" },
+          { title: "snps" },
           { title: "product" },
           { title: "fw sequence" },
           { title: "rv sequence" },
@@ -154,7 +155,7 @@ function setupPrimerTable(tableId) {
             return row[2]+ '_' + data;
           }
         },
-        { targets: [10,11],
+        { targets: [11,12],
           render: function (data, type, row, meta){
             if (data != 'None') {
               return "<a href='http://www.ncbi.nlm.nih.gov/nucleotide/" + data + "' target='_blank'>" + data +  "</a>";
@@ -164,7 +165,7 @@ function setupPrimerTable(tableId) {
             }
           }
         },
-        { targets: 12,
+        { targets: 13,
           render: function (data, type, row, meta){
             var html = '';
             var terms = data.split(',');
@@ -190,7 +191,7 @@ function setupPrimerTable(tableId) {
           api.column(2, {page:'current'} ).data().each( function ( group, i ) {
               if ( last !== group ) {
                   $(rows).eq( i ).before(
-                      '<tr class="group"><td colspan="11">'+group+'</td></tr>'
+                      '<tr class="group"><td colspan="12">'+group+'</td></tr>'
                   );
 
                   last = group;
