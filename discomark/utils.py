@@ -51,6 +51,10 @@ def print_error_and_exit(msg):
     print("Error: %s" % msg, file=sys.stderr)
     sys.exit(1)
 
+def check_input_data(input_dirs):
+    """ Verifies that input data has expected structure. """
+
+
 def setup_output_folders(out_dir, input_seqs, genome, config):
     """Sets up the output directory structure and copies input data.
     """

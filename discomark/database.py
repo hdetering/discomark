@@ -347,7 +347,7 @@ Avg\. #sequences in primer alignments: \S+ / \S+
                             .order_by(desc("n_species"), Ortholog.id) \
                             .all()
 
-        field_names = ['id','marker_id','n_species','prod_len',
+        field_names = ['id','marker_id','n_species','n_snps','prod_len',
                        'fw_sequence','rv_sequence','Tm','primer_len','fw_blast_hit','rv_blast_hit','annotations']
         csv = sep.join(field_names) + '\n'
         for res in primer_sets:

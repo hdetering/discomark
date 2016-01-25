@@ -148,6 +148,7 @@ class PrimerSet(Base):
     blast_fw    = Column(String) # NCBI accession
     blast_rv    = Column(String) # NCBI accession
     num_species = Column(Integer)
+    num_snps    = Column(Integer) # number of SNPs between primers
 
     def __repr__(self):
         return "<PrimerSet(ortholog='%d', product=%dbp)>" % (self.ortholog.id, self.prod_len)
@@ -159,6 +160,7 @@ class PrimerSet(Base):
     "markerId": "%s",
     "ps_idx": "%s",
     "no.OfSpecies": "%s",
+    "no.OfSnps": "%s",
     "est.ProductLength-(bp)": "%s",
     "fwSequence-(5'-3')": "%s",
     "rvSequence-(5'-3')": "%s",
@@ -172,6 +174,7 @@ class PrimerSet(Base):
                              self.ortholog.id,
                              self.ps_idx,
                              self.num_species,
+                             self.num_snps,
                              self.prod_len,
                              self.seq_fw,
                              self.seq_rv,
@@ -182,13 +185,14 @@ class PrimerSet(Base):
                              ','.join([f.shortcode for f in self.ortholog.functions]))
 
     def to_json_array(self, idx):
-        # idx, export, marker_id, ps_idx, species, prod_len, seq_fw, seq_rv, Tm, len, blast_fw, blast_rv, categories
-        format_str = '''[%d, 0, "%s", "%s", %d, %d, "%s", "%s", "%0.1f/%0.1f", "%d/%d", "%s", "%s", "%s"]'''
+        # idx, export, marker_id, ps_idx, species, snps, prod_len, seq_fw, seq_rv, Tm, len, blast_fw, blast_rv, categories
+        format_str = '''[%d, 0, "%s", "%s", %d, %d, %d, "%s", "%s", "%0.1f/%0.1f", "%d/%d", "%s", "%s", "%s"]'''
 
         return format_str % (idx,
                              self.ortholog.id,
                              self.ps_idx,
                              self.num_species,
+                             self.num_snps,
                              self.prod_len,
                              self.seq_fw,
                              self.seq_rv,
@@ -203,6 +207,7 @@ class PrimerSet(Base):
         field_values = ["%s_%s" % (self.ortholog.id, self.ps_idx),
                         str(self.ortholog.id),
                         str(self.num_species),
+                        str(self.num_snps),
                         str(self.prod_len),
                         self.seq_fw,
                         self.seq_rv,
