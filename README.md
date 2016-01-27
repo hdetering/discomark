@@ -50,7 +50,3 @@ Inspect the marker report in the output directory at `7_report/discomark_results
 (In the example above that would be: `output/7_report/discomark_results.html`.)
 
 The primer table can also be found in CSV format in `7_report/primers.xls`.
-
-## Acknowledgements
-
-DiscoMark uses [PriFi](http://cgi-www.cs.au.dk/cgi-chili/PriFi/main) for primer design. We thank [Jakob Fredslund](mailto:jakobf@birc.au.dk), who kindly provided us with the source code to PriFi.
