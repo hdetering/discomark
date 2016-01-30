@@ -8,6 +8,8 @@ Discover phylogenetic markers from orthologous sequences.
 
 ## Requirements
 
+DiscoMark is a python script and depends on several programs. The below instructions should work well for Unix-based (Linux, Apple OS X, etc.) operation systems. It might also be possible to run the program under Windows, however this has not been tested.
+
 DiscoMark, uses the following programs:
 * [Python](https://www.python.org) (>= 2.7)
 * [NCBI Blast+](http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST) (>= 2.2.29)
@@ -19,6 +21,17 @@ For Linux and Mac, we include binary files for BLASTn, MAFFT and TrimAl in the r
 Additionally, you'll need the following Python packages:
 * [Biopython](http://biopython.org/) (>= 1.62)
 * [SqlAlchemy](http://www.sqlalchemy.org/) (>= 0.9)
+
+To facilitate the installation of these packages, we suggest to use the python module manager ​pip​(which normally comes along with python3). To check which version is available on your computer type:
+```
+pip -V
+````
+
+To install the two python packages ​Biopython​(​www.biopython.org/​) and ​SQLAlchemy (​www.sqlalchemy.org/​)​you simply type the following:
+```
+sudo pip install biopython 
+sudo pip install sqlalchemy
+```
 
 ## Installation
 
