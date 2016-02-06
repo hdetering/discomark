@@ -81,7 +81,17 @@ div#alignment-viewer {
   overflow: scroll;
 }
 
-.clearfix {
+.border-rounded {
+    border-radius: 25px;
+    border: 2px solid;
+    padding: 0 20px;
+}
+
+.clearfix:after {
+  content: "";
+  visibility: hidden;
+  display: block;
+  height: 0;
   clear: both;
 }
 
@@ -207,4 +217,39 @@ a.button.icon span{
 
 a.button.icon.download span {
   background: url(../img/File_Text.png) no-repeat 0 -4px;
+}
+
+
+/*------------------
+      D3 plots
+ *------------------*/
+.axis text {
+  font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+/* D3 scatter plot */
+.dot {
+  stroke: #000;
+}
+
+/* D3 bar chart */
+/*.barchart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}*/
+.bar {
+  fill: steelblue;
+}
+.bar:hover {
+  fill: brown;
+}
+.barchart .x.axis path {
+  display: none;
 }

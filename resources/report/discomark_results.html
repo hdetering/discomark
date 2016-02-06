@@ -73,15 +73,38 @@
 
   <div id="tabs-plots">
     <div style="overflow:hidden;">
-      <h3>Markers available for input species</h3>
-      <div style="width:40%;float:left;padding-right:10px"><table id="tab-venn-markers-input" class="display compact"></table></div>
-      <div id="chart-venn-markers-input"></div>
 
-    <div/>
-    <div id="divSumSpecies" style="width:300px;">
-      <h3>Species overlap for identified primer sets</h3>
-      <table id="tabSumSpecies" class="display compact" width="100%"></table>
-    </div>
+      <div class="border-rounded">
+        <h2>Input</h2>
+        <div id="div-venn-markers-input">
+          <h3>Input files per species</h3>
+          <div style="width:40%;float:left;padding-right:50px"><table id="tab-venn-markers-input" class="display compact"></table></div>
+          <div id="chart-venn-markers-input"></div>
+        </div>
+      </div>
+
+      <div class="border-rounded" style="overflow:hidden;margin-top:2px">
+        <h2>Output</h2>
+
+        <div id="div-output-sumstats" style="float:left;width:400px;padding-right:50px">
+
+          <div id="div-sum-species">
+            <h3>Species overlap for identified markers</h3>
+            <table id="tabSumSpecies" class="display compact" width="100%"></table>
+          </div>
+
+          <div id="div-bar-markers">
+            <h3>Discovered markers by species</h3>
+            <svg class="barchart"></svg>
+          </div>
+
+        </div>
+
+        <div id="div-scatter-snps" style="float:left">
+          <h3>Marker length vs. SNP count</h3>
+          <div id="chart-scatter-snps"></div>
+        </div>
+      </div>
   </div>
 
   <!--

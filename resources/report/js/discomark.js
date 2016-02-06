@@ -3,76 +3,7 @@
 //    dt_dirty = false;
 var alignmentViewer = null;
 
-// obsolete (DynaTable)
-// function myAttributeWriter(record) {
-//     // `this` is the column object in settings.columns
-//     var html = "";
-//     if (this.id == "export") {
-//         html = /*JSON.stringify(record)+*/'<input type="checkbox" id="' + record.index + '" class="selector" ';
-//         if (record['markerId'] == "412698") { console.log(record); }
-//         if (record[this.id]=="1") {
-//             console.log("on!");
-//             html += "checked ";
-//         }
-//         html += '/>';
-//     }
-//     // include primer pair index in ortholog_id field
-//     else if (this.id == "markerId") {
-//         html = record[this.id] + "_" + record['ps_idx'];
-//     }
-//     // insert a link for NCBI records
-//     else if ((this.id == "fwBlastHit" || this.id == "rvBlastHit") && (record[this.id] != "None")) {
-//         html = "<a href='http://www.ncbi.nlm.nih.gov/nuccore/" + record[this.id] + "' target='_blank'>" + record[this.id] + "</a>";
-//     }
-//     else {
-//         html = record[this.id];
-//     }
-//     return html;
-// };
 
-// obsolete (DynaTable)
-// function simpleCellWriter(column, record) {
-//     var html = column.attributeWriter(record)
-//         td = '<td';
-//
-//     // add css style
-//     td += ' style="text-align: ' + textAlign[column.index] + ';"';
-//
-//     console.log(record['export']);
-//     return td +' id="' +JSON.stringify(record)+ '">' + html + '</td>';
-// };
-
-// obsolete (DynaTable)
-// function dataRowWriter(rowIndex, record, columns, cellWriter) {
-//     var tr = '';
-//
-//     // grab the record's attribute for each column
-//     for (var i = 0, len = columns.length; i < len; i++) {
-//       tr += cellWriter(columns[i], record);
-//     }
-//
-//     return '<tr data-id="' + record['markerId'] + '">' + tr + '</tr>';
-//   };
-
-// obsolete (DynaTable)
-// function selectableRowWriter(rowIndex, record, columns, cellWriter) {
-//     var tr = '<td>Möp!</td>';
-//
-//     // grab the record's attribute for each column
-//     for (var i = 0, len = columns.length; i < len; i++) {
-//       tr += cellWriter(columns[i], record);
-//     }
-//
-//     return '<tr>' + tr + '</tr>';
-// }
-
-// obsolete (DynaTable)
-// function updateDynatable(newRecords) {
-//     var dt = dynatable.data('dynatable');
-//     dt.records.updateFromJson({records: myRecords});
-//     dt.records.init();
-//     dt.process();
-// }
 
 function updateAlignmentViewer(markerId, showSeq) {
     console.log(markerId);
@@ -217,6 +148,171 @@ function setupPrimerTable(tableId) {
   } );
 }
 
+
+function setupScatterSnps(filename) {
+  console.log("let's go!");
+  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+      width = 960 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
+
+  var xValue = function(d) { return d.prod_len; },
+      xScale = d3.scale.linear().range([0, width]);
+
+  var yValue = function(d) { return d.n_snps; },
+      yScale = d3.scale.linear().range([height, 0]);
+
+  // fill color
+  var cValue = function(d) { return +d.n_species; },
+      color = d3.scale.category10();
+
+  var xAxis = d3.svg.axis()
+      .scale(xScale)
+      .orient("bottom");
+
+  var yAxis = d3.svg.axis()
+      .scale(yScale)
+      .orient("left");
+
+  // add graph canvas to DOM
+  var svg = d3.select("#chart-scatter-snps").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  // load data
+  d3.tsv(filename, function(error, data) {
+    if (error) throw error;
+
+    // convert string values into numbers
+    data.forEach(function(d) {
+      d.prod_len = +d.prod_len;
+      d.n_snps = +d.n_snps;
+    });
+
+    // don't want dots overlapping axis, so add in buffer to data domain
+    xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
+    yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
+    xScale.domain(d3.extent(data, function(d) { return d.prod_len; })).nice();
+    yScale.domain(d3.extent(data, function(d) { return d.n_snps; })).nice();
+
+    svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+    .append("text")
+      .attr("class", "label")
+      .attr("x", width)
+      .attr("y", -6)
+      .style("text-anchor", "end")
+      .text("Product length (bp)");
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+      .append("text")
+        .attr("class", "label")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("#SNPs")
+
+    svg.selectAll(".dot")
+        .data(data)
+      .enter().append("circle")
+        .attr("class", "dot")
+        .attr("r", 3.5)
+        .attr("cx", function(d) { return xScale(d.prod_len); })
+        .attr("cy", function(d) { return yScale(d.n_snps); })
+        .style("fill", function(d) { return color(d.n_species); });
+
+    var legend = svg.selectAll(".legend")
+        .data(color.domain())
+        .enter().append("g")
+          .attr("class", "legend")
+          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+    legend.append("rect")
+          .attr("x", width - 18)
+          .attr("width", 18)
+          .attr("height", 18)
+          .style("fill", color);
+
+    legend.append("text")
+          .attr("x", width - 24)
+          .attr("y", 9)
+          .attr("dy", ".35em")
+          .style("text-anchor", "end")
+          .text(function(d) { return d; });
+  });
+}
+
+
+function setupBarMarkers(data) {
+
+  var margin = {top: 20, right: 30, bottom: 30, left: 40},
+      width = 420 - margin.left - margin.right,
+      height = 100 - margin.top - margin.bottom,
+      barHeight = height / data.length;
+
+  var x = d3.scale.linear()
+      .domain([0, d3.max(data, function(d) { return d.value; })])
+      .range([0, width]);
+
+  var y = d3.scale.ordinal()
+      .domain(data.map(function(d) { return d.name; }))
+      .rangeRoundBands([height, 0], .1);
+
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom");
+
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left");
+
+  var chart = d3.select(".barchart")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+  chart.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  chart.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  var bar = chart.selectAll(".bar")
+      .data(data)
+    .enter().append("g")
+      .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")" });
+
+  bar.append("rect")
+      .attr("class", "bar")
+      .attr("height", y.rangeBand())
+      .attr("width", function(d) { return x(d.value); });
+      //.attr("transform", function(d) { return "translate(0," + y(d.name) + ")"; });
+
+
+
+  /*bar.append("text")
+      .attr("x", function(d) { return x(d.value) - 3; })
+      .attr("y", y.rangeBand() / 2)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.value; });*/
+}
+
+function type(d) {
+  d.value = +d.value; // coerce to number
+  return d;
+}
+
+
 function setupVenn(div_id, dataset) {
   var chart = venn.VennDiagram()
                   .width(400)
@@ -280,9 +376,12 @@ function finalizeSummary() {
       columns: [
         { title: "ID" },
         { title: "Species" },
-        { title: "#Input markers" }
+        { title: "#Input files" }
       ]
     } );
+
+    setupScatterSnps("primers.xls");
+    setupBarMarkers(species_markers_output);
 
     // populate species vs. primers table
     $('#tabSumSpecies').DataTable( {
@@ -298,44 +397,16 @@ function finalizeSummary() {
     } );
 }
 
-$( document ).ready(function() {
+  $( document ).ready(function() {
     setupPrimerTable('#primer-t');
     finalizeSummary();
     $('#tabs').tabs();
 //    alert(JSON.stringify(myRecords));
-    /*dynatable = $('#primer-table').dynatable({
-        features: {
-            //paginate: false,
-            pushState: false,
-            search: false
-        },
-        dataset: {
-            perPageDefault: 10,
-            records: myRecords
-        },
-        writers: {
-            _attributeWriter: myAttributeWriter,
-            _cellWriter: simpleCellWriter,
-            _rowWriter: dataRowWriter
-        }
-    });
-    dynatable.bind('dynatable:afterProcess', dtProcessingComplete);
-    dynatable.bind('dynatable:afterUpdate', function() {
-        if (dt_dirty) {
-            dt_dirty = false;
-            updateDynatable(myRecords);
-        }
-    });
-    dtProcessingComplete(); // needs to be called manually once
-    */
 
-    // get marker id for first primer pair
-    //var markerId = myRecords[0]['markerId'];
-    var markerId = myRecords[0][2];
-
-    //$('#alignment').html( alignments['413291'] );
+    // initialize alignment viewer
     alignmentViewer = new CanvasState(document.getElementById('alignmentCanvas'));
-    updateAlignmentViewer(markerId, false);
+    // select first primer pair displayed in table
+    $('#primer-t tbody tr:eq(1)').click();
 
     $('td.export-toggle').click(function() {
         this.toggleClass('selected');
