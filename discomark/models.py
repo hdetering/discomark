@@ -4,6 +4,7 @@
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+from sqlalchemy.orm.session import Session # provides object_session()
 from sqlalchemy.schema import ForeignKey
 Base = declarative_base()
 
@@ -38,12 +39,21 @@ class Function(Base):
     def __repr__(self):
         return "<Function('%s','%s')>" % (self.shortcode, self.description)
 
+# enable PrimerSet<->Species relationship (many-to-many)
+tab_primer_sets_species = Table('primer_sets_species', Base.metadata,
+    Column('id_primer_set', Integer, ForeignKey('primer_sets.id')),
+    Column('id_species', Integer, ForeignKey('species.id'))
+)
+
 class Species(Base):
     """ Species' refer to biological species'. """
     __tablename__ = 'species'
 
     id   = Column(Integer, primary_key=True)
     name = Column(String)
+
+    primer_sets = relationship("PrimerSet", secondary=tab_primer_sets_species,
+      back_populates="species")
 
     def __repr__(self):
         return "<Species(name='%s')>" % self.name
@@ -150,8 +160,16 @@ class PrimerSet(Base):
     num_species = Column(Integer)
     num_snps    = Column(Integer) # number of SNPs between primers
 
+    species = relationship("Species", secondary=tab_primer_sets_species,
+      back_populates="primer_sets")
+
     def __repr__(self):
         return "<PrimerSet(ortholog='%d', product=%dbp)>" % (self.ortholog.id, self.prod_len)
+
+    def add_species(self, species_id):
+        session = Session.object_session(self)
+        db_species = session.query(Species).get(species_id)
+        self.species.append(db_species)
 
     def to_json(self, idx, n_spec):
         format_str = '''  {

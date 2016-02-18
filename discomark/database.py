@@ -419,24 +419,24 @@ var subcats = [
             outfile.write(out_str)
 
     def generateCountsJs(self, target_fn):
-        n_markers = (self.session.query(
+        n_markers_in = (self.session.query(
             Species,
             func.count(distinct(Sequence.id_ortholog)))
             .join(Sequence)
             .group_by(Species)
             .all()
         )
-        n_species = len(n_markers) # how many species are there?
+        n_species = len(n_markers_in) # how many species are there?
 
         out_str  = "var species_key = [\n"
-        out_str += ',\n'.join(["\t[%d, '%s', %d]" % (x[0].id, x[0].name, x[1]) for x in n_markers])
+        out_str += ',\n'.join(["\t[%d, '%s', %d]" % (x[0].id, x[0].name, x[1]) for x in n_markers_in])
         out_str += "\n];\n\n"
 
         out_str += "var marker_sets_input = [ "
 
         # output single-species marker counts
-        out_str += "{sets: ['%s'], size: %d}" % (n_markers[0][0].id, n_markers[0][1])
-        for rec in n_markers[1:]:
+        out_str += "{sets: ['%s'], size: %d}" % (n_markers_in[0][0].id, n_markers_in[0][1])
+        for rec in n_markers_in[1:]:
             out_str += ",\n\t{sets: ['%s'], size: %d}" % (rec[0].id, rec[1])
 
         # determine overlaps
@@ -465,7 +465,21 @@ var subcats = [
             for rec in result:
                 out_str += ",\n\t{sets: [%s], size: %d}" % (','.join(["'%s'" % rec[i+1] for i in range(n_levels)]), rec[0])
 
-        out_str += "];"
+        out_str += "\n];\n\n"
+
+        # load number of markers found for each species
+        n_markers_out = (self.session.query(
+            Species.name,
+            func.count(distinct(PrimerSet.id_ortholog)))
+            .outerjoin(PrimerSet, Species.primer_sets)
+            .group_by(Species)
+            .all()
+        )
+        out_str += "var species_markers_output = [\n"
+        out_str += "\t{name: '%s', value: %d}" % (n_markers_out[0][0], n_markers_out[0][1])
+        for rec in n_markers_out[1:]:
+            out_str += ",\n\t{name: '%s', value: %d}" % (rec[0], rec[1])
+        out_str += "\n];\n"
 
         with open(target_fn, 'wt') as outfile:
             print(outfile.name)

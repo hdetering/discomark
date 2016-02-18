@@ -136,7 +136,7 @@ def add_reference(source_dir, target_dir, genome, hits, mafft_settings, log_fh):
                             print("[WARNING] ortholog sequence '%s' not found in Blast hits." % seq.id, file=log_fh)
                         SeqIO.write(seq, out_f, 'fasta')
                     if len(directions) > 1:
-                        print("[WARNING] reference seq '%s' has ortholog seqs mapped in both directions, thus it will not be included in the alignment." % rec.id)
+                        print("[WARNING] reference seq '%s' has ortholog seqs mapped in both directions, thus it will not be included in the alignment." % rec.id, file=log_fh)
                     else:
                         # retrieve relevant slice of reference
                         start = max(0, rec_hits['range'][0]-100)
@@ -262,6 +262,8 @@ def export_primer_alignments(source_dir, orthologs):
                     species_ids_rv.update(re.findall('id_species=(\d+)', desc))
                 n_species = min(len(species_ids_fw), len(species_ids_rv))
                 ps.num_species = n_species
+                for species_id in (species_ids_fw | species_ids_rv):
+                    ps.add_species(species_id)
 
                 # determine number of SNPs between primers
                 n_snps = 0
