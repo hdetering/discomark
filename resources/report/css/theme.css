@@ -233,9 +233,41 @@ a.button.icon.download span {
   shape-rendering: crispEdges;
 }
 
+.tooltip {
+  display: none;
+
+  color: #333;
+  background: #eee;
+  box-shadow: 0 0 5px #999999;
+  padding: 10px;
+
+  font-size: 12px;
+  text-align: center;
+
+  top: 95px;
+  left: 130px;
+  position: absolute;
+  width: 80px;
+  z-index: 10;
+}
+
+.legend rect {
+  cursor: pointer;
+  stroke-width: 2;
+}
+.legend rect.disabled {
+  fill: transparent !important;
+}
+
 /* D3 scatter plot */
 .dot {
   stroke: #000;
+}
+
+#chart-scatter-snps {
+  width: 960px;
+  height: 500px;
+  position: relative;
 }
 
 /* D3 bar chart */

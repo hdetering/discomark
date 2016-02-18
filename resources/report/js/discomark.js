@@ -14,10 +14,10 @@ function updateAlignmentViewer(markerId, showSeq) {
 
 function record2Fasta(rec) {
     var fastaStr = "";
-    fastaStr += ">" + rec.markerId + "_" + rec.ps_idx + "_fw\n";
-    fastaStr += rec["fwSequence-(5'-3')"] + "\n";
-    fastaStr += ">" + rec.markerId + "_" + rec.ps_idx + "_rv\n";
-    fastaStr += rec["rvSequence-(5'-3')"] + "\n";
+    fastaStr += ">" + rec[2] + "_" + rec[3] + "_fw\n";
+    fastaStr += rec[7] + "\n";
+    fastaStr += ">" + rec[2] + "_" + rec[3] + "_rv\n";
+    fastaStr += rec[8] + "\n";
 
     return fastaStr;
 }
@@ -26,7 +26,7 @@ function onDownloadFasta() {
     // get selected records
     var downloadStr = "";
     for (var i=0; i<myRecords.length; i++) {
-        if (myRecords[i].export == '1') {
+        if (myRecords[i][1] == 1) {
             downloadStr += record2Fasta(myRecords[i]);
         }
     }
@@ -78,7 +78,7 @@ function setupPrimerTable(tableId) {
           orderable: false,
           className: 'dt-body-center',
           render: function (data, type, row, meta){
-            return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+            return '<input type="checkbox" value="' + $('<div/>').text(data).html() + '">';
           }
         },
         { targets: 3,
@@ -146,6 +146,16 @@ function setupPrimerTable(tableId) {
       }
     }
   } );
+
+  // Handle click on checkbox
+  $(tableId + ' tbody').on('click', 'input[type="checkbox"]', function(e) {
+    var $row = $(this).closest('tr');
+    // Get row data
+    var data = table.row($row).data();
+    // Get row ID
+    var rowId = data[0];
+    myRecords[rowId][1] = (myRecords[rowId][1]==0 ? 1 : 0);
+  } );
 }
 
 
@@ -179,6 +189,16 @@ function setupScatterSnps(filename) {
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  // add tooltip
+  var tooltip = d3.select('#chart-scatter-snps').append('div')
+    .attr('class', 'tooltip');
+  tooltip.append('div')
+    .attr('class', 'label'); // data field to display
+  tooltip.append('div')
+    .attr('class', 'x-value'); // data field to display
+  tooltip.append('div')
+    .attr('class', 'y-value'); // data field to display
 
   // load data
   d3.tsv(filename, function(error, data) {
@@ -218,7 +238,7 @@ function setupScatterSnps(filename) {
         .style("text-anchor", "end")
         .text("#SNPs")
 
-    svg.selectAll(".dot")
+    var dot = svg.selectAll(".dot")
         .data(data)
       .enter().append("circle")
         .attr("class", "dot")
@@ -226,6 +246,21 @@ function setupScatterSnps(filename) {
         .attr("cx", function(d) { return xScale(d.prod_len); })
         .attr("cy", function(d) { return yScale(d.n_snps); })
         .style("fill", function(d) { return color(d.n_species); });
+
+    // show tooltip on mouseover
+    dot.on('mouseover', function(d) {
+      tooltip.select('.label').html('primer set <b>' + d.id + '</b>');
+      tooltip.select('.x-value').html('product <b>' + d.prod_len + 'bp</b>');
+      tooltip.select('.y-value').html('<b>' + d.n_snps + '</b> SNPs');
+      tooltip.style('display', 'block');
+    });
+    dot.on('mouseout', function() {
+      tooltip.style('display', 'none');
+    });
+    dot.on('mousemove', function(d) {
+      tooltip.style('top', (d3.event.layerY + 10) + 'px')
+        .style('left', (d3.event.layerX + 10) + 'px');
+    });
 
     var legend = svg.selectAll(".legend")
         .data(color.domain())
@@ -237,7 +272,24 @@ function setupScatterSnps(filename) {
           .attr("x", width - 18)
           .attr("width", 18)
           .attr("height", 18)
-          .style("fill", color);
+          .style("fill", color)
+          .style("stroke", color)
+          .on("click", function(label) {
+              var rect = d3.select(this);
+              var enabled = true;
+              if (rect.attr("class") === "disabled") {
+                rect.attr("class", "");
+              } else {
+                rect.attr("class", "disabled");
+                enabled = false;
+              }
+
+              display = enabled ? "inline" : "none";
+
+              svg.selectAll(".dot")
+                .filter(function(d) {return label == d.n_species;})
+                .attr("display", display);
+           });
 
     legend.append("text")
           .attr("x", width - 24)
