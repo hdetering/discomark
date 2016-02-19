@@ -22,12 +22,12 @@ Additionally, you'll need the following Python packages:
 * [Biopython](http://biopython.org/) (>= 1.62)
 * [SqlAlchemy](http://www.sqlalchemy.org/) (>= 0.9)
 
-To facilitate the installation of these packages, we suggest to use the python module manager ​pip​(which normally comes along with python3). To check which version is available on your computer type:
+To facilitate the installation of these packages, we suggest to use the python module manager [pip](https://pypi.python.org/pypi/pip) (which normally comes with python3). To check which version is available on your computer type:
 ```
 pip -V
-````
+```
 
-To install the two python packages ​Biopython​(​www.biopython.org/​) and ​SQLAlchemy (​www.sqlalchemy.org/​)​you simply type the following:
+To install the two python packages [Biopython](www.biopython.org/) and [SQLAlchemy](www.sqlalchemy.org/) you simply type the following:
 ```
 sudo pip install biopython 
 sudo pip install sqlalchemy
@@ -38,7 +38,6 @@ sudo pip install sqlalchemy
 Download DiscoMark (when setting the `PATH` environment variable, replace `linux` with `mac` if you're on a Mac):
 ```
 git clone https://github.com/hdetering/discomark.git
-export PYTHONPATH=/path/to/discomark/util/
 export PATH=/path/to/discomark/bin/linux:$PATH
 ```
 

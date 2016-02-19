@@ -20,11 +20,11 @@
 from __future__ import division, print_function
 import ast
 import time
-from .alignment import *
-import config as cf
+from prifipy.alignment import *
+import prifipy.config as cf
 import sys
 from math import log10, atan
-from .reversecomplement import reverse_and_complement
+from prifipy.reversecomplement import reverse_and_complement
 
 
 # needed for support of Python versions 2 _and_ 3

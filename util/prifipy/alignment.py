@@ -8,7 +8,7 @@ import sys
 from Bio.Align.Applications import ClustalwCommandline
 from Bio.Align import AlignInfo
 from Bio import AlignIO
-import config as cf
+import prifipy.config as cf
 
 
 
