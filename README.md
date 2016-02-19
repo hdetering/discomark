@@ -38,7 +38,7 @@ sudo pip install sqlalchemy
 Download DiscoMark (when setting the `PATH` environment variable, replace `linux` with `mac` if you're on a Mac):
 ```
 git clone https://github.com/hdetering/discomark.git
-export PATH=/path/to/discomark/bin/linux:$PATH
+export PATH=$PATH:/path/to/discomark/bin/linux
 ```
 
 If you have the programs BLAST+, MAFFT and TrimAl installed on your system you don't need the `export PATH=[...]` statement.
