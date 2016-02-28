@@ -171,8 +171,8 @@ class DataBroker():
 
             # loop through FASTA files
             for fn in sp_files:
-                oid = re.findall("^\d+", os.path.split(fn)[1])[0]
-                #oid = os.path.split(fn)[1].split('.')[0]
+                #oid = re.findall("^\d+", os.path.split(fn)[1])[0]
+                oid = os.path.split(fn)[1].split('.')[0]
 
                 db_ortho = self.get_or_create(Ortholog, id=str(oid))
                 db_file = File(path=fn)

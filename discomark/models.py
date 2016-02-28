@@ -62,7 +62,7 @@ class Ortholog(Base):
     """ Orthologs are groups of sequences encoding for the same gene. """
     __tablename__ = 'orthologs'
 
-    id          = Column(Integer, primary_key=True)
+    id          = Column(String, primary_key=True)
     prot        = Column(String)
     sequences   = relationship("Sequence", backref="ortholog")
     files       = relationship("File", backref="ortholog")
