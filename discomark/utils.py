@@ -1,5 +1,7 @@
 from __future__ import division, print_function
+import csv
 from glob import glob
+import json
 import os
 import re
 import shutil
@@ -106,6 +108,16 @@ def generateAlignmentJs(primer_dir, target_dir):
     print(f.name)
     f.write(out_str)
     f.close()
+
+def csv_to_js(fn_in, fn_out, delim = ',', varname = 'data'):
+    f_csv = open(fn_in)
+    with open(fn_out, 'w') as f_js:
+        f_js.write("%s = [\n" % varname)
+        reader = csv.DictReader(f_csv, delimiter=delim)
+        for row in reader:
+            json.dump(row, f_js)
+            f_js.write(',\n')
+        f_js.write("];\n")
 
 def purge_dir(path_to_dir):
     for filename in os.listdir(path_to_dir):

@@ -26,6 +26,7 @@
   <!--script src="js/dynatable/jquery.dynatable.js"></script-->
   <script src="js/summary.js"></script>
   <script src="js/counts.js"></script>
+  <script src="js/primers.js"></script>
   <script src="js/records.js"></script>
   <script src="js/alignments.js"></script>
   <script src="js/discomark-aln.js"></script>
@@ -74,12 +75,20 @@
   <div id="tabs-plots">
     <div style="overflow:hidden;">
 
-      <div class="border-rounded">
+      <div class="border-rounded" style="overflow:hidden">
         <h2>Input</h2>
         <div id="div-venn-markers-input">
           <h3>Input files per species</h3>
-          <div style="width:40%;float:left;padding-right:50px"><table id="tab-venn-markers-input" class="display compact"></table></div>
-          <div id="chart-venn-markers-input"></div>
+          <div style="width:400px;float:left;padding-right:50px">
+            <table id="tab-venn-markers-input" class="display compact"></table>
+            <p><strong>Table 1</strong>: Number of sequence files for each species contained in the input of this run.</p>
+          </div>
+          <div style="width:400px;float:left">
+            <div id="chart-venn-markers-input"></div>
+            <p><strong>Figure 1</strong>: Overlap of input sequences (e.g. orthologous groups) with respect to species.
+              Higher overlap increases chances that primers can be designed covering multiple species.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -91,18 +100,25 @@
           <div id="div-sum-species">
             <h3>Species overlap for identified markers</h3>
             <table id="tabSumSpecies" class="display compact" width="100%"></table>
+            <p><strong>Table 2</strong>: Grouping candidate markers (e.g. orthologous group of sequences) and primer pairs by the number of species that they cover.</p>
           </div>
 
           <div id="div-bar-markers">
             <h3>Discovered markers by species</h3>
             <svg class="barchart"></svg>
+            <p><strong>Figure 2</strong>: Number of markers that cover each species.
+              Markers covering multiple species are included in the count for each of them.
+            </p>
           </div>
 
         </div>
 
-        <div id="div-scatter-snps" style="float:left">
+        <div id="div-scatter-snps" style="float:left;width:960px">
           <h3>Marker length vs. SNP count</h3>
           <div id="chart-scatter-snps"></div>
+          <p><strong>Figure 3</strong>: Scatter plot displaying number of SNPs vs. product length for each primer pair.
+            Colors indicate the number of species covered by each SNP. Click on the legend items to show/hide sets of data points.
+          </p>
         </div>
       </div>
   </div>

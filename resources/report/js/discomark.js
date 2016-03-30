@@ -159,8 +159,8 @@ function setupPrimerTable(tableId) {
 }
 
 
-function setupScatterSnps(filename) {
-  console.log("let's go!");
+function setupScatterSnps(data) {
+  console.log("initializing scatter plot...");
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
@@ -201,8 +201,8 @@ function setupScatterSnps(filename) {
     .attr('class', 'y-value'); // data field to display
 
   // load data
-  d3.tsv(filename, function(error, data) {
-    if (error) throw error;
+  //d3.tsv(filename, function(error, data) {
+  //  if (error) throw error;
 
     // convert string values into numbers
     data.forEach(function(d) {
@@ -266,7 +266,7 @@ function setupScatterSnps(filename) {
         .data(color.domain())
         .enter().append("g")
           .attr("class", "legend")
-          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+          .attr("transform", function(d, i) { return "translate(0," + d * 20 + ")"; });
 
     legend.append("rect")
           .attr("x", width - 18)
@@ -297,13 +297,13 @@ function setupScatterSnps(filename) {
           .attr("dy", ".35em")
           .style("text-anchor", "end")
           .text(function(d) { return d; });
-  });
+  //});
 }
 
 
 function setupBarMarkers(data) {
 
-  var margin = {top: 20, right: 30, bottom: 30, left: 40},
+  var margin = {top: 20, right: 30, bottom: 30, left: 80},
       width = 420 - margin.left - margin.right,
       height = 100 - margin.top - margin.bottom,
       barHeight = height / data.length;
@@ -432,7 +432,7 @@ function finalizeSummary() {
       ]
     } );
 
-    setupScatterSnps("primers.xls");
+    setupScatterSnps(primers);
     setupBarMarkers(species_markers_output);
 
     // populate species vs. primers table
