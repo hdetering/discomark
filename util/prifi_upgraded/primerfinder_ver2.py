@@ -195,7 +195,7 @@ def ambiguityCode( col ):
         return 'B'
     if x:  # intron column with gaps in all other sequences
         return 'intron-in-primer-error'
-    if n:
+    if n or (a and c and g and t): # 'N' is also used if all 4 nucleotides are observed
         return 'N'
 
     return 'no-mismatch-error' # no mismatch in this column OR all gaps
