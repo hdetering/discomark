@@ -303,8 +303,8 @@ Avg\. #sequences in primer alignments: \S+ / \S+
 
         with open(filename, 'wt') as outfile:
             for ps in primer_sets:
-                outfile.write(">%d_%d_fw\n%s\n" % (ps.id, ps.id_ortholog, ps.seq_fw))
-                outfile.write(">%d_%d_rv\n%s\n" % (ps.id, ps.id_ortholog, ps.seq_rv))
+                outfile.write(">%d_%s_fw\n%s\n" % (ps.id, ps.id_ortholog, ps.seq_fw))
+                outfile.write(">%d_%s_rv\n%s\n" % (ps.id, ps.id_ortholog, ps.seq_rv))
 
     # load primer BLAST hits from XML file
     def load_primer_blast_hits_xml(self, blast_xml):
