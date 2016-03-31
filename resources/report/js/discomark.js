@@ -185,6 +185,7 @@ function setupScatterSnps(data) {
 
   // add graph canvas to DOM
   var svg = d3.select("#chart-scatter-snps").append("svg")
+      .attr("xmlns", "http://www.w3.org/2000/svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -287,7 +288,7 @@ function setupScatterSnps(data) {
               display = enabled ? "inline" : "none";
 
               svg.selectAll(".dot")
-                .filter(function(d) {return label == d.n_species;})
+                .filter(function(d) {return label == d.n_species + " species";})
                 .attr("display", display);
            });
 
@@ -298,6 +299,14 @@ function setupScatterSnps(data) {
           .style("text-anchor", "end")
           .text(function(d) { return d; });
   //});
+
+  // TODO: create download link
+  /*var container = d3.select('#chart-scatter-snps');
+  var d3_svg = container.select('svg');
+  xml = (new XMLSerializer()).serializeToString(d3_svg.node()); // convert node to xml string
+  container.append("a")
+      .attr("href", "data:application/octet-stream;base64," + btoa(xml)) // create data uri
+      .html("Download");*/
 }
 
 
@@ -411,6 +420,8 @@ function setupVenn(div_id, dataset) {
           .style("fill-opacity", d.sets.length == 1 ? .25 : .0)
           .style("stroke-opacity", 0);
   });
+
+  div.select('svg').attr("xmlns", "http://www.w3.org/2000/svg");
 }
 
 function finalizeSummary() {

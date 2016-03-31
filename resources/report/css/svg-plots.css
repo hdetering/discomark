@@ -1,0 +1,39 @@
+/*------------------*
+ |     D3 plots     |
+ *------------------*/
+
+/*** axes ***/
+.axis text {
+  font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+/*** legends ***/
+.legend rect {
+  cursor: pointer;
+  stroke-width: 2;
+}
+.legend rect.disabled {
+  fill: transparent !important;
+}
+
+/*** D3 scatter plot ***/
+.dot {
+  stroke: #000;
+}
+
+/*** D3 bar chart ***/
+.bar {
+  fill: steelblue;
+}
+.bar:hover {
+  fill: brown;
+}
+.barchart .x.axis path {
+  display: none;
+}

@@ -223,15 +223,12 @@ a.button.icon.download span {
 /*------------------
       D3 plots
  *------------------*/
-.axis text {
-  font: 10px sans-serif;
-}
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
+
+ #chart-scatter-snps {
+   width: 960px;
+   height: 500px;
+   position: relative;
+ }
 
 .tooltip {
   display: none;
@@ -249,39 +246,4 @@ a.button.icon.download span {
   position: absolute;
   width: 80px;
   z-index: 10;
-}
-
-.legend rect {
-  cursor: pointer;
-  stroke-width: 2;
-}
-.legend rect.disabled {
-  fill: transparent !important;
-}
-
-/* D3 scatter plot */
-.dot {
-  stroke: #000;
-}
-
-#chart-scatter-snps {
-  width: 960px;
-  height: 500px;
-  position: relative;
-}
-
-/* D3 bar chart */
-/*.barchart text {
-  fill: white;
-  font: 10px sans-serif;
-  text-anchor: end;
-}*/
-.bar {
-  fill: steelblue;
-}
-.bar:hover {
-  fill: brown;
-}
-.barchart .x.axis path {
-  display: none;
 }
