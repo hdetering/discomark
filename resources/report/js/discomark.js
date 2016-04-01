@@ -288,7 +288,7 @@ function setupScatterSnps(data) {
               display = enabled ? "inline" : "none";
 
               svg.selectAll(".dot")
-                .filter(function(d) {return label == d.n_species + " species";})
+                .filter(function(d) {return label == d.n_species;})
                 .attr("display", display);
            });
 
@@ -297,7 +297,7 @@ function setupScatterSnps(data) {
           .attr("y", 9)
           .attr("dy", ".35em")
           .style("text-anchor", "end")
-          .text(function(d) { return d; });
+          .text(function(d) { return d + " species"; });
   //});
 
   // TODO: create download link

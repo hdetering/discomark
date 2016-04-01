@@ -154,7 +154,7 @@ if __name__ == '__main__':
     print("\nGenerating data for report...\n", file=sys.stderr)
     model.primersets_to_records_js(os.path.join(report_dir, 'js', 'records.js'))
     model.primersets_to_csv(os.path.join(report_dir, 'primers.xls'), '\t')
-    utils.csv_to_json('primers.xls', 'primers.json', '\t')
+    utils.csv_to_js(os.path.join(report_dir, 'primers.xls'), os.path.join(report_dir, 'js', 'primers.js'), '\t', 'primers')
     utils.generateAlignmentJs(primer_dir, os.path.join(report_dir, 'js'))
     model.generateSummaryJs(os.path.join(report_dir, 'js', 'summary.js'))
     model.generateCountsJs(os.path.join(report_dir, 'js', 'counts.js'))
