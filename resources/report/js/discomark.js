@@ -193,7 +193,9 @@ function setupScatterSnps(data) {
 
   // add tooltip
   var tooltip = d3.select('#chart-scatter-snps').append('div')
+    .attr('id', 'tooltip-scatter-snps')
     .attr('class', 'tooltip');
+  tooltip.style('width', '80px');
   tooltip.append('div')
     .attr('class', 'label'); // data field to display
   tooltip.append('div')
@@ -321,6 +323,7 @@ function setupBarMarkers(data) {
       .domain([0, d3.max(data, function(d) { return d.value; })])
       .range([0, width]);
 
+  // note: y-axis labels will appear from bottom to top!
   var y = d3.scale.ordinal()
       .domain(data.map(function(d) { return d.name; }))
       .rangeRoundBands([height, 0], .1);
@@ -348,10 +351,13 @@ function setupBarMarkers(data) {
       .attr("class", "y axis")
       .call(yAxis);
 
+  // need to know how many bars there are to place bars from bottom to top
+  var num_items = d3.selectAll(species_markers_output).size();
   var bar = chart.selectAll(".bar")
       .data(data)
     .enter().append("g")
-      .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")" });
+      .attr("transform", function(d, i) {
+        return "translate(0," + (num_items-i-1) * barHeight + ")" });
 
   bar.append("rect")
       .attr("class", "bar")
@@ -437,9 +443,11 @@ function finalizeSummary() {
       searching: false,
       info: false,
       columns: [
-        { title: "ID" },
+        { title: "ID",
+          className: "dt-center" },
         { title: "Species" },
-        { title: "#Input files" }
+        { title: "#Input files",
+          className: "dt-right" }
       ]
     } );
 
@@ -453,9 +461,12 @@ function finalizeSummary() {
       searching: false,
       info: false,
       columns: [
-        { title: "#Species" },
-        { title: "#Orthologs" },
-        { title: "#PrimerPairs" }
+        { title: "#Species",
+          className: "dt-center" },
+        { title: "#Orthologs",
+          className: "dt-right" },
+        { title: "#PrimerPairs",
+          className: "dt-right" }
       ]
     } );
 }

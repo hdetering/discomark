@@ -305,7 +305,13 @@ def blast_primers_offline(primer_dir, out_dir):
     # cline = ['blastn'] + blast_options
     cline = NcbiblastnCommandline(query=query_fn, db='nt', out=out_fn, outfmt='5') #'"6 std sstrand"')
     print("\t%s\n" % cline)
-    cline()
+    # retry 3 times if request fails
+    for i in range(3):
+        try:
+            cline()
+        except urllib2.HTTPError:
+            continue
+        break
 
     # parse BLAST hits
     #print("\tLoading BLAST hits...\n")
