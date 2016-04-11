@@ -8,6 +8,8 @@ Discovery of phylogenetic markers from orthologous sequences.
 
 ## Citation
 
+If you use DiscoMark in you research, please cite
+
 Detering H, Rutschmann S, Simon S, Fredslund J, Monaghan MT. 2016. DiscoMark: Nuclear marker discovery from orthologous sequences using low coverage genome data. bioRxiv doi: 10.1101/047282
 
 
