@@ -62,13 +62,13 @@ class Ortholog(Base):
     """ Orthologs are groups of sequences encoding for the same gene. """
     __tablename__ = 'orthologs'
 
-    id          = Column(Integer, primary_key=True)
+    id          = Column(String, primary_key=True)
     prot        = Column(String)
     sequences   = relationship("Sequence", backref="ortholog")
     files       = relationship("File", backref="ortholog")
 
     def __repr__(self):
-        return "<Ortholog(%d)>" % self.id
+        return "<Ortholog(%s)>" % self.id
 
 class OrthologAnnotation(Base):
     """ OrthologAnnotations specify functional aspects for Orthologs. """
@@ -164,7 +164,7 @@ class PrimerSet(Base):
       back_populates="primer_sets")
 
     def __repr__(self):
-        return "<PrimerSet(ortholog='%d', product=%dbp)>" % (self.ortholog.id, self.prod_len)
+        return "<PrimerSet(ortholog='%s', product=%dbp)>" % (self.ortholog.id, self.prod_len)
 
     def add_species(self, species_id):
         session = Session.object_session(self)

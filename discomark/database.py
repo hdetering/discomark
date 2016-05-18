@@ -183,8 +183,8 @@ class DataBroker():
                 if not seqs_ok:
                     continue
 
-                oid = re.findall("^\d+", os.path.split(fn)[1])[0]
-                #oid = os.path.split(fn)[1].split('.')[0]
+                #oid = re.findall("^\d+", os.path.split(fn)[1])[0]
+                oid = os.path.split(fn)[1].split('.')[0]
 
                 db_ortho = self.get_or_create(Ortholog, id=str(oid))
                 db_file = File(path=fn)
@@ -315,8 +315,8 @@ Avg\. #sequences in primer alignments: \S+ / \S+
 
         with open(filename, 'wt') as outfile:
             for ps in primer_sets:
-                outfile.write(">%d_%d_fw\n%s\n" % (ps.id, ps.id_ortholog, ps.seq_fw))
-                outfile.write(">%d_%d_rv\n%s\n" % (ps.id, ps.id_ortholog, ps.seq_rv))
+                outfile.write(">%d_%s_fw\n%s\n" % (ps.id, ps.id_ortholog, ps.seq_fw))
+                outfile.write(">%d_%s_rv\n%s\n" % (ps.id, ps.id_ortholog, ps.seq_rv))
 
     # load primer BLAST hits from XML file
     def load_primer_blast_hits_xml(self, blast_xml):
@@ -441,15 +441,15 @@ var subcats = [
         n_species = len(n_markers_in) # how many species are there?
 
         out_str  = "var species_key = [\n"
-        out_str += ',\n'.join(["\t[%d, '%s', %d]" % (x[0].id, x[0].name, x[1]) for x in n_markers_in])
+        out_str += ',\n'.join(["\t['%s', '%s', %d]" % (chr(64+x[0].id), x[0].name, x[1]) for x in n_markers_in])
         out_str += "\n];\n\n"
 
         out_str += "var marker_sets_input = [ "
 
         # output single-species marker counts
-        out_str += "{sets: ['%s'], size: %d}" % (n_markers_in[0][0].id, n_markers_in[0][1])
+        out_str += "{sets: ['%s'], size: %d}" % (chr(64+n_markers_in[0][0].id), n_markers_in[0][1])
         for rec in n_markers_in[1:]:
-            out_str += ",\n\t{sets: ['%s'], size: %d}" % (rec[0].id, rec[1])
+            out_str += ",\n\t{sets: ['%s'], size: %d}" % (chr(64+rec[0].id), rec[1])
 
         # determine overlaps
         from sqlalchemy.sql.expression import alias, join, select
@@ -475,7 +475,7 @@ var subcats = [
             # execute query statement
             result = self.session.execute(stmt).fetchall()
             for rec in result:
-                out_str += ",\n\t{sets: [%s], size: %d}" % (','.join(["'%s'" % rec[i+1] for i in range(n_levels)]), rec[0])
+                out_str += ",\n\t{sets: [%s], size: %d}" % (','.join(["'%s'" % chr(64+rec[i+1]) for i in range(n_levels)]), rec[0])
 
         out_str += "\n];\n\n"
 

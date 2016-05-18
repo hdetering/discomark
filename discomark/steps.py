@@ -101,7 +101,10 @@ def map_to_reference(query_dir, mapped_dir, genome, settings, log_fh=sys.stderr)
     query_file = open(query_fn, 'wt')
     for f in query_files:
         o_id = os.path.split(f)[1].split('.')[0]
-        SeqIO.write(SeqIO.parse(open(f, 'rt'), 'fasta'), query_file, 'fasta')
+        for rec in SeqIO.parse(f, 'fasta'):
+          s = str(rec.seq).replace('-', 'N')
+          rec.seq = Seq(s)
+          query_file.write(rec.format('fasta'))
     query_file.close()
 
     # run BLAST
@@ -302,7 +305,13 @@ def blast_primers_offline(primer_dir, out_dir):
     # cline = ['blastn'] + blast_options
     cline = NcbiblastnCommandline(query=query_fn, db='nt', out=out_fn, outfmt='5') #'"6 std sstrand"')
     print("\t%s\n" % cline)
-    cline()
+    # retry 3 times if request fails
+    for i in range(3):
+        try:
+            cline()
+        except urllib2.HTTPError:
+            continue
+        break
 
     # parse BLAST hits
     #print("\tLoading BLAST hits...\n")

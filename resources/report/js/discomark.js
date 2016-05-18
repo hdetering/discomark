@@ -159,8 +159,8 @@ function setupPrimerTable(tableId) {
 }
 
 
-function setupScatterSnps(filename) {
-  console.log("let's go!");
+function setupScatterSnps(data) {
+  console.log("initializing scatter plot...");
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
@@ -185,6 +185,7 @@ function setupScatterSnps(filename) {
 
   // add graph canvas to DOM
   var svg = d3.select("#chart-scatter-snps").append("svg")
+      .attr("xmlns", "http://www.w3.org/2000/svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -192,7 +193,9 @@ function setupScatterSnps(filename) {
 
   // add tooltip
   var tooltip = d3.select('#chart-scatter-snps').append('div')
+    .attr('id', 'tooltip-scatter-snps')
     .attr('class', 'tooltip');
+  tooltip.style('width', '80px');
   tooltip.append('div')
     .attr('class', 'label'); // data field to display
   tooltip.append('div')
@@ -201,8 +204,8 @@ function setupScatterSnps(filename) {
     .attr('class', 'y-value'); // data field to display
 
   // load data
-  d3.tsv(filename, function(error, data) {
-    if (error) throw error;
+  //d3.tsv(filename, function(error, data) {
+  //  if (error) throw error;
 
     // convert string values into numbers
     data.forEach(function(d) {
@@ -266,7 +269,7 @@ function setupScatterSnps(filename) {
         .data(color.domain())
         .enter().append("g")
           .attr("class", "legend")
-          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+          .attr("transform", function(d, i) { return "translate(0," + d * 20 + ")"; });
 
     legend.append("rect")
           .attr("x", width - 18)
@@ -296,14 +299,22 @@ function setupScatterSnps(filename) {
           .attr("y", 9)
           .attr("dy", ".35em")
           .style("text-anchor", "end")
-          .text(function(d) { return d; });
-  });
+          .text(function(d) { return d + " species"; });
+  //});
+
+  // TODO: create download link
+  /*var container = d3.select('#chart-scatter-snps');
+  var d3_svg = container.select('svg');
+  xml = (new XMLSerializer()).serializeToString(d3_svg.node()); // convert node to xml string
+  container.append("a")
+      .attr("href", "data:application/octet-stream;base64," + btoa(xml)) // create data uri
+      .html("Download");*/
 }
 
 
 function setupBarMarkers(data) {
 
-  var margin = {top: 20, right: 30, bottom: 30, left: 40},
+  var margin = {top: 20, right: 30, bottom: 30, left: 80},
       width = 420 - margin.left - margin.right,
       height = 100 - margin.top - margin.bottom,
       barHeight = height / data.length;
@@ -312,6 +323,7 @@ function setupBarMarkers(data) {
       .domain([0, d3.max(data, function(d) { return d.value; })])
       .range([0, width]);
 
+  // note: y-axis labels will appear from bottom to top!
   var y = d3.scale.ordinal()
       .domain(data.map(function(d) { return d.name; }))
       .rangeRoundBands([height, 0], .1);
@@ -339,10 +351,13 @@ function setupBarMarkers(data) {
       .attr("class", "y axis")
       .call(yAxis);
 
+  // need to know how many bars there are to place bars from bottom to top
+  var num_items = d3.selectAll(species_markers_output).size();
   var bar = chart.selectAll(".bar")
       .data(data)
     .enter().append("g")
-      .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")" });
+      .attr("transform", function(d, i) {
+        return "translate(0," + (num_items-i-1) * barHeight + ")" });
 
   bar.append("rect")
       .attr("class", "bar")
@@ -411,6 +426,8 @@ function setupVenn(div_id, dataset) {
           .style("fill-opacity", d.sets.length == 1 ? .25 : .0)
           .style("stroke-opacity", 0);
   });
+
+  div.select('svg').attr("xmlns", "http://www.w3.org/2000/svg");
 }
 
 function finalizeSummary() {
@@ -426,13 +443,15 @@ function finalizeSummary() {
       searching: false,
       info: false,
       columns: [
-        { title: "ID" },
+        { title: "ID",
+          className: "dt-center" },
         { title: "Species" },
-        { title: "#Input files" }
+        { title: "#Input files",
+          className: "dt-right" }
       ]
     } );
 
-    setupScatterSnps("primers.xls");
+    setupScatterSnps(primers);
     setupBarMarkers(species_markers_output);
 
     // populate species vs. primers table
@@ -442,9 +461,12 @@ function finalizeSummary() {
       searching: false,
       info: false,
       columns: [
-        { title: "#Species" },
-        { title: "#Orthologs" },
-        { title: "#PrimerPairs" }
+        { title: "#Species",
+          className: "dt-center" },
+        { title: "#Orthologs",
+          className: "dt-right" },
+        { title: "#PrimerPairs",
+          className: "dt-right" }
       ]
     } );
 }
