@@ -21,7 +21,7 @@ DiscoMark, uses the following programs:
 * [Python](https://www.python.org) (>= 2.7)
 * [NCBI Blast+](http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST) (>= 2.2.29)
 * [MAFFT](http://mafft.cbrc.jp/alignment/software) (>= 6.864b)
-* [TrimAl](https://github.com/scapella/trimal) (>= 1.2)
+* [TrimAl](https://github.com/scapella/trimal) (>= 1.4)
 
 For Linux and Mac, we include binary files for BLASTn, MAFFT and TrimAl in the respective `bin/` folders. See the [Installation](#installation) section on how to use them.
 
