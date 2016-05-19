@@ -48,7 +48,7 @@ git clone https://github.com/hdetering/discomark.git
 export PATH=$PATH:$PWD/discomark/bin/linux
 ```
 
-If you have the programs BLAST+, MAFFT and TrimAl installed on your system you don't need the `export PATH=[...]` statement.
+If you have the programs BLAST+, MAFFT and TrimAl installed on your system you don't need the `export PATH=[...]` statement. In case you want to use the provided binaries, make sure to execute the `export PATH=[...]` statement each time you login or make the change persistent in your user profile (works slightly different for [linux](http://superuser.com/questions/324832/how-can-i-permanently-add-a-path-to-my-bash-profile) and [mac](http://hathaway.cc/post/69201163472/how-to-edit-your-path-environment-variables-on-mac)).
 
 ## How to run DiscoMark
 
