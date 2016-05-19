@@ -4,6 +4,7 @@ from sqlalchemy import create_engine, desc, distinct, func
 from sqlalchemy.orm import sessionmaker
 import os, re, sys
 from glob import glob
+from Bio import Alphabet
 from Bio import SeqIO
 from Bio.Blast import NCBIXML
 
@@ -167,10 +168,21 @@ class DataBroker():
             session.add(db_species)
 
             sp_dir = os.path.join(input_dir, sp_name)
-            sp_files = glob(os.path.join(sp_dir, '*.fa'))
+            sp_files = glob(os.path.join(sp_dir, '*.fa')) + glob(os.path.join(sp_dir, '*.fasta'))
 
             # loop through FASTA files
             for fn in sp_files:
+                # read sequences
+                recs = list(SeqIO.parse(fn, 'fasta', alphabet=Alphabet.IUPAC.unambiguous_dna))
+                seqs_ok = True
+                # make sure sequences are DNA
+                for r in recs:
+                    if not Alphabet._verify_alphabet(r.seq):
+                        seqs_ok = False
+                        break
+                if not seqs_ok:
+                    continue
+
                 #oid = re.findall("^\d+", os.path.split(fn)[1])[0]
                 oid = os.path.split(fn)[1].split('.')[0]
 
