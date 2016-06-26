@@ -1,6 +1,6 @@
 from __future__ import division, print_function
 from discomark.models import *
-from sqlalchemy import create_engine, desc, distinct, func
+from sqlalchemy import create_engine, desc, distinct, func, bindparam
 from sqlalchemy.orm import sessionmaker
 import os, re, sys
 from glob import glob
@@ -309,6 +309,22 @@ Avg\. #sequences in primer alignments: \S+ / \S+
         session.commit()
         session.close()
 
+    # set flag indicating if all Sequences of an Ortholog hit the same BLAST target
+    def update_uniq_ref_flag(self):
+        hit_counts = self.session.query(Ortholog.id, func.count(distinct(Mapping.refseq))) \
+                         .outerjoin(Sequence) \
+                         .join(Mapping) \
+                         .group_by(Ortholog.id) \
+                         .all()
+        updata = [ { 'oid': x[0], 'uref': True if x[1]<=1 else False } for x in hit_counts ]
+
+        otab = Ortholog.__table__
+        stmt = otab.update() \
+                   .where(otab.c.id == bindparam('oid')) \
+                   .values({otab.c.uniq_ref : bindparam('uref')})
+        self.session.execute(stmt, updata)
+        self.session.commit()
+
     # export primers to file
     def export_primers_to_file(self, filename):
         primer_sets = self.session.query(PrimerSet).all()
@@ -359,7 +375,7 @@ Avg\. #sequences in primer alignments: \S+ / \S+
                             .order_by(desc("n_species"), Ortholog.id) \
                             .all()
 
-        field_names = ['id','marker_id','n_species','n_snps','prod_len',
+        field_names = ['id','marker_id','n_species','n_snps','prod_len','uref',
                        'fw_sequence','rv_sequence','Tm','primer_len','fw_blast_hit','rv_blast_hit','annotations']
         csv = sep.join(field_names) + '\n'
         for res in primer_sets:

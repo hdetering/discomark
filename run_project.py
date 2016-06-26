@@ -125,6 +125,7 @@ if __name__ == '__main__':
             out_fn = steps.map_to_reference(source_dir, mapped_dir, reference, settings, logfile)
             model.load_blast_hits(out_fn)
             hits = model.get_best_hits()
+            model.update_uniq_ref_flag()
             settings = config.items('04_MAFFT_settings')
             steps.add_reference(source_dir, mapped_dir, reference, hits, settings, logfile)
         else:
