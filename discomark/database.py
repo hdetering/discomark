@@ -173,11 +173,11 @@ class DataBroker():
             # loop through FASTA files
             for fn in sp_files:
                 # read sequences
-                recs = list(SeqIO.parse(fn, 'fasta', alphabet=Alphabet.IUPAC.ambiguous_dna))
+                recs = list(SeqIO.parse(fn, 'fasta', alphabet=Alphabet.Gapped(IUPAC.ambiguous_dna)))
                 seqs_ok = True
                 # make sure sequences are DNA
                 for r in recs:
-                    if not Alphabet._verify_alphabet(r.seq):
+                    if not Alphabet._verify_alphabet(r.seq.upper()):
                         seqs_ok = False
                         break
                 if not seqs_ok:
