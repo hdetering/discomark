@@ -282,7 +282,7 @@ def export_primer_alignments(source_dir, orthologs):
 
 
 #############################################################
-# 7. primer BLAST                                           #
+# 6. primer BLAST                                           #
 #    BLAST primers against NCBI nt database for specificity #
 #############################################################
 
@@ -291,10 +291,23 @@ def blast_primers_online(primer_dir, out_fn, log_fh=sys.stderr):
     primerfile = os.path.join(primer_dir, 'primers.fa')
     print(datetime.datetime.now(), file=log_fh)
     print("Performing remote BLAST search for primers...", file=log_fh)
-    handle = NCBIWWW.qblast('blastn', 'refseq_mrna', open(primerfile).read(), entrez_query='txid2[Orgn] OR txid9606[Orgn]')
-    print(datetime.datetime.now(), file=log_fh)
-    with open(out_fn, 'w') as outfile:
-        outfile.write(handle.read())
+    primer_seqs = open(primerfile).read()
+    max_trials = 3
+    trials = 0
+    while trials < max_trials:
+        trials += 1
+        try:
+            handle = NCBIWWW.qblast('blastn', 'refseq_mrna', primer_seqs, entrez_query='txid2[Orgn] OR txid9606[Orgn]')
+            print(datetime.datetime.now(), file=log_fh)
+            with open(out_fn, 'w') as outfile:
+                outfile.write(handle.read())
+            break
+        except:
+            print("An error occurred. (trial %d of %d)" % (trial, max_trials), file=log_fh)
+            if (trials < max_trials):
+                print("  -> retrying...", file=log_fh)
+            else:
+                print("  -> giving up.", file=log_fh)
 
 # run local BLAST
 def blast_primers_offline(primer_dir, out_dir):
