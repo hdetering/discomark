@@ -8,7 +8,7 @@ from sqlalchemy.orm.session import Session # provides object_session()
 from sqlalchemy.schema import ForeignKey
 Base = declarative_base()
 
-from sqlalchemy import Table, Column, Float, Integer, String, Text
+from sqlalchemy import Table, Column, Boolean, Float, Integer, String, Text
 
 class Category(Base):
     """ Functional categories used in ortholog annotations. """
@@ -64,6 +64,7 @@ class Ortholog(Base):
 
     id          = Column(String, primary_key=True)
     prot        = Column(String)
+    uniq_ref    = Column(Boolean)
     sequences   = relationship("Sequence", backref="ortholog")
     files       = relationship("File", backref="ortholog")
 
@@ -179,6 +180,7 @@ class PrimerSet(Base):
     "ps_idx": "%s",
     "no.OfSpecies": "%s",
     "no.OfSnps": "%s",
+    "uniqRef": "%s",
     "est.ProductLength-(bp)": "%s",
     "fwSequence-(5'-3')": "%s",
     "rvSequence-(5'-3')": "%s",
@@ -194,6 +196,7 @@ class PrimerSet(Base):
                              self.num_species,
                              self.num_snps,
                              self.prod_len,
+                             self.ortholog.uniq_ref,
                              self.seq_fw,
                              self.seq_rv,
                              self.tm_fw, self.tm_rv,
@@ -203,8 +206,8 @@ class PrimerSet(Base):
                              ','.join([f.shortcode for f in self.ortholog.functions]))
 
     def to_json_array(self, idx):
-        # idx, export, marker_id, ps_idx, species, snps, prod_len, seq_fw, seq_rv, Tm, len, blast_fw, blast_rv, categories
-        format_str = '''[%d, 0, "%s", "%s", %d, %d, %d, "%s", "%s", "%0.1f/%0.1f", "%d/%d", "%s", "%s", "%s"]'''
+        # idx, export, marker_id, ps_idx, species, snps, prod_len, uref, seq_fw, seq_rv, Tm, len, blast_fw, blast_rv, categories
+        format_str = '''[%d, 0, "%s", "%s", %d, %d, %d, "%s", "%s", "%s", "%0.1f/%0.1f", "%d/%d", "%s", "%s", "%s"]'''
 
         return format_str % (idx,
                              self.ortholog.id,
@@ -212,6 +215,7 @@ class PrimerSet(Base):
                              self.num_species,
                              self.num_snps,
                              self.prod_len,
+                             self.ortholog.uniq_ref,
                              self.seq_fw,
                              self.seq_rv,
                              self.tm_fw, self.tm_rv,
@@ -227,6 +231,7 @@ class PrimerSet(Base):
                         str(self.num_species),
                         str(self.num_snps),
                         str(self.prod_len),
+                        str(self.ortholog.uniq_ref),
                         self.seq_fw,
                         self.seq_rv,
                         "%s/%s" % (self.tm_fw, self.tm_rv),

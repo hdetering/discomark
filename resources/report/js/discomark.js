@@ -62,6 +62,7 @@ function setupPrimerTable(tableId) {
           { title: "species" },
           { title: "snps" },
           { title: "product" },
+          { title: "uref" },
           { title: "fw sequence" },
           { title: "rv sequence" },
           { title: "Tm" },
@@ -86,7 +87,18 @@ function setupPrimerTable(tableId) {
             return row[2]+ '_' + data;
           }
         },
-        { targets: [11,12],
+        { targets: 7,
+          render: function (data, type, row, meta){
+            if (data == 'True') {
+              var title = 'all marker sequences mapped to the same reference sequence';
+              return '<img src="img/thumb_up.svg" height="30px" alt="yes" title="'+ title +'"/>';
+            }
+            else {
+              return 'no';
+            }
+          }
+        },
+        { targets: [12,13],
           render: function (data, type, row, meta){
             if (data != 'None') {
               return "<a href='http://www.ncbi.nlm.nih.gov/nucleotide/" + data + "' target='_blank'>" + data +  "</a>";
@@ -96,7 +108,7 @@ function setupPrimerTable(tableId) {
             }
           }
         },
-        { targets: 13,
+        { targets: 14,
           render: function (data, type, row, meta){
             var html = '';
             var terms = data.split(',');
@@ -122,7 +134,7 @@ function setupPrimerTable(tableId) {
           api.column(2, {page:'current'} ).data().each( function ( group, i ) {
               if ( last !== group ) {
                   $(rows).eq( i ).before(
-                      '<tr class="group"><td colspan="12">'+group+'</td></tr>'
+                      '<tr class="group"><td colspan="13">'+group+'</td></tr>'
                   );
 
                   last = group;
