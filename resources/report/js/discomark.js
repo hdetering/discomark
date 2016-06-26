@@ -89,7 +89,7 @@ function setupPrimerTable(tableId) {
         },
         { targets: 7,
           render: function (data, type, row, meta){
-            if (data = 'True') {
+            if (data == 'True') {
               var title = 'all marker sequences mapped to the same reference sequence';
               return '<img src="img/thumb_up.svg" height="30px" alt="yes" title="'+ title +'"/>';
             }
