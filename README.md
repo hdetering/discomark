@@ -10,7 +10,7 @@ Discovery of phylogenetic markers from orthologous sequences.
 
 If you use DiscoMark in you research, please cite
 
-Detering H, Rutschmann S, Simon S, Fredslund J, Monaghan MT. 2016. DiscoMark: Nuclear marker discovery from orthologous sequences using low coverage genome data. bioRxiv doi: 10.1101/047282
+Detering H, Rutschmann S, Simon S, Fredslund J, Monaghan MT (2016) DiscoMark: Nuclear marker discovery from orthologous sequences using low coverage genome data. *BioRxiv* **047282** doi: 10.1101/047282
 
 
 ## Requirements
@@ -60,12 +60,17 @@ cd discomark
 python run_project.py -i example/hamstr/species1 -i example/hamstr/species2 -r example/reference/reference.fasta -d output
 ```
 
-See the wiki for more info on the [command line options](https://github.com/hdetering/discomark/wiki/Command-Line-Options).
+See the wiki for complete information on the [command line options](https://github.com/hdetering/discomark/wiki/Command-Line-Options).
 
 
 ## Results
 
-Inspect the marker report in the output directory at `7_report/discomark_results.html`.  
+An interactive HTML file in the output directory at `7_report/discomark_results.html` contains all important information about the designed primer pairs.  
 (In the example above that would be: `output/7_report/discomark_results.html`.)
 
-The primer table can also be found in CSV format in `7_report/primers.xls`.
+A table with all primer pairs is also avialable at CSV format in `7_report/primers.xls`.
+
+
+Notice: This program may contain errors. Please inspect results carefully. This program comes with ABSOLUTELY NO WARRANTY.  
+This is free software, and you are welcome to redistribute it under certain conditions
+
