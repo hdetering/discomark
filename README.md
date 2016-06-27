@@ -8,7 +8,7 @@ Discovery of phylogenetic markers from orthologous sequences.
 
 ## Citation
 
-If you use DiscoMark in you research, please cite
+If you use DiscoMark in you research, please cite:
 
 Detering H, Rutschmann S, Simon S, Fredslund J, Monaghan MT (2016) DiscoMark: Nuclear marker discovery from orthologous sequences using low coverage genome data. *BioRxiv* **047282** doi: 10.1101/047282
 
@@ -52,7 +52,8 @@ If you have the programs BLAST+, MAFFT and TrimAl installed on your system you d
 
 ## How to run DiscoMark
 
-Make sure your [input data](https://github.com/hdetering/discomark/wiki#input-data) is formatted as FASTA format. 
+Make sure your [input data](https://github.com/hdetering/discomark/wiki#input-data) is formatted as FASTA format.   
+
 Let´s say you want to discover markers for two species (i.e. species1 and species2) and use a reference (i.e. reference.fasta), you will call DiscoMark like this:
 
 ```
@@ -60,7 +61,21 @@ cd discomark
 python run_project.py -i example/hamstr/species1 -i example/hamstr/species2 -r example/reference/reference.fasta -d output
 ```
 
-See the wiki for complete information on the [command line options](https://github.com/hdetering/discomark/wiki/Command-Line-Options).
+If you want to add an annotation file for the input markers, you will call DiscoMark like this:
+
+```
+cd discomark
+python run_project.py -i example/hamstr/species1 -i example/hamstr/species2 -r example/reference/reference.fasta -a input/co2go.ixosc.csv -d output
+```
+
+Under the defualt settings you will perform on online BLAST search for you primer pairs. Let´s say you do not have an internet connection or do not want to use this option you can call DiscoMark like this
+
+```
+cd discomark
+python run_project.py -i example/hamstr/species1 -i example/hamstr/species2 -r example/reference/reference.fasta -a input/co2go.ixosc.csv -d output --no-primer-blast
+```
+
+Please see the wiki for the complete information on the [command line options](https://github.com/hdetering/discomark/wiki/Command-Line-Options).
 
 
 ## Results
