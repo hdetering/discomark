@@ -87,7 +87,7 @@ A table with all primer pairs is also avialable at CSV format in `7_report/prime
 
 
 
-Notice: This program may contain errors. Please inspect results carefully. 
-This program comes with ABSOLUTELY NO WARRANTY.  
+Notice: This program may contain errors. Please inspect results carefully.   
+This program comes with ABSOLUTELY NO WARRANTY.   
 This is free software, and you are welcome to redistribute it under certain conditions
 
