@@ -68,7 +68,7 @@ cd discomark
 python run_project.py -i example/hamstr/species1 -i example/hamstr/species2 -r example/reference/reference.fasta -a input/co2go.ixosc.csv -d output
 ```
 
-Under the defualt settings you will perform on online BLAST search for you primer pairs. Let´s say you do not have an internet connection or do not want to use this option you can call DiscoMark like this
+Under the defualt settings you will perform on online BLAST search for you primer pairs. Let´s say you do not have an internet connection or do not want to use this option you can call DiscoMark like this:
 
 ```
 cd discomark
@@ -86,6 +86,8 @@ An interactive HTML file in the output directory at `7_report/discomark_results.
 A table with all primer pairs is also avialable at CSV format in `7_report/primers.xls`.
 
 
-Notice: This program may contain errors. Please inspect results carefully. This program comes with ABSOLUTELY NO WARRANTY.  
+
+Notice: This program may contain errors. Please inspect results carefully. 
+This program comes with ABSOLUTELY NO WARRANTY.  
 This is free software, and you are welcome to redistribute it under certain conditions
 
