@@ -91,3 +91,9 @@ Notice: This program may contain errors. Please inspect results carefully.
 This program comes with ABSOLUTELY NO WARRANTY.   
 This is free software, and you are welcome to redistribute it under certain conditions
 
+
+## Experiencing Problems?
+
+Have a look at the [FAQ](https://github.com/hdetering/discomark/wiki/Frequently-Asked-Questions). 
+
+If the FAQ is not helpful, you can [open an issue](https://github.com/hdetering/discomark/issues/new) to inform us about your problem.
