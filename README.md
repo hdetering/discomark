@@ -10,7 +10,7 @@ Discovery of phylogenetic markers from orthologous sequences.
 
 If you use DiscoMark in you research, please cite:
 
-Rutschmann S*, Detering H*, Simon S, Fredslund J, Monaghan MT (2016) DiscoMark: Nuclear marker discovery from orthologous sequences using draft genome data. *Molecular Ecology Resources*, DOI: 10.1111/1755-0998.12576. *, co-first authors
+Rutschmann S‡, Detering H‡, Simon S, Fredslund J, Monaghan MT (2016) DiscoMark: Nuclear marker discovery from orthologous sequences using draft genome data. *Molecular Ecology Resources*, DOI: 10.1111/1755-0998.12576. ‡, co-first authors
 
 
 ## Requirements
