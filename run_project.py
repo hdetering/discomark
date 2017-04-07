@@ -2,7 +2,7 @@
 from __future__ import division, print_function
 
 program = "DiscoMark"
-version = "1.0"
+version = "1.0.1"
 # Run parameters
 # (todo: create command line params)
 num_threads = 1
