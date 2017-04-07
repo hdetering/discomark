@@ -506,10 +506,10 @@ def scoreprimerpair( p1, p2, realindices, intronsbetweenprimers, explain=0 ):
             pro.append( "%5.1f: bonus for #sequences in primer alignments"%P)
 
         if p1.gcscore != 0:
-            contra.append("%5.1f: Fw GC content >= 75%"%p1.gcscore )
+            contra.append("{:5.1f}: Fw GC content >= 75%".format(p1.gcscore) )
 
         if p2.gcscore != 0:
-            contra.append("%5.1f: Rv GC content >= 75%"%p2.gcscore )
+            contra.append("{:5.1f}: Rv GC content >= 75%".format(p2.gcscore) )
 
         if p1.scscore != 0:
             contra.append("%5.1f: Fw self-complementarity"%p1.scscore )
