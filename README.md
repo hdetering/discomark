@@ -8,9 +8,9 @@ Discovery of phylogenetic markers from orthologous sequences.
 
 ## Citation
 
-If you use DiscoMark in you research, please cite
+If you use DiscoMark in you research, please cite:
 
-Detering H, Rutschmann S, Simon S, Fredslund J, Monaghan MT. 2016. DiscoMark: Nuclear marker discovery from orthologous sequences using low coverage genome data. bioRxiv doi: 10.1101/047282
+Rutschmann S‡, Detering H‡, Simon S, Fredslund J, Monaghan MT (2016) DiscoMark: Nuclear marker discovery from orthologous sequences using draft genome data. *Molecular Ecology Resources*, DOI: 10.1111/1755-0998.12576. ‡, co-first authors
 
 
 ## Requirements
@@ -52,7 +52,8 @@ If you have the programs BLAST+, MAFFT and TrimAl installed on your system you d
 
 ## How to run DiscoMark
 
-Make sure your [input data](https://github.com/hdetering/discomark/wiki#input-data) is formatted as FASTA format. 
+Make sure your [input data](https://github.com/hdetering/discomark/wiki#input-data) is formatted as FASTA format.   
+
 Let´s say you want to discover markers for two species (i.e. species1 and species2) and use a reference (i.e. reference.fasta), you will call DiscoMark like this:
 
 ```
@@ -60,12 +61,39 @@ cd discomark
 python run_project.py -i example/hamstr/species1 -i example/hamstr/species2 -r example/reference/reference.fasta -d output
 ```
 
-See the wiki for more info on the [command line options](https://github.com/hdetering/discomark/wiki/Command-Line-Options).
+If you want to add an annotation file for the input markers, you will call DiscoMark like this:
+
+```
+cd discomark
+python run_project.py -i example/hamstr/species1 -i example/hamstr/species2 -r example/reference/reference.fasta -a input/co2go.ixosc.csv -d output
+```
+
+Under the defualt settings you will perform on online BLAST search for you primer pairs. Let´s say you do not have an internet connection or do not want to use this option you can call DiscoMark like this:
+
+```
+cd discomark
+python run_project.py -i example/hamstr/species1 -i example/hamstr/species2 -r example/reference/reference.fasta -a input/co2go.ixosc.csv -d output --no-primer-blast
+```
+
+Please see the wiki for the complete information on the [command line options](https://github.com/hdetering/discomark/wiki/Command-Line-Options).
 
 
 ## Results
 
-Inspect the marker report in the output directory at `7_report/discomark_results.html`.  
+An interactive HTML file in the output directory at `7_report/discomark_results.html` contains all important information about the designed primer pairs.  
 (In the example above that would be: `output/7_report/discomark_results.html`.)
 
-The primer table can also be found in CSV format in `7_report/primers.xls`.
+A table with all primer pairs is also avialable at CSV format in `7_report/primers.xls`.
+
+
+
+Notice: This program may contain errors. Please inspect results carefully.   
+This program comes with ABSOLUTELY NO WARRANTY.   
+This is free software, and you are welcome to redistribute it under the GPLv2 conditions 
+
+
+## Experiencing Problems?
+
+Have a look at the [FAQ](https://github.com/hdetering/discomark/wiki/Frequently-Asked-Questions). 
+
+If the FAQ is not helpful, you can [open an issue](https://github.com/hdetering/discomark/issues/new) to inform us about your problem.
